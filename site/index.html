@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training Club Programs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a gym-board index of programs; each program opens as a full-width sheet of day tables */
+:root{
+  --bg:#f3f4f6; --surface:#ffffff; --line:#d9dce3; --line-soft:#e8eaef;
+  --fg:#16181d; --muted:#5b6170; --faint:#8a90a0;
+  --plate:#c62f2f; --plate-soft:#fbe9e8; --plate-ink:#9e1f1f;
+  --steel:#2f4a6b; --steel-soft:#e7edf5;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121418; --surface:#1a1d23; --line:#2d323c; --line-soft:#23272f;
+  --fg:#eceef2; --muted:#a3a9b6; --faint:#767d8c;
+  --plate:#ef5b54; --plate-soft:#3a1d1e; --plate-ink:#ff8a83;
+  --steel:#8fb2dc; --steel-soft:#1d2836; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121418; --surface:#1a1d23; --line:#2d323c; --line-soft:#23272f;
+  --fg:#eceef2; --muted:#a3a9b6; --faint:#767d8c;
+  --plate:#ef5b54; --plate-soft:#3a1d1e; --plate-ink:#ff8a83;
+  --steel:#8fb2dc; --steel-soft:#1d2836; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0;line-height:1.05}
+h1{font-size:clamp(2.2rem,6vw,3.4rem);text-transform:uppercase}
+h2{font-size:1.7rem;text-transform:uppercase}
+h3{font-size:1.25rem;text-transform:uppercase;letter-spacing:.03em}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--plate-ink)}
+.lede{color:var(--muted);max-width:62ch;margin:.6rem 0 0}
+header.top{display:flex;flex-direction:column;gap:6px;margin-bottom:22px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.controls input{flex:1 1 220px;min-width:0;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 .8rem var(--body);padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--plate);outline-offset:2px}
+.count{font-family:var(--mono);font-size:.78rem;color:var(--faint);margin-bottom:8px}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 16px;border-top:1px solid var(--line-soft);text-decoration:none;color:inherit}
+.row:first-child{border-top:0}
+.row:hover{background:var(--steel-soft)}
+.row .name{font-family:var(--display);font-weight:600;font-size:1.3rem;letter-spacing:.02em;text-transform:uppercase}
+.row .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px}
+.tag{font:500 .72rem var(--mono);letter-spacing:.04em;padding:2px 7px;border-radius:4px;background:var(--steel-soft);color:var(--steel);white-space:nowrap}
+.status{font:500 .74rem var(--mono);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.status.ready{color:var(--plate-ink)}
+.status.ready::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--plate);margin-right:6px;vertical-align:1px}
+.status.soon{color:var(--faint)}
+.equip{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:14px}
+.equip summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:10px 14px;font:600 .82rem var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.equip summary::-webkit-details-marker{display:none}
+.equip summary::before{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:transform .15s;margin-right:2px}
+.equip[open] summary::before{transform:rotate(45deg)}
+.equip .sel{font:500 .74rem var(--mono);letter-spacing:.04em;text-transform:none;color:var(--plate-ink)}
+.equip .clear-link{margin-left:auto;font:500 .74rem var(--body);letter-spacing:0;text-transform:none;color:var(--steel);background:none;border:0;padding:0;cursor:pointer}
+.equip-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line-soft)}
+.equip-body p{margin:8px 0 0;color:var(--muted);font-size:.85rem;max-width:70ch}
+.equip-actions{display:flex;gap:14px}
+.equip-actions button{font:500 .8rem var(--body);background:none;border:0;padding:0;color:var(--steel);cursor:pointer}
+.equip-actions button:hover,.equip .clear-link:hover{text-decoration:underline}
+.goal-def{font-size:.82rem!important}
+.goal-def:empty{display:none}
+.goal-def b{color:var(--fg);font-weight:600}
+.understood{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-6px 0 14px}
+.understood:empty{display:none}
+.understood .lbl{font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-right:2px}
+.understood .k{color:var(--faint);margin-right:2px}
+.understood .hint{font-size:.82rem;color:var(--muted)}
+.tag.seq{background:var(--fg);color:var(--bg);letter-spacing:.08em}
+.gear .legend{font-size:.8rem;color:var(--muted);margin-left:4px}
+.tag.also{background:var(--plate-soft);color:var(--plate-ink)}
+.gear{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.gear .lbl{font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-right:2px}
+.empty{padding:28px 16px;color:var(--muted)}
+.back{display:inline-flex;gap:6px;align-items:center;font:500 .85rem var(--body);color:var(--steel);text-decoration:none;margin-bottom:18px}
+.back:hover{text-decoration:underline}
+.sheet-head{display:flex;flex-direction:column;gap:8px;padding-bottom:18px;border-bottom:3px solid var(--fg);margin-bottom:20px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--fg);font-weight:500}
+.notes{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;color:var(--muted);font-size:.88rem;max-width:80ch}
+.notes li::before{content:"— ";color:var(--faint)}
+section.block{margin-top:30px}
+section.block>h2{margin-bottom:10px}
+section.block>h2 small{font-family:var(--mono);font-size:.8rem;font-weight:400;letter-spacing:.04em;color:var(--muted);text-transform:none;margin-left:8px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-top:1px solid var(--line-soft)}
+thead th{font:600 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg);border-top:0}
+tr.day-start td{border-top:2px solid var(--line)}
+td.day{font-family:var(--display);font-weight:600;font-size:1.05rem;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;width:1%}
+td.day span{display:block;font-family:var(--mono);font-size:.7rem;font-weight:400;color:var(--faint);letter-spacing:.06em}
+td.slot{font-family:var(--mono);color:var(--faint);width:1%;white-space:nowrap}
+tr.pair-a td.slot,tr.solo td.slot{color:var(--plate-ink)}
+td.rx{font-family:var(--mono);font-size:.82rem;font-variant-numeric:tabular-nums}
+td.cond{font-family:var(--mono);font-size:.8rem;color:var(--steel);max-width:22ch}
+.star{color:var(--plate);font-weight:700;margin-left:2px}
+tr.cardio td{background:var(--steel-soft)}
+.prog table{min-width:720px}
+.prog td:first-child{font-weight:600;white-space:nowrap}
+.prog td:not(:first-child){font-family:var(--mono);font-size:.8rem;font-variant-numeric:tabular-nums}
+.buy{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 16px;border-radius:6px;background:var(--plate);color:#fff;font:600 .9rem var(--body);text-decoration:none}
+.buy:hover{filter:brightness(1.08)}
+.foot{margin-top:28px;font-size:.82rem;color:var(--faint);max-width:80ch}
+.pending{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:22px 18px;color:var(--muted);max-width:60ch}
+.pending a{color:var(--steel)}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.status{justify-self:start}}
+@media (prefers-reduced-motion:no-preference){.row{transition:background .12s}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap" id="app"></div>
+
+<script src="links.js"></script>
+<script src="engine.js"></script>
+<script src="data/boneyard.js"></script>
+<script src="data/warpig.js"></script>
+<script src="data/imperium-phase-1.js"></script>
+<script src="data/ultima-phase-2.js"></script>
+<script src="data/axios-ppl-6-day.js"></script>
+<script src="data/centurion-phase-2.js"></script>
+<script src="data/htk-phase-2.js"></script>
+<script src="data/darkwater-2kb.js"></script>
+<script src="data/alpha-bravo-sp1.js"></script>
+<script src="data/deimos-phase-2.js"></script>
+<script src="data/centurion-phase-3.js"></script>
+<script src="data/darkwater-phase-3.js"></script>
+<script src="data/warpony.js"></script>
+<script src="data/gym-based-functional-strength.js"></script>
+<script src="data/darkwater-1kb.js"></script>
+<script src="data/kerberos.js"></script>
+<script src="data/htk-phase-3.js"></script>
+<script src="data/echelon.js"></script>
+<script src="data/ultima-phase-1.js"></script>
+<script src="data/kreuzer-phase-1.js"></script>
+<script src="data/alpha-bravo-hp1.js"></script>
+<script src="data/htk-phase-1.js"></script>
+<script src="data/warhorse.js"></script>
+<script src="data/halcyon-phase-1.js"></script>
+<script src="data/reaver-phase-1.js"></script>
+<script src="data/reaver-phase-2.js"></script>
+<script src="data/darkwater-phase-2.js"></script>
+<script src="data/wolfdog-phase-1.js"></script>
+<script src="data/opr-8-phase-1.js"></script>
+<script src="data/fizeek-5-day-template.js"></script>
+<script src="data/drago.js"></script>
+<script src="data/jacked-and-athletic.js"></script>
+<script src="data/1kb-vagabond.js"></script>
+<script src="data/2kb-vagabond.js"></script>
+<script src="data/darkwater-phase-1.js"></script>
+<script src="data/deimos-phase-1.js"></script>
+<script src="data/deimos-phase-3.js"></script>
+<script src="data/falcata.js"></script>
+<script src="data/ground-based-calisthenics-mobility.js"></script>
+<script src="data/kilo-bravo.js"></script>
+<script>
+const PROGRAMS=[
+["1KB VAGABOND", "1kb-vagabond", 6, 4, "HYP,STC,STR"],["2KB VAGABOND", "2kb-vagabond", 6, 4, "HYP,STC"],["ALPHA BRAVO | HP1", "alpha-bravo-hp1", 6, 5, "HYP,STC"],["ALPHA BRAVO | SP1", "alpha-bravo-sp1", 6, 5, "HYP,STC"],["AXIOS PPL / 6-Day", "axios-ppl-6-day", 6, 6, "HYP,STC"],["BELLATOR – PHASE 1", "bellator-phase-1", 6, 6, "HYP,STC"],["BELLATOR – PHASE 2", "bellator-phase-2", 6, 6, "HYP,STC"],["BLUDKRIEG", "bludkrieg", 6, 4, "HYP,STC,STR"],["BONEYARD", "boneyard", 6, 3, "HYP,STC"],["CENTURION – PHASE 2", "centurion-phase-2", 6, 5, "STR,MAX"],["CENTURION – PHASE 3", "centurion-phase-3", 6, 5, "STC,STR"],["DARKWATER – 1KB", "darkwater-1kb", 6, 6, "HYP,STC"],["DARKWATER – 2KB", "darkwater-2kb", 6, 6, "HYP,STC"],["DARKWATER – PHASE 1", "darkwater-phase-1", 6, 6, "HYP,STC"],["DARKWATER – PHASE 2", "darkwater-phase-2", 6, 6, "HYP,STC"],["DARKWATER – PHASE 3", "darkwater-phase-3", 6, 6, "HYP,STC"],["DEIMOS – PHASE 1", "deimos-phase-1", 6, 6, "HYP,STC"],["DEIMOS – PHASE 2", "deimos-phase-2", 7, 6, "HYP,STC,UNLOAD"],["DEIMOS – PHASE 3", "deimos-phase-3", 6, 6, "HYP,STC"],["DRAGO", "drago", 6, 6, "HYP,STC"],["ECHELON", "echelon", 6, 6, "HYP,STC,STR"],["FALCATA", "falcata", 6, 6, "HYP,STC"],["FIZEEK 5-DAY TEMPLATE", "fizeek-5-day-template", 6, 5, "HYP,STC,STR"],["GROUND-BASED CALISTHENICS + MOBILITY", "ground-based-calisthenics-mobility", 6, 4, "HYP,STC,STR"],["GYM-BASED / FUNCTIONAL STRENGTH", "gym-based-functional-strength", 6, 6, "HYP,STC"],["HALCYON – PHASE 1", "halcyon-phase-1", 7, 4, "HYP,STC,UNLOAD"],["HTK – PHASE 1", "htk-phase-1", 6, 6, "HYP,STC,STR"],["HTK – PHASE 2", "htk-phase-2", 6, 6, "HYP,STC,STR"],["HTK – PHASE 3", "htk-phase-3", 6, 6, "HYP,STC,STR"],["IMPERIUM – PHASE 1", "imperium-phase-1", 6, 6, "STC,STR"],["JACKED AND ATHLETIC", "jacked-and-athletic", 6, 6, "HYP,STC"],["KERBEROS", "kerberos", 6, 6, "HYP,STC,STR"],["KILO BRAVO", "kilo-bravo", 6, 3, "HYP,STC"],["KREUZER – PHASE 1", "kreuzer-phase-1", 6, 6, "HYP,STC"],["OPR-8 – PHASE 1", "opr-8-phase-1", 6, 6, "HYP,STC,STR"],["REAVER – PHASE 1", "reaver-phase-1", 6, 6, "HYP,STC"],["REAVER – PHASE 2", "reaver-phase-2", 6, 6, "HYP,STC"],["ULTIMA – PHASE 1", "ultima-phase-1", 6, 6, "HYP,STC"],["ULTIMA – PHASE 2", "ultima-phase-2", 6, 6, "HYP,STC"],["WARHORSE", "warhorse", 6, 6, "HYP,STC,STR"],["WARPIG", "warpig", 6, 6, "HYP,STC"],["WARPONY", "warpony", 6, 5, "HYP,STC"],["WOLFDOG – PHASE 1", "wolfdog-phase-1", 6, 6, "HYP,STC,STR"]
+];
+const GOAL_LIST=["Muscle Gain", "Strength", "Fat Loss", "Weight Loss", "Aerobic Endurance", "Fitness Maintenance", "Total Body Power", "Mobility / Core Strength", "Metabolic Conditioning"];
+const GOAL_DEFS={"Muscle Gain": "Hypertrophy block with plenty of 10+ rep work.", "Strength": "Strength block, or main lifts reaching ~80%+ for 5 reps or fewer.", "Fat Loss": "Lifting plus 2 or more conditioning days a week.", "Weight Loss": "The most conditioning: 3+ conditioning days, metabolic circuits or hard intervals.", "Aerobic Endurance": "75+ minutes of aerobic cardio a week.", "Fitness Maintenance": "Balanced: lifting, 2–3 conditioning days, moderate loads, no single extreme focus.", "Total Body Power": "15%+ of lifts are explosive: jumps, throws, slams, cleans, snatches, swings.", "Mobility / Core Strength": "20%+ of the work is core, mobility or hip/trunk control.", "Metabolic Conditioning": "Metabolic circuits or hard interval conditioning."};
+/* Goals each program could support, derived from its loads, rep ranges, movement types and conditioning. */
+const GOALS={"1kb-vagabond":["Muscle Gain","Strength","Total Body Power"],"2kb-vagabond":["Muscle Gain","Total Body Power"],"alpha-bravo-hp1":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance"],"alpha-bravo-sp1":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance"],"axios-ppl-6-day":["Muscle Gain","Strength"],"bellator-phase-1":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance"],"bellator-phase-2":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance"],"bludkrieg":["Muscle Gain","Strength"],"boneyard":["Muscle Gain","Strength"],"centurion-phase-2":["Strength","Fat Loss","Aerobic Endurance"],"centurion-phase-3":["Strength","Fat Loss"],"darkwater-1kb":["Muscle Gain","Fat Loss","Total Body Power","Mobility / Core Strength"],"darkwater-2kb":["Muscle Gain","Fat Loss","Fitness Maintenance","Total Body Power","Mobility / Core Strength"],"darkwater-phase-1":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance"],"darkwater-phase-2":["Muscle Gain","Fat Loss","Fitness Maintenance","Mobility / Core Strength"],"darkwater-phase-3":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance","Mobility / Core Strength"],"deimos-phase-1":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance"],"deimos-phase-2":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance","Mobility / Core Strength"],"deimos-phase-3":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance"],"drago":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance","Total Body Power"],"echelon":["Muscle Gain","Strength","Fat Loss","Weight Loss","Aerobic Endurance","Metabolic Conditioning"],"falcata":["Fat Loss","Fitness Maintenance","Mobility / Core Strength"],"fizeek-5-day-template":["Muscle Gain","Strength"],"ground-based-calisthenics-mobility":["Muscle Gain","Strength","Mobility / Core Strength"],"gym-based-functional-strength":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance","Mobility / Core Strength"],"halcyon-phase-1":["Muscle Gain","Strength"],"htk-phase-1":["Muscle Gain","Strength","Fat Loss","Weight Loss","Aerobic Endurance","Total Body Power","Metabolic Conditioning"],"htk-phase-2":["Muscle Gain","Strength","Fat Loss","Weight Loss","Metabolic Conditioning"],"htk-phase-3":["Muscle Gain","Strength","Fat Loss","Weight Loss","Total Body Power","Metabolic Conditioning"],"imperium-phase-1":["Strength","Fat Loss","Fitness Maintenance"],"jacked-and-athletic":["Muscle Gain","Strength","Fat Loss","Weight Loss","Aerobic Endurance","Total Body Power","Metabolic Conditioning"],"kerberos":["Muscle Gain","Strength","Fat Loss","Weight Loss","Aerobic Endurance","Total Body Power","Metabolic Conditioning"],"kilo-bravo":["Total Body Power"],"kreuzer-phase-1":["Muscle Gain","Fat Loss","Weight Loss","Aerobic Endurance","Mobility / Core Strength","Metabolic Conditioning"],"opr-8-phase-1":["Muscle Gain","Strength","Fat Loss","Weight Loss","Aerobic Endurance","Total Body Power","Metabolic Conditioning"],"reaver-phase-1":["Muscle Gain","Strength","Fat Loss","Aerobic Endurance","Fitness Maintenance"],"reaver-phase-2":["Muscle Gain","Strength","Fat Loss","Fitness Maintenance"],"ultima-phase-1":["Muscle Gain","Fat Loss","Aerobic Endurance","Fitness Maintenance"],"ultima-phase-2":["Muscle Gain","Strength","Fat Loss"],"warhorse":["Muscle Gain","Strength","Fat Loss","Weight Loss","Aerobic Endurance","Metabolic Conditioning"],"warpig":["Muscle Gain","Strength","Fat Loss","Aerobic Endurance","Fitness Maintenance"],"warpony":["Muscle Gain","Strength","Fat Loss","Weight Loss","Aerobic Endurance","Metabolic Conditioning"],"wolfdog-phase-1":["Muscle Gain","Strength"]};
+const EQUIP_LIST=["Barbell","Dumbbell","Kettlebell","Cable","Weight Machines","Med ball","Band","Pull-up Bar","Glute-Ham Developer","Bench","Incline Bench","Squat rack","Trap bar","Landmine","Dip Bar"];
+/* Per program: [listed equipment it needs, other gear outside the list]. Built from movement names; programs missing here aren't mapped yet. */
+const EQUIP={"1kb-vagabond":[["Kettlebell","Bench"],[]],"2kb-vagabond":[["Kettlebell","Pull-up Bar","Bench","Dip Bar"],[]],"alpha-bravo-hp1":[["Barbell","Dumbbell","Band","Pull-up Bar","Glute-Ham Developer","Incline Bench","Bench","Squat rack"],[]],"alpha-bravo-sp1":[["Barbell","Dumbbell","Band","Pull-up Bar","Glute-Ham Developer","Incline Bench","Bench","Squat rack"],[]],"axios-ppl-6-day":[["Barbell","Dumbbell","Cable","Pull-up Bar","Glute-Ham Developer","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"bellator-phase-1":[["Barbell","Dumbbell","Band","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"bellator-phase-2":[["Barbell","Dumbbell","Med ball","Band","Pull-up Bar","Incline Bench","Bench","Squat rack"],["Weight plate"]],"bludkrieg":[["Barbell","Dumbbell","Cable","Pull-up Bar","Incline Bench","Bench","Squat rack","Landmine","Dip Bar"],[]],"boneyard":[["Barbell","Dumbbell","Pull-up Bar","Incline Bench","Bench","Squat rack"],[]],"centurion-phase-2":[["Barbell","Dumbbell","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack"],[]],"centurion-phase-3":[["Barbell","Dumbbell","Pull-up Bar","Bench","Squat rack","Dip Bar"],[]],"darkwater-1kb":[["Kettlebell","Med ball","Band","Pull-up Bar","Bench","Squat rack","Dip Bar"],[]],"darkwater-2kb":[["Kettlebell","Med ball","Band","Pull-up Bar","Bench","Squat rack","Dip Bar"],[]],"darkwater-phase-1":[["Barbell","Dumbbell","Med ball","Band","Pull-up Bar","Incline Bench","Bench","Squat rack","Landmine","Dip Bar"],[]],"darkwater-phase-2":[["Barbell","Dumbbell","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"darkwater-phase-3":[["Barbell","Dumbbell","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack","Landmine","Dip Bar"],[]],"deimos-phase-1":[["Barbell","Dumbbell","Med ball","Band","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"deimos-phase-2":[["Barbell","Dumbbell","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"deimos-phase-3":[["Barbell","Dumbbell","Band","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"drago":[["Barbell","Dumbbell","Kettlebell","Band","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"echelon":[["Barbell","Dumbbell","Cable","Pull-up Bar","Incline Bench","Bench","Squat rack","Landmine","Dip Bar"],["Stability ball"]],"falcata":[["Barbell","Dumbbell","Band","Pull-up Bar","Incline Bench","Bench","Squat rack"],["Weight plate"]],"fizeek-5-day-template":[["Barbell","Dumbbell","Cable","Weight Machines","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"ground-based-calisthenics-mobility":[[],[]],"gym-based-functional-strength":[["Barbell","Dumbbell","Cable","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack"],["Weight plate"]],"halcyon-phase-1":[["Barbell","Dumbbell","Band","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"htk-phase-1":[["Barbell","Dumbbell","Kettlebell","Cable","Pull-up Bar","Incline Bench","Bench","Squat rack"],[]],"htk-phase-2":[["Barbell","Dumbbell","Kettlebell","Cable","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack","Trap bar","Dip Bar"],[]],"htk-phase-3":[["Barbell","Dumbbell","Kettlebell","Cable","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack","Landmine"],[]],"imperium-phase-1":[["Barbell","Dumbbell","Band","Pull-up Bar","Incline Bench","Bench","Squat rack"],[]],"jacked-and-athletic":[["Barbell","Dumbbell","Kettlebell","Cable","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack"],[]],"kerberos":[["Barbell","Dumbbell","Kettlebell","Cable","Pull-up Bar","Incline Bench","Bench","Squat rack","Trap bar"],[]],"kilo-bravo":[["Kettlebell"],[]],"kreuzer-phase-1":[["Barbell","Dumbbell","Kettlebell","Cable","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"opr-8-phase-1":[["Barbell","Dumbbell","Kettlebell","Cable","Med ball","Pull-up Bar","Incline Bench","Bench","Squat rack","Trap bar","Dip Bar"],["Sled","Suspension trainer","Plyo box"]],"reaver-phase-1":[["Barbell","Dumbbell","Band","Pull-up Bar","Incline Bench","Bench","Squat rack"],[]],"reaver-phase-2":[["Barbell","Dumbbell","Band","Pull-up Bar","Incline Bench","Bench","Squat rack","Dip Bar"],[]],"ultima-phase-1":[["Barbell","Dumbbell","Cable","Weight Machines","Pull-up Bar","Glute-Ham Developer","Incline Bench","Bench","Landmine","Dip Bar"],[]],"ultima-phase-2":[["Barbell","Dumbbell","Cable","Weight Machines","Pull-up Bar","Glute-Ham Developer","Incline Bench","Bench","Squat rack","Landmine","Dip Bar"],[]],"warhorse":[["Barbell","Dumbbell","Cable","Weight Machines","Pull-up Bar","Glute-Ham Developer","Incline Bench","Bench","Squat rack"],[]],"warpig":[["Barbell","Dumbbell","Cable","Weight Machines","Pull-up Bar","Glute-Ham Developer","Incline Bench","Bench","Dip Bar"],[]],"warpony":[["Barbell","Dumbbell","Cable","Weight Machines","Pull-up Bar","Glute-Ham Developer","Incline Bench","Bench"],[]],"wolfdog-phase-1":[["Barbell","Dumbbell","Kettlebell","Cable","Pull-up Bar","Incline Bench","Bench","Squat rack"],[]]};
+const BLOCK_NAMES={HYP:"Hypertrophy",STC:"Strength Capacity",STR:"Strength",MAX:"Max Strength",UNLOAD:"Unload"};
+/* How blocks run week to week, from each week's block type (A = first block, B = second…; U = unload week). */
+const BLOCK_SEQ={"centurion-phase-2":"A/B/A/B/A/B","alpha-bravo-hp1":"A/B/A/B/A/B","alpha-bravo-sp1":"A/B/A/B/A/B","axios-ppl-6-day":"AAA/BBB","bellator-phase-1":"A/B/A/B/A/B","bellator-phase-2":"A/B/A/B/A/B","bludkrieg":"AA/BB/CC","boneyard":"A/B/A/B/A/B","centurion-phase-3":"A/B/A/B/A/B","darkwater-1kb":"A/B/A/B/A/B","darkwater-2kb":"A/B/A/B/A/B","darkwater-phase-1":"A/B/A/B/A/B","darkwater-phase-2":"A/B/A/B/A/B","darkwater-phase-3":"A/B/A/B/A/B","deimos-phase-1":"A/B/A/B/A/B","deimos-phase-2":"A/B/A/B/A/B/U","deimos-phase-3":"A/B/A/B/A/B","drago":"A/B/A/B/A/B","echelon":"AA/BB/CC","falcata":"A/B/A/B/A/B","fizeek-5-day-template":"AA/BB/CC","ground-based-calisthenics-mobility":"AA/BB/CC","gym-based-functional-strength":"AAA/BBB","halcyon-phase-1":"AAA/BBB/U","htk-phase-1":"A/B/C/A/B/C","htk-phase-2":"A/B/C/A/B/C","htk-phase-3":"A/B/C/A/B/C","imperium-phase-1":"A/B/A/B/A/B","kerberos":"A/B/C/A/B/C","kilo-bravo":"A/B/A/B/A/B","opr-8-phase-1":"AA/BB/CC","reaver-phase-1":"A/B/A/B/A/B","reaver-phase-2":"A/B/A/B/A/B","ultima-phase-1":"AAA/BBB","ultima-phase-2":"AAA/BBB","warhorse":"AA/BB/CC","warpig":"A/B/A/B/A/B","warpony":"A/B/A/B/A/B","wolfdog-phase-1":"AA/BB/CC","1kb-vagabond":"AA/BB/CC","2kb-vagabond":"AAA/BBB","kreuzer-phase-1":"A/B/A/B/A/B","jacked-and-athletic":"A/B/A/B/A/B"};
+const blockInfo=p=>{const all=p[4].split(","),main=all.filter(b=>b!=="UNLOAD"),unload=all.includes("UNLOAD");
+  const legend=main.map((b,i)=>`${"ABCDEFG"[i]} = ${BLOCK_NAMES[b]}`).concat(unload?["U = Unload week"]:[]).join(" · ");
+  return {count:`${main.length} Block${main.length>1?"s":""}${unload?" + Unload":""}`,seq:BLOCK_SEQ[p[1]],legend,main}};
+
+
+/* Detail sheets. Day: [label, conditioning, [[slot, lift, prescription], ...]] ; * in lift = load changes week to week */
+const DETAILS={
+"bludkrieg":{
+ facts:["6 weeks","4 days/week","4 lifts / 0 conditioning","Week 7 off"],
+ notes:["All % = % of estimated 1RM.","Weeks 1–2 Hypertrophy, 3–4 Strength Capacity, 5–6 Strength. The same exercises run all six weeks.","Starred lifts change load week to week; Week 1 is shown. See progression."],
+ blocks:[{title:"All weeks",sub:"Weeks 1–6",days:[
+  ["1 Squat/Row","",[["A1","BB Back Squat*","55% x 10–12, 60% x 10–12, 65% x 8–10, 70% x 6–8"],["B1","Landmine Row w/ Attachment*","60% x 10–12, 62.5% x 10–12, 65% x 8–10"],["C1","DB RFE Split Squat*","60% x 10–12, 62.5% x 10–12 / side"],["C2","DB Heels-Elevated Goblet Squat*","57.5% x 12–15, 60% x 12–15"],["D1","Pull-up [Under]","2 x BW x 5–10"],["D2","Cable Dante Row [Under]*","57.5% x 12–15, 60% x 12–15"]]],
+  ["2 Press/Hinge","",[["A1","BB Close-Grip Bench*","55% x 10–12, 60% x 10–12, 65% x 8–10, 70% x 6–8"],["B1","BB Stiff-Legged Deadlift*","62.5% x 8–10, 67.5% x 6–8, 70% x 5–7"],["C1","DB High-Incline Bench*","60% x 10–12, 62.5% x 10–12"],["C2","DB Lateral Raise","57.5% x 12–15, 60% x 12–15"],["D1","Cable OH Triceps Ext*","57.5% x 12–15, 60% x 12–15"],["D2","BW Reverse-Grip Deficit Push-Up","2 x BW x 10–20"]]],
+  ["3 Pull/Squat","",[["A1","BB Bent Row [Over]*","55% x 10–12, 60% x 10–12, 65% x 8–10, 70% x 6–8"],["B1","DB FFE Reverse Lunge*","62.5% x 8–10, 67.5% x 6–8, 70% x 5–7 / side"],["C1","Pull-up [Under]","2 x BW x 5–10"],["C2","Cable Incline Lateral 1-Arm Pulldown","60% x 10–12, 62.5% x 10–12 / side"],["D1","Cable Biceps Curl","60% x 10–12, 62.5% x 10–12"],["D2","DB Seated Incline Curl","57.5% x 12–15, 60% x 12–15"]]],
+  ["4 Press/Hinge","",[["A1","BB Incline Bench*","55% x 10–12, 60% x 10–12, 65% x 8–10, 70% x 6–8"],["B1","BB RDL (wide-stance)*","60% x 10–12, 62.5% x 10–12, 65% x 8–10"],["C1","Parallel Bar Dip","2 x BW x 10–20"],["C2","DB Bench Press","60% x 10–12, 62.5% x 10–12"],["D1","Cable 1-Arm Lateral Raise","60% x 10–12, 62.5% x 10–12 / side"],["D2","DB High-Incline Lateral Raise","60% x 10–12, 62.5% x 10–12"]]]
+ ]}],
+ progressions:[{title:"Progression",cols:["Lift","Weeks 1–2","Week 3","Week 4","Weeks 5–6"],rows:[
+  ["Back Squat · CG Bench · Bent Row · Incline Bench","55% x 10–12, 60% x 10–12, 65% x 8–10, 70% x 6–8","60% x 8–10, 62.5% x 8–10, 67.5% x 6–8, 72.5% x 5–7","60% x 8–10, 62.5% x 8–10, 67.5% x 6–8, 72.5% x 4–6","60% x 8–10, 62.5% x 8–10, 67.5% x 6–8, 75% x 4–6"],
+  ["Landmine Row","60% x 10–12, 62.5% x 10–12, 65% x 8–10","62.5% x 8–10, 67.5% x 6–8, 72.5% x 5–7","60% x 10–12, 65% x 8–10, 67.5% x 6–8","Same as Week 4"],
+  ["SLDL · FFE Reverse Lunge","62.5% x 8–10, 67.5% x 6–8, 70% x 5–7","62.5% x 8–10, 67.5% x 6–8, 72.5% x 4–6","Same as Week 3","Same as Week 3"],
+  ["BB RDL (wide-stance)","Wk 1: 60% x 10–12, 62.5% x 10–12, 65% x 8–10 · Wk 2: 60% x 10–12, 62.5% x 8–10, 67.5% x 6–8","62.5% x 8–10, 67.5% x 6–8, 72.5% x 4–6","Same as Week 3","Same as Week 3"],
+  ["DB RFE Split Squat (/ side)","60% x 10–12, 62.5% x 10–12","62.5% x 8–10, 65% x 8–10","67.5% x 5–7, 70% x 5–7","65% x 6–8, 67.5% x 6–8"],
+  ["DB High-Incline Bench","60% x 10–12, 62.5% x 10–12","62.5% x 8–10, 65% x 8–10","Same as Week 3","Same as Week 3"],
+  ["Goblet Squat · Dante Row · Cable OH Triceps Ext","57.5% x 12–15, 60% x 12–15","60% x 10–12, 62.5% x 10–12","Same as Week 3","Same as Week 3"]
+ ]}]
+},
+"bellator-phase-1":{
+ facts:["6 weeks","6 days/week","4 lifts / 2 cardio days","Week 7 off"],
+ notes:["All % = % of estimated 1RM. WEEK A runs Weeks 1/3/5, WEEK B runs Weeks 2/4/6.","Starred lifts change load week to week; the starting week is shown. See progression.","Every % accessory adds 2.5% each time its week repeats (e.g. 60% → 62.5% → 65%).","Cardio intervals are stored as work and rest without an intensity, so they're shown as ON / OFF."],
+ blocks:[
+ {title:"Week A",sub:"Weeks 1 / 3 / 5",days:[
+  ["1 Chest/Triceps/Delts","",[["A1","BB Close-Grip Bench*","60% x 8–10, 65% x 6–8, 3 x 70% x 5–7"],["B1","Decline Push-up","3 x BW x 10–20"],["B2","DB Incline Bench","3 x 60% x 10–12"],["C1","Parallel Bar Dip","3 x BW x 10–20"],["C2","DB Bent Over Triceps Ext","3 x 55% x 12–20"],["D1","DB High-Incline Upright Row","3 x 60% x 10–12"],["D2","DB High-Incline Lateral Raise","3 x 55% x 12–20"]]],
+  ["2 Back/Lats/Biceps","",[["A1","BB Stiff-Legged Deadlift*","60% x 6–8, 65% x 4–6, 70% x 3–5, 3 x 75% x 3–5"],["B1","Pull-up [Under]","3 x BW x 4–8"],["B2","DB Seated Rear Delt Fly","3 x 55% x 12–20"],["C1","DB Biceps Curl [Parallel]","3 x 60% x 10–12"],["C2","DB Chest-Supported Row","3 x 55% x 12–20"],["D1","BB Reverse Curl","3 x 60% x 10–12"],["D2","DB Seated Bent Row","3 x 55% x 12–20"]]],
+  ["3 Cardio","5 x 90 sec ON / 90 sec OFF, then 3 x 5 min ON / 3 min OFF",[]],
+  ["4 Legs/Core","",[["A1","BB Tempo Back Squat*","60% x 6–8, 65% x 4–6, 70% x 3–5, 3 x 75% x 3–5"],["B1","DB Walking Lunge","3 x 65% x 6–8 / side"],["B2","Hanging Knee Raise","3 x BW x 5–10"],["C1","Band Lying Leg Curl","3 x Band x 15–25"],["C2","DB 1-Arm Single-Leg RDL","3 x 65% x 6–8 / side"],["D1","Iso Crunch w/ Heel Tap","3 x BW x 10–20 / side"],["D2","Bicycle Crunch","3 x BW x 10–20 / side"]]],
+  ["5 Arms/Shoulders","",[["A1","BB High-Incline Seated Press*","60% x 8–10, 65% x 6–8, 3 x 70% x 5–7"],["B1","DB Seated Incline Curl","3 x 60% x 10–12"],["B2","BB Biceps Curl","3 x 55% x 12–20"],["C1","Band Triceps Ext","3 x Band x 15–25"],["C2","DB Lying Triceps Ext","3 x 60% x 10–12"],["D1","DB Curl to Press","3 x 60% x 10–12"],["D2","DB Incline T Raise","3 x 55% x 12–20"]]],
+  ["6 Cardio","4 x 8 min ON / 3 min OFF",[]]
+ ]},
+ {title:"Week B",sub:"Weeks 2 / 4 / 6",days:[
+  ["1 Chest/Triceps/Delts","",[["A1","BB Pause Bench (3 sec)*","60% x 6–8, 65% x 4–6, 2 x 70% x 3–5, 2 x 75% x 2–4, 2 x 80% x 1–3"],["B1","DB High-Incline Bench (alt.)","3 x 65% x 6–8 / side"],["B2","DB Lateral Raise","3 x 55% x 12–20"],["C1","BB Lying Triceps Ext","3 x 60% x 10–12"],["C2","DB Bench [Parallel]","3 x 55% x 12–20"],["D1","BW Deficit Push-Up","3 x BW x 10–20"],["D2","DB Incline Y Raise","3 x 55% x 12–20"]]],
+  ["2 Back/Lats/Biceps","",[["A1","BB Deadlift [Alt-Grip]*","60% x 6–8, 65% x 4–6, 70% x 3–5, 3 x 75% x 3–5"],["B1","Pull-up [Over]","3 x BW x 5–10"],["B2","Hanging Knee Raise","3 x BW x 6–12"],["C1","DB Biceps Curl (alt.)","3 x 65% x 6–8 / side"],["C2","DB Incline Prone Curl","3 x 55% x 12–20"],["D1","DB Bent Row [Parallel]","3 x 60% x 10–12"],["D2","DB Reverse Fly","3 x 55% x 12–20"]]],
+  ["3 Cardio","4 x 2 min ON / 2 min OFF, then 2 x 8 min ON / 3 min OFF",[]],
+  ["4 Quad/Ham/Glute","",[["A1","BB Back Squat*","60% x 6–8, 65% x 4–6, 70% x 3–5, 3 x 75% x 3–5"],["B1","DB RFE Split Squat","3 x 65% x 6–8 / side"],["B2","DB Heels-Elevated Goblet Squat","3 x 55% x 12–20"],["C1","DB Walking RDL","3 x 65% x 6–8 / side"],["C2","Hollow Rock","3 x 30 sec"],["D1","Quadruped Hip Abduction/Extension","3 x BW x 6–8 / side"],["D2","Pause Mountain Climbers (5 sec)","3 x BW x 6–10 / side"]]],
+  ["5 Shoulders/Arms","",[["A1","BB Close-Grip Incline Bench*","60% x 6–8, 65% x 4–6, 2 x 70% x 3–5, 2 x 75% x 2–4, 2 x 80% x 1–3"],["B1","DB Standing Press (alt.)","3 x 65% x 6–8 / side"],["B2","DB Lying Triceps Ext","3 x 55% x 12–20"],["C1","DB Biceps Curl [Parallel]","3 x 60% x 10–12"],["C2","DB Seated Incline Curl","3 x 55% x 12–20"],["D1","DB High-Incline Lateral Raise","3 x 60% x 10–12"],["D2","DB Seated Rear Delt Fly","3 x 55% x 12–20"]]],
+  ["6 Cardio","3 x 12 min ON / 3 min OFF",[]]
+ ]}],
+ progressions:[
+ {title:"Progression · Week A",cols:["Lift","Week 1","Week 3","Week 5"],rows:[
+  ["CG Bench · BB High-Incline Seated Press","60% x 8–10, 65% x 6–8, 3 x 70% x 5–7","60% x 8–10, 65% x 6–8, 70% x 5–7, 3 x 75% x 3–5","60% x 8–10, 65% x 6–8, 70% x 5–7, 75% x 3–5, 80% x 2–3, 85% x 1–3"],
+  ["SLDL · Tempo Back Squat","60% x 6–8, 65% x 4–6, 70% x 3–5, 3 x 75% x 3–5","62.5% x 6–8, 67.5% x 4–6, 72.5% x 3–5, 3 x 77.5% x 3–5","60% x 6–8, 65% x 4–6, 70% x 3–5, 75% x 3–5, 3 x 80% x 3–5"]]},
+ {title:"Progression · Week B",cols:["Lift","Week 2","Week 4","Week 6"],rows:[
+  ["Pause Bench · CG Incline Bench","60% x 6–8, 65% x 4–6, 2 x 70% x 3–5, 2 x 75% x 2–4, 2 x 80% x 1–3","62.5% x 6–8, 67.5% x 4–6, 2 x 72.5% x 3–5, 2 x 77.5% x 2–4, 2 x 82.5% x 1–3","65% x 6–8, 70% x 4–6, 2 x 75% x 3–5, 2 x 80% x 2–4, 2 x 85% x 1–3"],
+  ["Deadlift · Back Squat","60% x 6–8, 65% x 4–6, 70% x 3–5, 3 x 75% x 3–5","62.5% x 6–8, 67.5% x 4–6, 72.5% x 3–5, 3 x 77.5% x 3–5","60% x 6–8, 65% x 4–6, 70% x 3–5, 75% x 3–5, 3 x 80% x 3–5"]]}
+ ]
+},
+"bellator-phase-2":{
+ facts:["6 weeks","6 days/week","4 lifts / 2 cardio days","Week 7 off"],
+ notes:["All % = % of estimated 1RM. WEEK A runs Weeks 1/3/5, WEEK B runs Weeks 2/4/6.","Starred lifts change load week to week; the starting week is shown. See progression.","Every % accessory adds 2.5% each time its week repeats, except the Day 5 DB Biceps Curl in Week A (55%, 55%, 60%).","Cardio intervals are stored as work and rest without an intensity, so they're shown as ON / OFF."],
+ blocks:[
+ {title:"Week A",sub:"Weeks 1 / 3 / 5",days:[
+  ["1 Chest/Triceps/Delts","",[["A1","BB Incline Bench*","60% x 8–10, 65% x 6–8, 3 x 70% x 5–7"],["B1","DB Bench Press","3 x 62.5% x 8–10"],["B2","Band Triceps Ext","3 x Band x 15–25"],["C1","DB Arnold Press","3 x 60% x 10–12"],["C2","DB High-Incline Lateral Raise","3 x 55% x 12–20"],["D1","DB Incline Y Raise","3 x 55% x 12–20"],["D2","Band Pull to Face w/ External Rotation","3 x Band x 15–20"]]],
+  ["2 Back/Lats/Biceps","",[["A1","BB Deadlift [Alt-Grip]*","60% x 6–8, 65% x 4–6, 70% x 3–5, 4 x 72.5% x 3–5"],["B1","Pull-up [Under]","3 x BW x 5–10"],["B2","DB Chest-Supported Rear Delt Row","3 x 55% x 12–20"],["C1","DB One-Arm Row","3 x 62.5% x 8–10 / side"],["C2","Band Upright Row","3 x Band x 15–25"],["D1","DB Seated Incline Curl","3 x 60% x 10–12"],["D2","DB Reverse Fly","3 x 55% x 12–20"]]],
+  ["3 Cardio","5 x 90 sec ON / 90 sec OFF, then 3 x 5 min ON / 3 min OFF",[]],
+  ["4 Legs/Core","",[["A1","BB Pause Back Squat (3 sec)*","60% x 6–8, 65% x 4–6, 70% x 3–5, 4 x 72.5% x 3–5"],["B1","DB RFE Split Squat","3 x 65% x 6–8 / side"],["B2","Hanging Knee Raise","3 x BW x 5–10"],["C1","DB Walking RDL","3 x 65% x 6–8 / side"],["C2","Band Lying Leg Curl","3 x Band x 15–25"],["D1","Alt. Jack Knives","3 x BW x 5–10 / side"],["D2","Cook Hip Lift","3 x BW x 4–8 / side"]]],
+  ["5 Arms/Shoulders","",[["A1","BB Standing Press*","60% x 8–10, 65% x 6–8, 3 x 70% x 5–7"],["B1","BB Biceps Curl","3 x 62.5% x 8–10"],["B2","DB Biceps Curl [Parallel]","3 x 55% x 12–20"],["C1","BW Reverse-Grip Deficit Push-Up","3 x BW x 10–20"],["C2","DB Bent Over Triceps Ext","3 x 55% x 12–20"],["D1","DB High-Incline Bench (alt.)","3 x 60% x 10–12 / side"],["D2","DB High-Incline Lateral Raise","3 x 55% x 12–20"]]],
+  ["6 Cardio","4 x 8 min ON / 3 min OFF",[]]
+ ]},
+ {title:"Week B",sub:"Weeks 2 / 4 / 6",days:[
+  ["1 Chest/Triceps/Delts","",[["A1","BB Pause Bench (3 sec)*","60% x 6–8, 65% x 4–6, 2 x 70% x 3–5, 2 x 75% x 2–4, 2 x 80% x 1–3"],["B1","DB Incline Bench","3 x 62.5% x 8–10"],["B2","DB Lateral Raise","3 x 55% x 12–20"],["C1","DB Lying Triceps Ext","3 x 60% x 10–12"],["C2","BW Quasi-Iso Push-Up","3 x BW x 4–8"],["D1","DB Seated Rear Delt Fly","3 x 55% x 12–20"],["D2","Plate Incline Row to External Rotation","3 x Plate x 4–8"]]],
+  ["2 Back/Lats/Biceps","",[["A1","BB Deadlift [Snatch-Grip]*","60% x 6–8, 65% x 4–6, 70% x 3–5, 4 x 72.5% x 3–5"],["B1","Pull-up [Over]","3 x BW x 5–10"],["B2","DB Seated Bent Row","3 x 60% x 10–12"],["C1","DB Incline Prone Curl","3 x 60% x 10–12"],["C2","DB Biceps Curl [Parallel]","3 x 55% x 12–20"],["D1","Supine Row [Under]","3 x BW x 5–10"],["D2","DB Incline T Raise","3 x 55% x 12–20"]]],
+  ["3 Cardio","4 x 2 min ON / 2 min OFF, then 2 x 8 min ON / 3 min OFF",[]],
+  ["4 Quad/Ham/Glute","",[["A1","BB Back Squat*","60% x 6–8, 65% x 4–6, 70% x 3–5, 4 x 72.5% x 3–5"],["B1","DB FFE Reverse Lunge","3 x 65% x 6–8 / side"],["B2","DB Heels-Elevated Goblet Squat","3 x 55% x 12–20"],["C1","DB Walking RDL","3 x 65% x 6–8 / side"],["C2","MB Crunch to Extension","3 x MB x 10–20"],["D1","BW Iso Hip Bridge","3 x 30 sec"],["D2","Side-Lying Hip Abduction","3 x BW x 10–20 / side"]]],
+  ["5 Shoulders/Arms","",[["A1","BB High-Incline Seated Press*","60% x 6–8, 65% x 4–6, 70% x 3–5, 75% x 2–4, 4 x 80% x 1–3"],["B1","DB Bench Press","3 x 62.5% x 8–10"],["B2","DB Lying Triceps Ext","3 x 55% x 12–20"],["C1","DB Seated Incline Curl","3 x 60% x 10–12"],["C2","DB Incline T Raise","3 x 55% x 12–20"],["D1","DB High-Incline Upright Row","3 x 60% x 10–12"],["D2","DB High-Incline Lateral Raise","3 x 55% x 12–20"]]],
+  ["6 Cardio","3 x 12 min ON / 3 min OFF",[]]
+ ]}],
+ progressions:[
+ {title:"Progression · Week A",cols:["Lift","Week 1","Week 3","Week 5"],rows:[
+  ["Incline Bench · Standing Press","60% x 8–10, 65% x 6–8, 3 x 70% x 5–7","60% x 8–10, 65% x 6–8, 70% x 5–7, 3 x 75% x 3–5","60% x 8–10, 65% x 6–8, 70% x 5–7, 75% x 3–5, 80% x 2–3, 85% x 1–3"],
+  ["Deadlift · Pause Back Squat","60% x 6–8, 65% x 4–6, 70% x 3–5, 4 x 72.5% x 3–5","62.5% x 6–8, 67.5% x 4–6, 72.5% x 3–5, 4 x 75% x 3–5","62.5% x 6–8, 67.5% x 4–6, 72.5% x 3–5, 4 x 77.5% x 3–5"]]},
+ {title:"Progression · Week B",cols:["Lift","Week 2","Week 4","Week 6"],rows:[
+  ["Pause Bench","60% x 6–8, 65% x 4–6, 2 x 70% x 3–5, 2 x 75% x 2–4, 2 x 80% x 1–3","60% x 6–8, 65% x 4–6, 70% x 3–5, 75% x 2–4, 80% x 1–3, 3 x 82.5% x 1–3","60% x 6–8, 65% x 4–6, 70% x 3–5, 75% x 2–4, 80% x 1–3, 82.5% x 1–3, 2 x 85% x 1–3"],
+  ["BB High-Incline Seated Press","60% x 6–8, 65% x 4–6, 70% x 3–5, 75% x 2–4, 4 x 80% x 1–3","Same as Pause Bench Week 4","Same as Pause Bench Week 6"],
+  ["Snatch-Grip Deadlift · Back Squat","60% x 6–8, 65% x 4–6, 70% x 3–5, 4 x 72.5% x 3–5","62.5% x 6–8, 67.5% x 4–6, 72.5% x 3–5, 4 x 75% x 3–5","62.5% x 6–8, 67.5% x 4–6, 72.5% x 3–5, 4 x 77.5% x 3–5"]]}
+ ]
+}
+};
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const liftName=s=>s.endsWith("*")?esc(s.slice(0,-1))+'<span class="star" title="Load changes week to week">*</span>':esc(s);
+const app=document.getElementById("app");
+const LINKS=window.PROGRAM_LINKS||{};
+let query="",daysFilter="all",onlyReady=false;
+/* "What do you want to train?" — reads goal, equipment and days-per-week words out of free text. Order matters: longer phrases first. */
+const TERMS=[
+ ["goal",["Fat Loss","Mobility / Core Strength"],/\b(six[- ]?pack( abs)?|visible abs|flat (stomach|belly)|lose (the |my )?(belly|gut)|belly fat)\b/],
+ ["goal",["Strength","Aerobic Endurance"],/\bhybrid( athlete| training)?\b/],
+ ["goal","Mobility / Core Strength",/\b(mobility|core( strength| stability)?|abs|ab work|flexib\w*|stretch\w*|trunk|posture|move better|moving better|range of motion|rom|joint health|loosen up|get loose|less stiff|stiffness|bendy|hips?|plank\w*)\b/],
+ ["goal","Metabolic Conditioning",/\b(metabolic( conditioning)?|met ?cons?|hiit|high[- ]intensity|circuits?|conditioning|work capacity|intervals?|crossfit|sweat\w*|burnouts?|finishers?|gassed|get gassed)\b/],
+ ["goal","Weight Loss",/\b(weight[- ]loss|lose (some )?weight|losing weight|(drop|lose) (some |a few |\d+ )?(weight|pounds|lbs|kilos|kg)|slim( down)?|slimm\w*|get smaller|drop a (size|dress size|pant size)|scale down|lighter|weigh less)\b/],
+ ["goal","Fat Loss",/\b(fat[- ]loss|lose (body ?)?fat|burn (body ?)?fat|fat burn\w*|drop (body ?)?fat|body ?fat|lean(er| out| up)?|get lean|cut(ting)?|shred\w*|get shredded|ripped|get ripped|defin(ed|ition)|tone(d)?|toning|beach body|summer body|recomp\w*)\b/],
+ ["goal","Aerobic Endurance",/\b(aerobic( endurance)?|endurance|cardio|stamina|gas tank|engine|running|runs?|runner|jog\w*|5k|10k|half marathon|marathon|triathlon|hik(e|es|ing)|rucking|ruck|zone ?2|vo2( ?max)?|heart health|go longer|last longer|not get winded|winded|out of breath)\b/],
+ ["goal","Fitness Maintenance",/\b(maintenance|maintain\w*|general fitness|overall fitness|stay(ing)? (fit|in shape|active|healthy)|keep fit|keep in shape|in shape|healthy|health\w*|longevity|feel (good|better)|well[- ]?rounded|balanced|consistency|consistent|everyday fitness|life ?long)\b/],
+ ["goal","Total Body Power",/\b((total[- ]body )?power(ful)?|explosive\w*|explode|athletic\w*|athlete|sports?|jump\w*|vertical|vert|speed|faster|fast|quick(er|ness)?|sprint\w*|throw (harder|farther)|hit harder|punch harder|agility|plyo\w*|basketball|football|soccer|volleyball|hockey|rugby|baseball|softball|tennis|lacrosse|wrestling|mma|boxing|bjj|jiu[- ]?jitsu|martial arts|golf|pickleball|track|jump higher)\b/],
+ ["goal","Strength",/\b(strength|strong(er|est)?|get strong|powerlift\w*|max(imal)?|max out|1 ?rm|one rep max|prs?|personal (record|best)s?|heavy|lift heavy|heavier|squat more|bench more|deadlift more|lift more|raw strength|brute)\b/],
+ ["goal","Muscle Gain",/\b(muscle( gain)?|muscular|gain muscle|build muscle|put on (muscle|size|mass)|gains|hypertroph\w*|size|bigger|get big|big|huge|jacked|get jacked|swole|get swole|yoked|beef(y| up)|bulk\w*|mass|bodybuild\w*|physique|aesthetic\w*|pump|grow|growth|arms|guns)\b/],
+ ["equip","Incline Bench",/\bincline( bench)?\b/],
+ ["equip","Squat rack",/\b(squat rack|power rack|rack|cage)\b/],
+ ["equip","Trap bar",/\b(trap ?bar|hex ?bar)\b/],
+ ["equip","Pull-up Bar",/\b(pull[- ]?ups?( bar)?|chin[- ]?ups?( bar)?)\b/],
+ ["equip","Dip Bar",/\b(dip(s| bars?| station)?)\b/],
+ ["equip","Glute-Ham Developer",/\b(ghd|glute[- ]ham( developer| raise)?)\b/],
+ ["equip","Weight Machines",/\b(weight )?machines?\b/],
+ ["equip","Med ball",/\b(med(icine)? ?balls?|mb)\b/],
+ ["equip","Landmine",/\blandmine\b/],
+ ["equip","Kettlebell",/\b(kettle ?bells?|kbs?)\b/],
+ ["equip","Dumbbell",/\b(dumb ?bells?|dbs?)\b/],
+ ["equip","Barbell",/\b(barbells?|bb|olympic bar)\b/],
+ ["equip","Cable",/\b(cables?|pulley)\b/],
+ ["equip","Band",/\b(resistance bands?|bands?)\b/],
+ ["equip","Bench",/\b(flat bench|bench)\b/]
+];
+const NUMW={one:1,two:2,three:3,four:4,five:5,six:6,seven:7};
+const STOP=new Set("build higher lower up down i want to train for with and or a an my get be more less some the on in at per week weeks wk day days a week using use have has only just program programs plan something that is it me also plus & , gym home access equipment i'm im like would love need focus improve better work out workout train training".split(" "));
+function parseQuery(q){
+  let t=" "+q.toLowerCase().replace(/[^\w\s/&-]/g," ")+" ";
+  const out={goal:new Set(),equip:new Set(),days:new Set(),unknown:[]};
+  t=t.replace(/\b(\d|one|two|three|four|five|six|seven)\s*(?:x|-?\s*days?|times)(?:\s*(?:a|per|\/)\s*w(?:ee)?k)?\b/g,(m,n)=>{out.days.add(NUMW[n]||+n);return " "});
+  for(const [k,v,re] of TERMS){const g=new RegExp(re.source,"g");if(g.test(t)){[].concat(v).forEach(x=>out[k].add(x));t=t.replace(new RegExp(re.source,"g")," ")}}
+  out.unknown=t.split(/\s+/).filter(w=>w&&!STOP.has(w)&&!/^\d+$/.test(w));
+  return out;
+}
+let parsed=parseQuery("");
+const fitsQuery=p=>{const id=p[1];
+  if(parsed.days.size&&!parsed.days.has(p[3]))return false;
+  if(parsed.goal.size&&!(GOALS[id]&&[...parsed.goal].every(x=>GOALS[id].includes(x))))return false;
+  if(parsed.equip.size&&!(EQUIP[id]&&[...parsed.equip].every(x=>EQUIP[id][0].includes(x))))return false;
+  return true};
+
+let have=new Set(),equipOpen=false,goals=new Set(),goalOpen=false;
+try{const v=JSON.parse(localStorage.getItem("tc-goal")||"null");if(v){goals=new Set(v.goals.filter(x=>GOAL_LIST.includes(x)));goalOpen=!!v.open}}catch(e){}
+const saveGoal=()=>{try{localStorage.setItem("tc-goal",JSON.stringify({goals:[...goals],open:goalOpen}))}catch(e){}};
+const fitsGoal=id=>!goals.size||(GOALS[id]&&[...goals].every(x=>GOALS[id].includes(x)));
+try{const v=JSON.parse(localStorage.getItem("tc-equip")||"null");if(v){have=new Set(v.have.filter(x=>EQUIP_LIST.includes(x)));equipOpen=!!v.open}}catch(e){}
+const saveEquip=()=>{try{localStorage.setItem("tc-equip",JSON.stringify({have:[...have],open:equipOpen}))}catch(e){}};
+const fitsEquip=id=>!have.size||(EQUIP[id]&&[...have].every(x=>EQUIP[id][0].includes(x)));
+const RAWD=window.RAW||{}, built={};
+const hasDetail=id=>!!(DETAILS[id]||RAWD[id]);
+function getDetail(id){if(DETAILS[id])return DETAILS[id];if(!RAWD[id]||!window.buildProgram)return null;try{return built[id]||(built[id]=window.buildProgram(RAWD[id]))}catch(e){console.error(e);return null}}
+
+function renderList(){
+  const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
+  app.innerHTML=`
+  <header class="top">
+    <span class="eyebrow">Axios Training Club</span>
+    <h1>Training Club Programs</h1>
+    <p class="lede">Every program in the Training Club group. Open one to see each day's lifts, prescriptions and how the loading progresses week to week.</p>
+  </header>
+  <div class="controls">
+    <input id="q" type="search" placeholder="What do you want to train?" aria-label="What do you want to train? Describe goals, equipment or days per week" value="${esc(query)}">
+    <div class="chips" role="group" aria-label="Days per week">
+      <button class="chip" data-d="all" aria-pressed="${daysFilter==="all"}">All</button>
+      ${dayOpts.map(d=>`<button class="chip" data-d="${d}" aria-pressed="${daysFilter==String(d)}">${d} days</button>`).join("")}
+      <button class="chip" id="ready" aria-pressed="${onlyReady}">Details ready</button>
+    </div>
+  </div>
+  <div class="understood" id="understood" aria-live="polite"></div>
+  <details class="equip" id="goal"${goalOpen?" open":""}>
+    <summary>Training goal <span class="sel" id="goal-sel"></span><button class="clear-link" id="goal-clear" type="button" hidden>Clear</button></summary>
+    <div class="equip-body">
+      <p>Select one or more goals to see programs that could support all of them.</p>
+      <div class="chips" role="group" aria-label="Training goals">${GOAL_LIST.map(e=>`<button class="chip" data-goal="${esc(e)}" title="${esc(GOAL_DEFS[e])}" aria-pressed="${goals.has(e)}">${esc(e)}</button>`).join("")}</div>
+      <p class="goal-def" id="goal-def"></p>
+    </div>
+  </details>
+  <details class="equip" id="equip"${equipOpen?" open":""}>
+    <summary>Equipment <span class="sel" id="equip-sel"></span><button class="clear-link" id="equip-clear" type="button" hidden>Clear</button></summary>
+    <div class="equip-body">
+      <p>Select equipment to see programs that use all of it. Programs may use other equipment too.</p>
+      <div class="chips" role="group" aria-label="Equipment the program uses">${EQUIP_LIST.map(e=>`<button class="chip" data-eq="${esc(e)}" aria-pressed="${have.has(e)}">${esc(e)}</button>`).join("")}</div>
+      <div class="equip-actions"><button type="button" id="equip-all">Select all</button><button type="button" id="equip-none">Clear</button></div>
+    </div>
+  </details>
+  <div class="count" id="count"></div>
+  <div class="list" id="list"></div>`;
+  const q=document.getElementById("q");
+  q.addEventListener("input",e=>{query=e.target.value;parsed=parseQuery(query);fill()});
+  app.querySelectorAll(".chip[data-d]").forEach(b=>b.addEventListener("click",()=>{daysFilter=b.dataset.d;app.querySelectorAll(".chip[data-d]").forEach(x=>x.setAttribute("aria-pressed",x===b));fill()}));
+  document.getElementById("ready").addEventListener("click",e=>{onlyReady=!onlyReady;e.currentTarget.setAttribute("aria-pressed",onlyReady);fill()});
+  const gdet=document.getElementById("goal");
+  gdet.addEventListener("toggle",()=>{goalOpen=gdet.open;saveGoal()});
+  const syncGoal=()=>{app.querySelectorAll(".chip[data-goal]").forEach(b=>b.setAttribute("aria-pressed",goals.has(b.dataset.goal)));saveGoal();fill()};
+  app.querySelectorAll(".chip[data-goal]").forEach(b=>b.addEventListener("click",()=>{const e=b.dataset.goal;goals.has(e)?goals.delete(e):goals.add(e);syncGoal()}));
+  document.getElementById("goal-clear").addEventListener("click",e=>{e.preventDefault();goals.clear();syncGoal()});
+  const det=document.getElementById("equip");
+  det.addEventListener("toggle",()=>{equipOpen=det.open;saveEquip()});
+  const syncEq=()=>{app.querySelectorAll(".chip[data-eq]").forEach(b=>b.setAttribute("aria-pressed",have.has(b.dataset.eq)));saveEquip();fill()};
+  app.querySelectorAll(".chip[data-eq]").forEach(b=>b.addEventListener("click",()=>{const e=b.dataset.eq;have.has(e)?have.delete(e):have.add(e);syncEq()}));
+  document.getElementById("equip-all").addEventListener("click",()=>{have=new Set(EQUIP_LIST);syncEq()});
+  document.getElementById("equip-none").addEventListener("click",()=>{have.clear();syncEq()});
+  document.getElementById("equip-clear").addEventListener("click",e=>{e.preventDefault();have.clear();syncEq()});
+  fill();
+}
+function fill(){
+  const rows=PROGRAMS.filter(p=>fitsQuery(p)&&(daysFilter==="all"||String(p[3])===daysFilter)&&(!onlyReady||hasDetail(p[1]))&&fitsEquip(p[1])&&fitsGoal(p[1]));
+  const unmapped=PROGRAMS.filter(p=>!EQUIP[p[1]]).length;
+  document.getElementById("count").textContent=`${rows.length} of ${PROGRAMS.length} programs · ${PROGRAMS.filter(p=>hasDetail(p[1])).length} with full details`+((have.size||goals.size||parsed.goal.size||parsed.equip.size)&&unmapped?` · ${unmapped} hidden until their movements are mapped`:"");
+  const u=document.getElementById("understood");
+  const bits=[...[...parsed.goal].map(x=>["Goal",x]),...[...parsed.equip].map(x=>["Uses",x]),...[...parsed.days].sort().map(x=>["Days",x+" days/wk"])];
+  u.innerHTML=query.trim()?(bits.length?`<span class="lbl">Matching</span>${bits.map(([k,v])=>`<span class="tag"><span class="k">${k}</span> ${esc(v)}</span>`).join("")}`:`<span class="lbl">Try</span><span class="hint">a goal, equipment or days, e.g. “fat loss with kettlebells, 4 days”</span>`)+(parsed.unknown.length&&bits.length?`<span class="hint">Ignored: ${esc(parsed.unknown.join(", "))}</span>`:""):"";
+  document.getElementById("goal-sel").textContent=goals.size?`· ${goals.size} selected`:"";
+  document.getElementById("goal-clear").hidden=!goals.size;
+  document.getElementById("goal-def").innerHTML=[...goals].map(x=>`<b>${esc(x)}:</b> ${esc(GOAL_DEFS[x])}`).join("<br>");
+  document.getElementById("equip-sel").textContent=have.size?`· ${have.size} selected`:"";
+  document.getElementById("equip-clear").hidden=!have.size;
+  document.getElementById("list").innerHTML=rows.length?rows.map(p=>{
+    const ready=hasDetail(p[1]);
+    return `<a class="row" href="#${p[1]}"><div style="min-width:0"><div class="name">${esc(p[0])}</div><div class="meta"><span class="tag">${p[2]} wks</span><span class="tag">${p[3]} days/wk</span>${(()=>{const bi=blockInfo(p);return `<span class="tag" title="${esc(bi.legend)}">${bi.count}</span>${bi.seq?`<span class="tag seq" title="${esc(bi.legend)}">${bi.seq}</span>`:""}`})()}${have.size&&EQUIP[p[1]]?EQUIP[p[1]][1].map(o=>`<span class="tag also">+ ${esc(o)}</span>`).join(""):""}</div></div><span class="status ${ready?"ready":"soon"}">${ready?"Details":"Coming soon"}</span></a>`;
+  }).join(""):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`;
+}
+function renderDetail(id){
+  const p=PROGRAMS.find(x=>x[1]===id); if(!p){renderList();return}
+  const d=getDetail(id);
+  const blocksTag=p[4].split(",").map(b=>BLOCK_NAMES[b]).join(" · ");
+  let html=`<a class="back" href="#">← All programs</a>
+  <div class="sheet-head"><span class="eyebrow">${blocksTag}</span><h1>${esc(p[0])}</h1>${LINKS[id]?`<a class="buy" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Get this program →</a>`:""}`;
+  if(!d){
+    html+=`<div class="facts"><span><b>${p[2]}</b> weeks</span><span><b>${p[3]}</b> days/week</span></div></div>
+    <div class="pending">The full write-up for this program isn't on the page yet. It's listed so the club can see what's available; the day-by-day details are being added in batches.</div>`;
+    app.innerHTML=html; window.scrollTo(0,0); return;
+  }
+  const g=EQUIP[id];
+  html+=`<div class="facts">${d.facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${(()=>{const bi=blockInfo(p);return `<div class="gear"><span class="lbl">Blocks</span><span class="tag">${bi.count}</span>${bi.seq?`<span class="tag seq">${bi.seq}</span>`:""}<span class="legend">${esc(bi.legend)}</span></div>`})()}${GOALS[id]?`<div class="gear"><span class="lbl">Goals</span>${GOALS[id].map(x=>`<span class="tag" title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join("")}</div>`:""}${g?`<div class="gear"><span class="lbl">Equipment</span>${g[0].map(e=>`<span class="tag">${esc(e)}</span>`).join("")}${g[1].map(e=>`<span class="tag also">+ ${esc(e)}</span>`).join("")}</div>`:""}<ul class="notes">${d.notes.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></div>`;
+  d.blocks.forEach(b=>{
+    html+=`<section class="block"><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th><th>Conditioning</th></tr></thead><tbody>`;
+    b.days.forEach(([label,cond,ex])=>{
+      const [num,...rest]=label.split(" ");
+      const dayCell=`<td class="day" rowspan="${Math.max(ex.length,1)}"><span>Day ${num}</span>${esc(rest.join(" "))}</td>`;
+      if(!ex.length){html+=`<tr class="day-start cardio">${dayCell}<td class="slot"></td><td>—</td><td class="rx">—</td><td class="cond">${esc(cond)}</td></tr>`;return}
+      ex.forEach(([slot,lift,rx],i)=>{
+        const letter=slot[0], paired=ex.some(e=>e[0]===letter+"2");
+        const cls=[i===0?"day-start":"",paired?(slot.endsWith("1")?"pair-a":"pair-b"):"solo"].join(" ");
+        html+=`<tr class="${cls}">${i===0?dayCell:""}<td class="slot">${esc(slot)}</td><td>${liftName(lift)}</td><td class="rx">${esc(rx)}</td>${i===0?`<td class="cond" rowspan="${ex.length}">${cond?esc(cond):"—"}</td>`:""}</tr>`;
+      });
+    });
+    html+=`</tbody></table></div></section>`;
+  });
+  d.progressions.forEach(pr=>{
+    html+=`<section class="block prog"><h2>${esc(pr.title)}</h2><div class="tbl-wrap"><table><thead><tr>${pr.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${pr.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></section>`;
+  });
+  html+=`<p class="foot">To estimate your 1RM: take a recent 3–5 rep max and multiply by about 1.1 (3 reps) to 1.15 (5 reps).${DETAILS[id]?"":" \"No sets saved\" means that lift has no sets entered yet."}</p>`;
+  app.innerHTML=html; window.scrollTo(0,0);
+}
+function route(){const id=location.hash.slice(1); id?renderDetail(id):renderList()}
+window.addEventListener("hashchange",route);
+route();
+</script>
+
+</body>
+</html>
