@@ -46,7 +46,23 @@ header.top{display:flex;flex-direction:column;gap:6px;margin-bottom:22px}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--plate);outline-offset:2px}
 .count{font-family:var(--mono);font-size:.78rem;color:var(--faint);margin-bottom:8px}
 .list{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 16px;border-top:1px solid var(--line-soft);text-decoration:none;color:inherit}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 16px;border-top:1px solid var(--line-soft);position:relative}
+.row .main{text-decoration:none;color:inherit;min-width:0}
+.row .main::after{content:"";position:absolute;inset:0}
+.acts{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.acts .status{text-decoration:none}
+.buy-sm{font:600 .78rem var(--body);padding:7px 12px;border-radius:6px;background:var(--plate);color:#fff;text-decoration:none;white-space:nowrap;border:1px solid var(--plate)}
+.buy-sm:hover{filter:brightness(1.08)}
+.buy-sm.nolink,.buy.nolink{background:transparent;color:var(--faint);border:1px dashed var(--line);cursor:default;filter:none}
+.tag.lvl{background:transparent;border:1px solid var(--line);color:var(--fg)}
+.tag.lvl-Beginner{border-color:#3f8f5a;color:#3f8f5a}
+.tag.lvl-Intermediate{border-color:#b7862b;color:#b7862b}
+.tag.lvl-Advanced{border-color:#b8443a;color:#b8443a}
+.tag.rated{background:var(--plate);color:#fff}
+.copy{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--plate);border-radius:8px;padding:16px 18px;margin:0 0 22px;max-width:80ch}
+.copy h2{font-family:var(--display);font-size:1.1rem;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}
+.copy p{margin:0 0 10px;color:var(--muted);line-height:1.55}
+.copy p:last-child{margin-bottom:0}
 .row:first-child{border-top:0}
 .row:hover{background:var(--steel-soft)}
 .row .name{font-family:var(--display);font-weight:600;font-size:1.3rem;letter-spacing:.02em;text-transform:uppercase}
@@ -108,12 +124,12 @@ tr.cardio td{background:var(--steel-soft)}
 .prog table{min-width:720px}
 .prog td:first-child{font-weight:600;white-space:nowrap}
 .prog td:not(:first-child){font-family:var(--mono);font-size:.8rem;font-variant-numeric:tabular-nums}
-.buy{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 16px;border-radius:6px;background:var(--plate);color:#fff;font:600 .9rem var(--body);text-decoration:none}
+.buy{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 16px;border-radius:6px;background:var(--plate);color:#fff;font:600 .9rem var(--body);text-decoration:none;border:1px solid var(--plate)}
 .buy:hover{filter:brightness(1.08)}
 .foot{margin-top:28px;font-size:.82rem;color:var(--faint);max-width:80ch}
 .pending{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:22px 18px;color:var(--muted);max-width:60ch}
 .pending a{color:var(--steel)}
-@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.status{justify-self:start}}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.acts{justify-self:start}}
 @media (prefers-reduced-motion:no-preference){.row{transition:background .12s}}
 </style>
 </head>
@@ -123,6 +139,7 @@ tr.cardio td{background:var(--steel-soft)}
 <div class="wrap" id="app"></div>
 
 <script src="links.js"></script>
+<script src="program-info.js"></script>
 <script src="engine.js"></script>
 <script src="data/boneyard.js"></script>
 <script src="data/warpig.js"></script>
@@ -269,9 +286,15 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const liftName=s=>s.endsWith("*")?esc(s.slice(0,-1))+'<span class="star" title="Load changes week to week">*</span>':esc(s);
 const app=document.getElementById("app");
 const LINKS=window.PROGRAM_LINKS||{};
-let query="",daysFilter="all",onlyReady=false;
+const INFO=window.PROGRAM_INFO||{};
+const LEVEL_LIST=["Beginner","Intermediate","Advanced"];
+const levelOf=id=>(INFO[id]&&INFO[id].level)||"";
+let query="",daysFilter="all";
 /* "What do you want to train?" — reads goal, equipment and days-per-week words out of free text. Order matters: longer phrases first. */
 const TERMS=[
+ ["level","Beginner",/\b(beginners?|novice|newbie|new to (lifting|training|the gym)|just starting|starting out|first program|easy|entry[- ]level)\b/],
+ ["level","Intermediate",/\b(intermediate|some experience|mid[- ]level)\b/],
+ ["level","Advanced",/\b(advanced|experienced|seasoned|veteran|elite|hard(core)?|challenging|intense)\b/],
  ["goal",["Fat Loss","Mobility / Core Strength"],/\b(six[- ]?pack( abs)?|visible abs|flat (stomach|belly)|lose (the |my )?(belly|gut)|belly fat)\b/],
  ["goal",["Strength","Aerobic Endurance"],/\bhybrid( athlete| training)?\b/],
  ["goal","Mobility / Core Strength",/\b(mobility|core( strength| stability)?|abs|ab work|flexib\w*|stretch\w*|trunk|posture|move better|moving better|range of motion|rom|joint health|loosen up|get loose|less stiff|stiffness|bendy|hips?|plank\w*)\b/],
@@ -303,7 +326,7 @@ const NUMW={one:1,two:2,three:3,four:4,five:5,six:6,seven:7};
 const STOP=new Set("build higher lower up down i want to train for with and or a an my get be more less some the on in at per week weeks wk day days a week using use have has only just program programs plan something that is it me also plus & , gym home access equipment i'm im like would love need focus improve better work out workout train training".split(" "));
 function parseQuery(q){
   let t=" "+q.toLowerCase().replace(/[^\w\s/&-]/g," ")+" ";
-  const out={goal:new Set(),equip:new Set(),days:new Set(),unknown:[]};
+  const out={goal:new Set(),equip:new Set(),days:new Set(),level:new Set(),unknown:[]};
   t=t.replace(/\b(\d|one|two|three|four|five|six|seven)\s*(?:x|-?\s*days?|times)(?:\s*(?:a|per|\/)\s*w(?:ee)?k)?\b/g,(m,n)=>{out.days.add(NUMW[n]||+n);return " "});
   for(const [k,v,re] of TERMS){const g=new RegExp(re.source,"g");if(g.test(t)){[].concat(v).forEach(x=>out[k].add(x));t=t.replace(new RegExp(re.source,"g")," ")}}
   out.unknown=t.split(/\s+/).filter(w=>w&&!STOP.has(w)&&!/^\d+$/.test(w));
@@ -312,6 +335,7 @@ function parseQuery(q){
 let parsed=parseQuery("");
 const fitsQuery=p=>{const id=p[1];
   if(parsed.days.size&&!parsed.days.has(p[3]))return false;
+  if(parsed.level.size&&!parsed.level.has(levelOf(id)))return false;
   if(parsed.goal.size&&!(GOALS[id]&&[...parsed.goal].every(x=>GOALS[id].includes(x))))return false;
   if(parsed.equip.size&&!(EQUIP[id]&&[...parsed.equip].every(x=>EQUIP[id][0].includes(x))))return false;
   return true};
@@ -322,11 +346,18 @@ const saveGoal=()=>{try{localStorage.setItem("tc-goal",JSON.stringify({goals:[..
 const fitsGoal=id=>!goals.size||(GOALS[id]&&[...goals].every(x=>GOALS[id].includes(x)));
 try{const v=JSON.parse(localStorage.getItem("tc-equip")||"null");if(v){have=new Set(v.have.filter(x=>EQUIP_LIST.includes(x)));equipOpen=!!v.open}}catch(e){}
 const saveEquip=()=>{try{localStorage.setItem("tc-equip",JSON.stringify({have:[...have],open:equipOpen}))}catch(e){}};
+let levels=new Set(),levelOpen=false;
+try{const v=JSON.parse(localStorage.getItem("tc-level")||"null");if(v){levels=new Set(v.levels.filter(x=>LEVEL_LIST.includes(x)));levelOpen=!!v.open}}catch(e){}
+const saveLevel=()=>{try{localStorage.setItem("tc-level",JSON.stringify({levels:[...levels],open:levelOpen}))}catch(e){}};
+const fitsLevel=id=>!levels.size||levels.has(levelOf(id));
 const fitsEquip=id=>!have.size||(EQUIP[id]&&[...have].every(x=>EQUIP[id][0].includes(x)));
 const RAWD=window.RAW||{}, built={};
 const hasDetail=id=>!!(DETAILS[id]||RAWD[id]);
 function getDetail(id){if(DETAILS[id])return DETAILS[id];if(!RAWD[id]||!window.buildProgram)return null;try{return built[id]||(built[id]=window.buildProgram(RAWD[id]))}catch(e){console.error(e);return null}}
 
+const badges=id=>{const i=INFO[id]||{};return (i.level?`<span class="tag lvl lvl-${i.level}">${i.level}</span>`:"")+(i.rated?`<span class="tag rated">★ Highly Rated</span>`:"")};
+const buyBtn=(id,cls)=>LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Buy Program</a>`:`<span class="${cls} nolink" title="Link coming soon">Buy Program</span>`;
+const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<section class="copy"><h2>About this program</h2>${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</section>`:""};
 function renderList(){
   const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
   app.innerHTML=`
@@ -340,7 +371,6 @@ function renderList(){
     <div class="chips" role="group" aria-label="Days per week">
       <button class="chip" data-d="all" aria-pressed="${daysFilter==="all"}">All</button>
       ${dayOpts.map(d=>`<button class="chip" data-d="${d}" aria-pressed="${daysFilter==String(d)}">${d} days</button>`).join("")}
-      <button class="chip" id="ready" aria-pressed="${onlyReady}">Details ready</button>
     </div>
   </div>
   <div class="understood" id="understood" aria-live="polite"></div>
@@ -360,12 +390,18 @@ function renderList(){
       <div class="equip-actions"><button type="button" id="equip-all">Select all</button><button type="button" id="equip-none">Clear</button></div>
     </div>
   </details>
+  <details class="equip" id="level"${levelOpen?" open":""}>
+    <summary>Difficulty <span class="sel" id="level-sel"></span><button class="clear-link" id="level-clear" type="button" hidden>Clear</button></summary>
+    <div class="equip-body">
+      <p>Select one or more levels to see programs at any of them.</p>
+      <div class="chips" role="group" aria-label="Difficulty">${LEVEL_LIST.map(e=>`<button class="chip" data-lvl="${e}" aria-pressed="${levels.has(e)}">${e}</button>`).join("")}</div>
+    </div>
+  </details>
   <div class="count" id="count"></div>
   <div class="list" id="list"></div>`;
   const q=document.getElementById("q");
   q.addEventListener("input",e=>{query=e.target.value;parsed=parseQuery(query);fill()});
   app.querySelectorAll(".chip[data-d]").forEach(b=>b.addEventListener("click",()=>{daysFilter=b.dataset.d;app.querySelectorAll(".chip[data-d]").forEach(x=>x.setAttribute("aria-pressed",x===b));fill()}));
-  document.getElementById("ready").addEventListener("click",e=>{onlyReady=!onlyReady;e.currentTarget.setAttribute("aria-pressed",onlyReady);fill()});
   const gdet=document.getElementById("goal");
   gdet.addEventListener("toggle",()=>{goalOpen=gdet.open;saveGoal()});
   const syncGoal=()=>{app.querySelectorAll(".chip[data-goal]").forEach(b=>b.setAttribute("aria-pressed",goals.has(b.dataset.goal)));saveGoal();fill()};
@@ -378,23 +414,30 @@ function renderList(){
   document.getElementById("equip-all").addEventListener("click",()=>{have=new Set(EQUIP_LIST);syncEq()});
   document.getElementById("equip-none").addEventListener("click",()=>{have.clear();syncEq()});
   document.getElementById("equip-clear").addEventListener("click",e=>{e.preventDefault();have.clear();syncEq()});
+  const ldet=document.getElementById("level");
+  ldet.addEventListener("toggle",()=>{levelOpen=ldet.open;saveLevel()});
+  const syncLvl=()=>{app.querySelectorAll(".chip[data-lvl]").forEach(b=>b.setAttribute("aria-pressed",levels.has(b.dataset.lvl)));saveLevel();fill()};
+  app.querySelectorAll(".chip[data-lvl]").forEach(b=>b.addEventListener("click",()=>{const e=b.dataset.lvl;levels.has(e)?levels.delete(e):levels.add(e);syncLvl()}));
+  document.getElementById("level-clear").addEventListener("click",e=>{e.preventDefault();levels.clear();syncLvl()});
   fill();
 }
 function fill(){
-  const rows=PROGRAMS.filter(p=>fitsQuery(p)&&(daysFilter==="all"||String(p[3])===daysFilter)&&(!onlyReady||hasDetail(p[1]))&&fitsEquip(p[1])&&fitsGoal(p[1]));
+  const rows=PROGRAMS.filter(p=>fitsQuery(p)&&(daysFilter==="all"||String(p[3])===daysFilter)&&fitsEquip(p[1])&&fitsGoal(p[1])&&fitsLevel(p[1]));
   const unmapped=PROGRAMS.filter(p=>!EQUIP[p[1]]).length;
   document.getElementById("count").textContent=`${rows.length} of ${PROGRAMS.length} programs · ${PROGRAMS.filter(p=>hasDetail(p[1])).length} with full details`+((have.size||goals.size||parsed.goal.size||parsed.equip.size)&&unmapped?` · ${unmapped} hidden until their movements are mapped`:"");
   const u=document.getElementById("understood");
-  const bits=[...[...parsed.goal].map(x=>["Goal",x]),...[...parsed.equip].map(x=>["Uses",x]),...[...parsed.days].sort().map(x=>["Days",x+" days/wk"])];
+  const bits=[...[...parsed.goal].map(x=>["Goal",x]),...[...parsed.equip].map(x=>["Uses",x]),...[...parsed.level].map(x=>["Level",x]),...[...parsed.days].sort().map(x=>["Days",x+" days/wk"])];
   u.innerHTML=query.trim()?(bits.length?`<span class="lbl">Matching</span>${bits.map(([k,v])=>`<span class="tag"><span class="k">${k}</span> ${esc(v)}</span>`).join("")}`:`<span class="lbl">Try</span><span class="hint">a goal, equipment or days, e.g. “fat loss with kettlebells, 4 days”</span>`)+(parsed.unknown.length&&bits.length?`<span class="hint">Ignored: ${esc(parsed.unknown.join(", "))}</span>`:""):"";
   document.getElementById("goal-sel").textContent=goals.size?`· ${goals.size} selected`:"";
   document.getElementById("goal-clear").hidden=!goals.size;
   document.getElementById("goal-def").innerHTML=[...goals].map(x=>`<b>${esc(x)}:</b> ${esc(GOAL_DEFS[x])}`).join("<br>");
   document.getElementById("equip-sel").textContent=have.size?`· ${have.size} selected`:"";
   document.getElementById("equip-clear").hidden=!have.size;
+  document.getElementById("level-sel").textContent=levels.size?`· ${levels.size} selected`:"";
+  document.getElementById("level-clear").hidden=!levels.size;
   document.getElementById("list").innerHTML=rows.length?rows.map(p=>{
     const ready=hasDetail(p[1]);
-    return `<a class="row" href="#${p[1]}"><div style="min-width:0"><div class="name">${esc(p[0])}</div><div class="meta"><span class="tag">${p[2]} wks</span><span class="tag">${p[3]} days/wk</span>${(()=>{const bi=blockInfo(p);return `<span class="tag" title="${esc(bi.legend)}">${bi.count}</span>${bi.seq?`<span class="tag seq" title="${esc(bi.legend)}">${bi.seq}</span>`:""}`})()}${have.size&&EQUIP[p[1]]?EQUIP[p[1]][1].map(o=>`<span class="tag also">+ ${esc(o)}</span>`).join(""):""}</div></div><span class="status ${ready?"ready":"soon"}">${ready?"Details":"Coming soon"}</span></a>`;
+    return `<div class="row"><a class="main" href="#${p[1]}"><div class="name">${esc(p[0])}</div><div class="meta"><span class="tag">${p[2]} wks</span><span class="tag">${p[3]} days/wk</span>${(()=>{const bi=blockInfo(p);return `<span class="tag" title="${esc(bi.legend)}">${bi.count}</span>${bi.seq?`<span class="tag seq" title="${esc(bi.legend)}">${bi.seq}</span>`:""}`})()}${badges(p[1])}${have.size&&EQUIP[p[1]]?EQUIP[p[1]][1].map(o=>`<span class="tag also">+ ${esc(o)}</span>`).join(""):""}</div></a><div class="acts"><a class="status ${ready?"ready":"soon"}" href="#${p[1]}" tabindex="-1">${ready?"See Program Details":"Coming soon"}</a>${buyBtn(p[1],"buy-sm")}</div></div>`;
   }).join(""):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`;
 }
 function renderDetail(id){
@@ -402,7 +445,7 @@ function renderDetail(id){
   const d=getDetail(id);
   const blocksTag=p[4].split(",").map(b=>BLOCK_NAMES[b]).join(" · ");
   let html=`<a class="back" href="#">← All programs</a>
-  <div class="sheet-head"><span class="eyebrow">${blocksTag}</span><h1>${esc(p[0])}</h1>${LINKS[id]?`<a class="buy" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Get this program →</a>`:""}`;
+  <div class="sheet-head"><span class="eyebrow">${blocksTag}</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${buyBtn(id,"buy")}`;
   if(!d){
     html+=`<div class="facts"><span><b>${p[2]}</b> weeks</span><span><b>${p[3]}</b> days/week</span></div></div>
     <div class="pending">The full write-up for this program isn't on the page yet. It's listed so the club can see what's available; the day-by-day details are being added in batches.</div>`;
@@ -410,6 +453,7 @@ function renderDetail(id){
   }
   const g=EQUIP[id];
   html+=`<div class="facts">${d.facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${(()=>{const bi=blockInfo(p);return `<div class="gear"><span class="lbl">Blocks</span><span class="tag">${bi.count}</span>${bi.seq?`<span class="tag seq">${bi.seq}</span>`:""}<span class="legend">${esc(bi.legend)}</span></div>`})()}${GOALS[id]?`<div class="gear"><span class="lbl">Goals</span>${GOALS[id].map(x=>`<span class="tag" title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join("")}</div>`:""}${g?`<div class="gear"><span class="lbl">Equipment</span>${g[0].map(e=>`<span class="tag">${esc(e)}</span>`).join("")}${g[1].map(e=>`<span class="tag also">+ ${esc(e)}</span>`).join("")}</div>`:""}<ul class="notes">${d.notes.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></div>`;
+  html+=copyBox(id);
   d.blocks.forEach(b=>{
     html+=`<section class="block"><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th><th>Conditioning</th></tr></thead><tbody>`;
     b.days.forEach(([label,cond,ex])=>{
