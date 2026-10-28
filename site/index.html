@@ -269,7 +269,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const liftName=s=>s.endsWith("*")?esc(s.slice(0,-1))+'<span class="star" title="Load changes week to week">*</span>':esc(s);
 const app=document.getElementById("app");
 const LINKS=window.PROGRAM_LINKS||{};
-let query="",daysFilter="all",onlyReady=false;
+let query="",daysFilter="all";
 /* "What do you want to train?" — reads goal, equipment and days-per-week words out of free text. Order matters: longer phrases first. */
 const TERMS=[
  ["goal",["Fat Loss","Mobility / Core Strength"],/\b(six[- ]?pack( abs)?|visible abs|flat (stomach|belly)|lose (the |my )?(belly|gut)|belly fat)\b/],
@@ -340,7 +340,6 @@ function renderList(){
     <div class="chips" role="group" aria-label="Days per week">
       <button class="chip" data-d="all" aria-pressed="${daysFilter==="all"}">All</button>
       ${dayOpts.map(d=>`<button class="chip" data-d="${d}" aria-pressed="${daysFilter==String(d)}">${d} days</button>`).join("")}
-      <button class="chip" id="ready" aria-pressed="${onlyReady}">Details ready</button>
     </div>
   </div>
   <div class="understood" id="understood" aria-live="polite"></div>
@@ -365,7 +364,6 @@ function renderList(){
   const q=document.getElementById("q");
   q.addEventListener("input",e=>{query=e.target.value;parsed=parseQuery(query);fill()});
   app.querySelectorAll(".chip[data-d]").forEach(b=>b.addEventListener("click",()=>{daysFilter=b.dataset.d;app.querySelectorAll(".chip[data-d]").forEach(x=>x.setAttribute("aria-pressed",x===b));fill()}));
-  document.getElementById("ready").addEventListener("click",e=>{onlyReady=!onlyReady;e.currentTarget.setAttribute("aria-pressed",onlyReady);fill()});
   const gdet=document.getElementById("goal");
   gdet.addEventListener("toggle",()=>{goalOpen=gdet.open;saveGoal()});
   const syncGoal=()=>{app.querySelectorAll(".chip[data-goal]").forEach(b=>b.setAttribute("aria-pressed",goals.has(b.dataset.goal)));saveGoal();fill()};
@@ -381,7 +379,7 @@ function renderList(){
   fill();
 }
 function fill(){
-  const rows=PROGRAMS.filter(p=>fitsQuery(p)&&(daysFilter==="all"||String(p[3])===daysFilter)&&(!onlyReady||hasDetail(p[1]))&&fitsEquip(p[1])&&fitsGoal(p[1]));
+  const rows=PROGRAMS.filter(p=>fitsQuery(p)&&(daysFilter==="all"||String(p[3])===daysFilter)&&fitsEquip(p[1])&&fitsGoal(p[1]));
   const unmapped=PROGRAMS.filter(p=>!EQUIP[p[1]]).length;
   document.getElementById("count").textContent=`${rows.length} of ${PROGRAMS.length} programs · ${PROGRAMS.filter(p=>hasDetail(p[1])).length} with full details`+((have.size||goals.size||parsed.goal.size||parsed.equip.size)&&unmapped?` · ${unmapped} hidden until their movements are mapped`:"");
   const u=document.getElementById("understood");
