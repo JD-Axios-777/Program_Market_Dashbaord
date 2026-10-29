@@ -53,6 +53,9 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .shelf-head h2{font-family:var(--display);font-weight:700;font-size:1.6rem;text-transform:uppercase;letter-spacing:.02em;margin:0;line-height:1}
 .shelf-head p{margin:4px 0 0;color:var(--muted);font-size:.92em}
 .shelf-n{font-family:var(--mono);font-size:.78rem;color:var(--faint);white-space:nowrap}
+.shelf-nav a.nav-extra{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.shelf-nav a.nav-extra:hover{opacity:.9}
+.tag.soon-tag{background:transparent;border:1px dashed var(--line);color:var(--muted)}
 .demo-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--steel);color:var(--steel);background:var(--surface);font:600 .9rem var(--body);text-decoration:none;white-space:nowrap}
 .demo-btn:hover{background:var(--steel);color:var(--surface)}
 .row.demo-row{background:var(--steel-soft)}
@@ -386,7 +389,7 @@ const saveEquip=()=>{try{localStorage.setItem("tc-equip",JSON.stringify({have:[.
 let levels=new Set(),levelOpen=false;
 try{const v=JSON.parse(localStorage.getItem("tc-level")||"null");if(v){levels=new Set(v.levels.filter(x=>LEVEL_LIST.includes(x)));levelOpen=!!v.open}}catch(e){}
 const saveLevel=()=>{try{localStorage.setItem("tc-level",JSON.stringify({levels:[...levels],open:levelOpen}))}catch(e){}};
-const fitsLevel=id=>!levels.size||levels.has(levelOf(id));
+const fitsLevel=id=>true; /* level is now shown as shelves, not a filter */
 const fitsEquip=id=>!have.size||(EQUIP[id]&&[...have].every(x=>EQUIP[id][0].includes(x)));
 const RAWD=window.RAW||{}, built={};
 const hasDetail=id=>!!(DETAILS[id]||RAWD[id]);
@@ -402,11 +405,18 @@ const demoRow=()=>`<div class="row demo-row"><a class="main" href="${esc(DEMO_HR
 const SHELVES=[
   ["Beginner","Start here if you're new to structured programs or returning after time off."],
   ["Intermediate","For lifters comfortable with the main barbell lifts and percentage-based loading."],
-  ["Advanced","Higher volume and intensity for experienced lifters."],
-  ["Other","Not yet rated."]];
-const shelfOf=p=>LEVEL_LIST.includes(levelOf(p[1]))?levelOf(p[1]):"Other";
+  ["Advanced","Higher volume and intensity for experienced lifters."]];
+const EXTRAS=[
+  {id:"bundles",title:"Program Bundles",desc:"Several programs in one purchase.",items:[
+    {name:"Hypertrophy Program Bundle",tags:["Bundle","$120"],href:"https://axios-remote-fitness-coaching.kit.com/products/hypertrophy-program-bundle",cta:"Buy Bundle"},
+    {name:"Series bundles (e.g. Darkwater Phases 1–3)",tags:["Coming soon"]}]},
+  {id:"systems",title:"Total Training Systems",desc:"Year-round plans that rotate 6-week phases for lean mass, strength/power and work capacity.",items:[
+    {name:"[Training system name]",tags:["Coming soon"]}]}];
+const extraRow=it=>`<div class="row extra-row"><div class="main"><div class="name">${esc(it.name)}</div><div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></div>${it.href?`<div class="acts"><a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a></div>`:""}</div>`;
+const extrasHtml=()=>EXTRAS.map(x=>`<div class="shelf-head" id="lvl-${x.id}"><div><h2>${esc(x.title)}</h2><p>${esc(x.desc)}</p></div><span class="shelf-n">${x.items.length} item${x.items.length>1?"s":""}</span></div>`+x.items.map(extraRow).join("")).join("");
+const shelfOf=p=>levelOf(p[1]);
 const slugL=l=>"lvl-"+l.toLowerCase();
-const shelfNav=rows=>`<nav class="shelf-nav" aria-label="Jump to level">${SHELVES.map(([l])=>{const n=rows.filter(p=>shelfOf(p)===l).length;return n?`<a href="#${slugL(l)}" data-jump="${slugL(l)}">${l} <span>${n}</span></a>`:""}).join("")}</nav>`;
+const shelfNav=rows=>`<nav class="shelf-nav" aria-label="Jump to level">${SHELVES.map(([l])=>{const n=rows.filter(p=>shelfOf(p)===l).length;return n?`<a href="#${slugL(l)}" data-jump="${slugL(l)}">${l} <span>${n}</span></a>`:""}).join("")}${EXTRAS.map(x=>`<a href="#lvl-${x.id}" data-jump="lvl-${x.id}" class="nav-extra">${esc(x.title)}</a>`).join("")}</nav>`;
 const byLevel=(rows,fn)=>SHELVES.map(([l,d])=>{const g=rows.filter(p=>shelfOf(p)===l);if(!g.length)return "";return `<div class="shelf-head" id="${slugL(l)}"><div><h2>${l}</h2><p>${esc(d)}</p></div><span class="shelf-n">${g.length} program${g.length>1?"s":""}</span></div>`+g.map(fn).join("")}).join("");
 function renderList(){
   const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
@@ -440,13 +450,6 @@ function renderList(){
       <div class="equip-actions"><button type="button" id="equip-all">Select all</button><button type="button" id="equip-none">Clear</button></div>
     </div>
   </details>
-  <details class="equip" id="level"${levelOpen?" open":""}>
-    <summary>Difficulty <span class="sel" id="level-sel"></span><button class="clear-link" id="level-clear" type="button" hidden>Clear</button></summary>
-    <div class="equip-body">
-      <p>Select one or more levels to see programs at any of them.</p>
-      <div class="chips" role="group" aria-label="Difficulty">${LEVEL_LIST.map(e=>`<button class="chip" data-lvl="${e}" aria-pressed="${levels.has(e)}">${e}</button>`).join("")}</div>
-    </div>
-  </details>
   <div class="count" id="count"></div>
   <div class="list" id="list"></div>`;
   const q=document.getElementById("q");
@@ -464,11 +467,6 @@ function renderList(){
   document.getElementById("equip-all").addEventListener("click",()=>{have=new Set(EQUIP_LIST);syncEq()});
   document.getElementById("equip-none").addEventListener("click",()=>{have.clear();syncEq()});
   document.getElementById("equip-clear").addEventListener("click",e=>{e.preventDefault();have.clear();syncEq()});
-  const ldet=document.getElementById("level");
-  ldet.addEventListener("toggle",()=>{levelOpen=ldet.open;saveLevel()});
-  const syncLvl=()=>{app.querySelectorAll(".chip[data-lvl]").forEach(b=>b.setAttribute("aria-pressed",levels.has(b.dataset.lvl)));saveLevel();fill()};
-  app.querySelectorAll(".chip[data-lvl]").forEach(b=>b.addEventListener("click",()=>{const e=b.dataset.lvl;levels.has(e)?levels.delete(e):levels.add(e);syncLvl()}));
-  document.getElementById("level-clear").addEventListener("click",e=>{e.preventDefault();levels.clear();syncLvl()});
   fill();
 }
 function fill(){
@@ -483,12 +481,10 @@ function fill(){
   document.getElementById("goal-def").innerHTML=[...goals].map(x=>`<b>${esc(x)}:</b> ${esc(GOAL_DEFS[x])}`).join("<br>");
   document.getElementById("equip-sel").textContent=have.size?`· ${have.size} selected`:"";
   document.getElementById("equip-clear").hidden=!have.size;
-  document.getElementById("level-sel").textContent=levels.size?`· ${levels.size} selected`:"";
-  document.getElementById("level-clear").hidden=!levels.size;
   document.getElementById("list").innerHTML=(rows.length?shelfNav(rows):"")+(DEMO_HREF?demoRow():"")+(rows.length?byLevel(rows,p=>{
     const ready=hasDetail(p[1]);
     return `<div class="row"><a class="main" href="#${p[1]}"><div class="name">${esc(p[0])}</div><div class="meta"><span class="tag">${p[2]} wks</span><span class="tag">${p[3]} days/wk</span>${(()=>{const bi=blockInfo(p);return `<span class="tag" title="${esc(bi.legend)}">${bi.count}</span>${bi.seq?`<span class="tag seq" title="${esc(bi.legend)}">${bi.seq}</span>`:""}`})()}${badges(p[1])}${have.size&&EQUIP[p[1]]?EQUIP[p[1]][1].map(o=>`<span class="tag also">+ ${esc(o)}</span>`).join(""):""}</div></a><div class="acts"><a class="status ${ready?"ready":"soon"}" href="#${p[1]}" tabindex="-1">${ready?"See Program Details":"Coming soon"}</a>${buyBtn(p[1],"buy-sm")}</div></div>`;
-  }):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`);
+  }):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`)+extrasHtml();
   document.querySelectorAll("[data-jump]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t)t.scrollIntoView({behavior:"smooth",block:"start"})}));
 }
 function renderDetail(id){

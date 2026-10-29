@@ -38,7 +38,7 @@ Hypertrophy and strength capacity weeks alternate so you train size and strength
 
 Alternating hypertrophy and strength capacity weeks continue to push both size and strength, building directly on Phase 1.` },
 
-  "bludkrieg": { level: "", rated: false, copy:
+  "bludkrieg": { level: "Intermediate", rated: false, copy:
 `A four-day barbell-focused program pairing a squat or pull with a press or hinge each day. Back squat, close-grip bench, bent row and incline bench anchor the week.
 
 Six weeks move through hypertrophy, strength capacity and strength, two weeks each, with the same exercises throughout so you can watch the loads climb.` },
