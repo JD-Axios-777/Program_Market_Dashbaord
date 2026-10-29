@@ -147,7 +147,8 @@ Weeks 1–3 build a hypertrophy base and weeks 4–6 move into strength capacity
         { h: "Ongoing support", lines: [
           "Questions about a lift, a load or how the program is going? Reach out and get an answer.",
           "Technical help with the app is included, from setup to logging your sessions.",
-          "Support continues for as long as you run the program." ] }
+          "Reset the program and run it again any time.",
+          "Support comes with every run, so you can always reach out." ] }
       ],
       note: "Built for a full gym: barbell, dumbbells, cables and a squat rack. If yours is missing something, swaps cover it."
     } },
