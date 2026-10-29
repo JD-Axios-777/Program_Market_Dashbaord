@@ -63,7 +63,8 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .copy h2{font-family:var(--display);font-size:1.1rem;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}
 .copy p{margin:0 0 10px;color:var(--muted);line-height:1.55}
 .copy p:last-child{margin-bottom:0}
-.incl{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:8px;padding:16px 18px;margin:0 0 22px;max-width:80ch}
+.incl{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:8px;padding:16px 18px;margin:4px 0 0;max-width:80ch;width:100%;box-sizing:border-box}
+.incl .note:last-child{margin-bottom:0}
 .incl h2{font-family:var(--display);font-size:1.1rem;text-transform:uppercase;letter-spacing:.04em;margin:0;display:inline}
 .incl summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin:-6px 0}
 .incl summary::-webkit-details-marker{display:none}
@@ -370,7 +371,7 @@ function getDetail(id){if(DETAILS[id])return DETAILS[id];if(!RAWD[id]||!window.b
 
 const badges=id=>{const i=INFO[id]||{};return (i.level?`<span class="tag lvl lvl-${i.level}">${i.level}</span>`:"")+(i.rated?`<span class="tag rated">★ Highly Rated</span>`:"")};
 const buyBtn=(id,cls)=>LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Buy Program</a>`:`<span class="${cls} nolink" title="Link coming soon">Buy Program</span>`;
-const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<details class="incl"><summary><h2>${esc(c.title)}</h2></summary>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}${buyBtn(id,"buy")}</details>`};
+const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<details class="incl"><summary><h2>${esc(c.title)}</h2></summary>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}</details>`};
 const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<section class="copy"><h2>About this program</h2>${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</section>`:""};
 function renderList(){
   const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
@@ -459,7 +460,7 @@ function renderDetail(id){
   const d=getDetail(id);
   const blocksTag=p[4].split(",").map(b=>BLOCK_NAMES[b]).join(" · ");
   let html=`<a class="back" href="#">← All programs</a>
-  <div class="sheet-head"><span class="eyebrow">${blocksTag}</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${buyBtn(id,"buy")}`;
+  <div class="sheet-head"><span class="eyebrow">${blocksTag}</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${buyBtn(id,"buy")}${inclBox(id)}`;
   if(!d){
     html+=`<div class="facts"><span><b>${p[2]}</b> weeks</span><span><b>${p[3]}</b> days/week</span></div></div>
     <div class="pending">The full write-up for this program isn't on the page yet. It's listed so the club can see what's available; the day-by-day details are being added in batches.</div>`;
@@ -467,7 +468,7 @@ function renderDetail(id){
   }
   const g=EQUIP[id];
   html+=`<div class="facts">${d.facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${(()=>{const bi=blockInfo(p);return `<div class="gear"><span class="lbl">Blocks</span><span class="tag">${bi.count}</span>${bi.seq?`<span class="tag seq">${bi.seq}</span>`:""}<span class="legend">${esc(bi.legend)}</span></div>`})()}${GOALS[id]?`<div class="gear"><span class="lbl">Goals</span>${GOALS[id].map(x=>`<span class="tag" title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join("")}</div>`:""}${g?`<div class="gear"><span class="lbl">Equipment</span>${g[0].map(e=>`<span class="tag">${esc(e)}</span>`).join("")}${g[1].map(e=>`<span class="tag also">+ ${esc(e)}</span>`).join("")}</div>`:""}<ul class="notes">${d.notes.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></div>`;
-  html+=copyBox(id)+inclBox(id);
+  html+=copyBox(id);
   d.blocks.forEach(b=>{
     html+=`<section class="block"><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th><th>Conditioning</th></tr></thead><tbody>`;
     b.days.forEach(([label,cond,ex])=>{
