@@ -49,3 +49,6 @@ window.PROGRAM_LINKS = {
 /* Free demo program: paste its link between the quotes. The "Not sure? Try a free demo program"
    row at the top of the program list appears once this is filled in. */
 window.DEMO_LINK = "https://axioscoaching.outgrow.us/Axios-Custom-Program";
+
+/* Custom Program / Accountability: the button in the upgrade section at the bottom of each program page. */
+window.UPGRADE_LINK = "https://axios-remote-fitness-coaching.kit.com/products/custom-program-accountabil";

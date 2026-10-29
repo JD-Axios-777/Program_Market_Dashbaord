@@ -249,3 +249,18 @@ window.PROGRAM_INCLUDES = {
   note: "Missing something from the equipment list above? Swaps cover it.",
   noEquipNote: "No equipment needed. If a movement doesn't suit you, swaps cover it."
 };
+
+/* Upgrade section at the bottom of every program page: makes the case for the
+   Custom Program / Accountability service. Its link is UPGRADE_LINK in links.js. */
+window.PROGRAM_UPGRADE = {
+  eyebrow: "Want it built around you?",
+  title: "Custom Program + Accountability",
+  lead: "This program is written for a general lifter with a standard week. A custom program starts from your week instead.",
+  points: [
+    { h: "Written for you", p: "Your days per week, your equipment, your goals and your starting point." },
+    { h: "Regular check-ins", p: "A coach reviews how your training is going and gives you guidance." },
+    { h: "Accountability", p: "Scheduled check-ins keep you consistent from one week to the next." }
+  ],
+  button: "Get my custom program",
+  price: "$100 / month"
+};
