@@ -127,31 +127,7 @@ A great option for training at home, building a movement foundation, or recoveri
 `A six-day program with two lower-body strength days, two upper-body strength days and two cardio days. Squats, RDLs, pulldowns and presses lead the sessions, with core work and functional accessories.
 
 Weeks 1–3 build a hypertrophy base and weeks 4–6 move into strength capacity, making this a straightforward full-gym program for building all-round strength.`,
-    includes: {
-      title: "What the $50 gets you",
-      lead: "This page shows the plan. Buying it puts the plan in a coaching app that adjusts to you.",
-      items: [
-        { h: "Premium coaching app", lines: [
-          "All 6 weeks are loaded into the app, day by day.",
-          "Open it at the gym and follow the session in order.",
-          "Log your sets as you go, so every week builds on the last." ] },
-        { h: "Loads that adjust to how you feel (RPE)", lines: [
-          "RPE means rate of perceived exertion: a 1–10 score for how hard a set felt.",
-          "Each working set has a target effort.",
-          "Set felt easier than the target? Add weight. Harder? Take some off.",
-          "The percentages on this page are the starting point. Your RPE adjusts them each session." ] },
-        { h: "Swaps and replacements", lines: [
-          "Equipment taken or missing? Swap in an approved replacement.",
-          "A movement doesn't suit you? Same fix.",
-          "Each replacement trains the same movement pattern, so the program keeps its structure." ] },
-        { h: "Ongoing support", lines: [
-          "Questions about a lift, a load or how the program is going? Reach out and get an answer.",
-          "Technical help with the app is included, from setup to logging your sessions.",
-          "Reset the program and run it again any time.",
-          "Support comes with every run, so you can always reach out." ] }
-      ],
-      note: "Built for a full gym: barbell, dumbbells, cables and a squat rack. If yours is missing something, swaps cover it."
-    } },
+    includesNote: "Built for a full gym: barbell, dumbbells, cables and a squat rack. If yours is missing something, swaps cover it." },
 
   "halcyon-phase-1": { level: "Intermediate", rated: false, copy:
 `A four-day body-part split: shoulders/arms, back, chest/triceps and legs. Each day opens with a heavy barbell lift and follows with focused accessory work.
@@ -242,4 +218,34 @@ Hypertrophy and strength capacity weeks alternate, with interval and steady card
 `A six-day strength program cycling legs/core, push/pull and back/lats/traps twice a week. Back squat, bench and deadlift and their pause and stiff-legged variations are trained with high frequency.
 
 Six weeks move through hypertrophy, strength capacity and strength, two weeks each, with top sets climbing toward 90%.` }
+};
+
+/* "What the $50 gets you" section, shown on every program page.
+   {weeks} is replaced with the program's length. The closing note defaults to a line about the
+   equipment list; set includesNote on a program above to give it its own line. */
+window.PROGRAM_INCLUDES = {
+  title: "What the $50 gets you",
+  lead: "This page shows the plan. Buying it puts the plan in a coaching app that adjusts to you.",
+  items: [
+    { h: "Premium coaching app", lines: [
+      "All {weeks} weeks are loaded into the app, day by day.",
+      "Open it at the gym and follow the session in order.",
+      "Log your sets as you go, so every week builds on the last." ] },
+    { h: "Loads that adjust to how you feel (RPE)", lines: [
+      "RPE means rate of perceived exertion: a 1–10 score for how hard a set felt.",
+      "Each working set has a target effort.",
+      "Set felt easier than the target? Add weight. Harder? Take some off.",
+      "The percentages on this page are the starting point. Your RPE adjusts them each session." ] },
+    { h: "Swaps and replacements", lines: [
+      "Equipment taken or missing? Swap in an approved replacement.",
+      "A movement doesn't suit you? Same fix.",
+      "Each replacement trains the same movement pattern, so the program keeps its structure." ] },
+    { h: "Ongoing support", lines: [
+      "Questions about a lift, a load or how the program is going? Reach out and get an answer.",
+      "Technical help with the app is included, from setup to logging your sessions.",
+      "Reset the program and run it again any time.",
+      "Support comes with every run, so you can always reach out." ] }
+  ],
+  note: "Missing something from the equipment list above? Swaps cover it.",
+  noEquipNote: "No equipment needed. If a movement doesn't suit you, swaps cover it."
 };

@@ -364,7 +364,7 @@ function getDetail(id){if(DETAILS[id])return DETAILS[id];if(!RAWD[id]||!window.b
 
 const badges=id=>{const i=INFO[id]||{};return (i.level?`<span class="tag lvl lvl-${i.level}">${i.level}</span>`:"")+(i.rated?`<span class="tag rated">★ Highly Rated</span>`:"")};
 const buyBtn=(id,cls)=>LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Buy Program</a>`:`<span class="${cls} nolink" title="Link coming soon">Buy Program</span>`;
-const inclBox=id=>{const c=INFO[id]&&INFO[id].includes;if(!c)return "";return `<section class="incl"><h2>${esc(c.title)}</h2>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(l)}</p>`).join("")}</div>`).join("")}</div>${c.note?`<p class="note">${esc(c.note)}</p>`:""}${buyBtn(id,"buy")}</section>`};
+const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<section class="incl"><h2>${esc(c.title)}</h2>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}${buyBtn(id,"buy")}</section>`};
 const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<section class="copy"><h2>About this program</h2>${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</section>`:""};
 function renderList(){
   const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
