@@ -48,4 +48,4 @@ window.PROGRAM_LINKS = {
 
 /* Free demo program: paste its link between the quotes. The "Not sure? Try a free demo program"
    row at the top of the program list appears once this is filled in. */
-window.DEMO_LINK = "";
+window.DEMO_LINK = "https://axioscoaching.outgrow.us/Axios-Custom-Program";
