@@ -145,6 +145,17 @@ tr.cardio td{background:var(--steel-soft)}
 .buy{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 16px;border-radius:6px;background:var(--plate);color:#fff;font:600 .9rem var(--body);text-decoration:none;border:1px solid var(--plate)}
 .buy:hover{filter:brightness(1.08)}
 .foot{margin-top:28px;font-size:.82rem;color:var(--faint);max-width:80ch}
+.upgrade{margin:36px 0 0;padding:22px 22px 24px;background:var(--fg);color:var(--bg);border-radius:10px;max-width:80ch}
+.upgrade .eyebrow{color:inherit;opacity:.7}
+.upgrade h2{font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1.05;text-transform:uppercase;letter-spacing:.01em;margin:6px 0 10px}
+.upgrade .lead{margin:0 0 18px;line-height:1.55;opacity:.85;max-width:62ch}
+.upgrade .pts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:0 0 20px}
+.upgrade h3{font-size:.95rem;font-weight:600;margin:0 0 4px}
+.upgrade .pts p{margin:0;line-height:1.5;opacity:.75;font-size:.95em}
+.upgrade .cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.upgrade .price{font-family:var(--mono);font-size:.9rem;letter-spacing:.04em}
+.upgrade .go{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:6px;background:var(--plate);color:#fff;font:600 .95rem var(--body);text-decoration:none}
+.upgrade .go:hover{filter:brightness(1.08)}
 .pending{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:22px 18px;color:var(--muted);max-width:60ch}
 .pending a{color:var(--steel)}
 @media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.acts{justify-self:start}}
@@ -376,6 +387,7 @@ function getDetail(id){if(DETAILS[id])return DETAILS[id];if(!RAWD[id]||!window.b
 const badges=id=>{const i=INFO[id]||{};return (i.level?`<span class="tag lvl lvl-${i.level}">${i.level}</span>`:"")+(i.rated?`<span class="tag rated">★ Highly Rated</span>`:"")};
 const buyBtn=(id,cls)=>LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Buy Program</a>`:`<span class="${cls} nolink" title="Link coming soon">Buy Program</span>`;
 const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<details class="incl"><summary><h2>${esc(c.title)}</h2></summary>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}</details>`};
+const upgradeBox=()=>{const u=window.PROGRAM_UPGRADE,href=(window.UPGRADE_LINK||"").trim();if(!u||!href)return "";return `<section class="upgrade"><span class="eyebrow">${esc(u.eyebrow)}</span><h2>${esc(u.title)}</h2><p class="lead">${esc(u.lead)}</p><div class="pts">${u.points.map(x=>`<div><h3>${esc(x.h)}</h3><p>${esc(x.p)}</p></div>`).join("")}</div><div class="cta"><a class="go" href="${esc(href)}" target="_blank" rel="noopener">${esc(u.button)}</a><span class="price">${esc(u.price)}</span></div></section>`};
 const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<section class="copy"><h2>About this program</h2>${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</section>`:""};
 const DEMO_HREF=(window.DEMO_LINK||"").trim(); /* set in links.js; the demo row only shows once a link is filled in */
 const demoRow=()=>`<div class="row demo-row"><a class="main" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener"><div class="name">Not sure? Get a free 2-week custom program</div><div class="meta"><span class="tag free">Free</span><span class="tag">Answer a short survey, get a program built for you</span></div></a><div class="acts"><a class="demo-btn" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener" tabindex="-1">Get my free program</a></div></div>`;
@@ -492,6 +504,7 @@ function renderDetail(id){
   d.progressions.forEach(pr=>{
     html+=`<section class="block prog"><h2>${esc(pr.title)}</h2><div class="tbl-wrap"><table><thead><tr>${pr.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${pr.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></section>`;
   });
+  html+=upgradeBox();
   html+=`<p class="foot">To estimate your 1RM: take a recent 3–5 rep max and multiply by about 1.1 (3 reps) to 1.15 (5 reps).${DETAILS[id]?"":" \"No sets saved\" means that lift has no sets entered yet."}</p>`;
   app.innerHTML=html; window.scrollTo(0,0);
 }
