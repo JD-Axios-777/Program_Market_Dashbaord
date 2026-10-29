@@ -38,7 +38,7 @@ Hypertrophy and strength capacity weeks alternate so you train size and strength
 
 Alternating hypertrophy and strength capacity weeks continue to push both size and strength, building directly on Phase 1.` },
 
-  "bludkrieg": { level: "", rated: false, copy:
+  "bludkrieg": { level: "Intermediate", rated: false, copy:
 `A four-day barbell-focused program pairing a squat or pull with a press or hinge each day. Back squat, close-grip bench, bent row and incline bench anchor the week.
 
 Six weeks move through hypertrophy, strength capacity and strength, two weeks each, with the same exercises throughout so you can watch the loads climb.` },
@@ -263,4 +263,18 @@ window.PROGRAM_UPGRADE = {
   ],
   button: "Get my custom program",
   price: "$100 / month"
+};
+
+/* Training Club pitch at the bottom of the main program list. The button links to CLUB_LINK in links.js. */
+window.CLUB_PITCH = {
+  eyebrow: "By application",
+  title: "Join the Axios Training Club",
+  lead: "Training Club members get every program in this library, not just one.",
+  points: [
+    { h: "Every program, one membership", p: "All {count} programs. Move from one phase or program to the next without buying each one." },
+    { h: "Costs less than buying programs one at a time", p: "A single program is $50. Membership starts at $25 per month for the full library." },
+    { h: "Membership is selective", p: "Training Club is limited to members who qualify. The intake survey tells us if it's the right fit." }
+  ],
+  button: "Take the intake survey",
+  note: "See if you qualify"
 };
