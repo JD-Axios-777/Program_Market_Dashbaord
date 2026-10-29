@@ -45,6 +45,10 @@ header.top{display:flex;flex-direction:column;gap:6px;margin-bottom:22px}
 .chip[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:var(--bg)}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--plate);outline-offset:2px}
 .count{font-family:var(--mono);font-size:.78rem;color:var(--faint);margin-bottom:8px}
+.demo-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--steel);color:var(--steel);background:var(--surface);font:600 .9rem var(--body);text-decoration:none;white-space:nowrap}
+.demo-btn:hover{background:var(--steel);color:var(--surface)}
+.row.demo-row{background:var(--steel-soft)}
+.tag.free{background:var(--steel);color:var(--surface);border-color:var(--steel)}
 .list{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 16px;border-top:1px solid var(--line-soft);position:relative}
 .row .main{text-decoration:none;color:inherit;min-width:0}
@@ -373,6 +377,8 @@ const badges=id=>{const i=INFO[id]||{};return (i.level?`<span class="tag lvl lvl
 const buyBtn=(id,cls)=>LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Buy Program</a>`:`<span class="${cls} nolink" title="Link coming soon">Buy Program</span>`;
 const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<details class="incl"><summary><h2>${esc(c.title)}</h2></summary>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}</details>`};
 const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<section class="copy"><h2>About this program</h2>${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</section>`:""};
+const DEMO_HREF=(window.DEMO_LINK||"").trim(); /* set in links.js; the demo row only shows once a link is filled in */
+const demoRow=()=>`<div class="row demo-row"><a class="main" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener"><div class="name">Not sure? Try a free demo program</div><div class="meta"><span class="tag free">Free</span><span class="tag">See the app, RPE and swaps before you buy</span></div></a><div class="acts"><a class="demo-btn" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener" tabindex="-1">Try it free</a></div></div>`;
 function renderList(){
   const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
   app.innerHTML=`
@@ -450,10 +456,10 @@ function fill(){
   document.getElementById("equip-clear").hidden=!have.size;
   document.getElementById("level-sel").textContent=levels.size?`· ${levels.size} selected`:"";
   document.getElementById("level-clear").hidden=!levels.size;
-  document.getElementById("list").innerHTML=rows.length?rows.map(p=>{
+  document.getElementById("list").innerHTML=(DEMO_HREF?demoRow():"")+(rows.length?rows.map(p=>{
     const ready=hasDetail(p[1]);
     return `<div class="row"><a class="main" href="#${p[1]}"><div class="name">${esc(p[0])}</div><div class="meta"><span class="tag">${p[2]} wks</span><span class="tag">${p[3]} days/wk</span>${(()=>{const bi=blockInfo(p);return `<span class="tag" title="${esc(bi.legend)}">${bi.count}</span>${bi.seq?`<span class="tag seq" title="${esc(bi.legend)}">${bi.seq}</span>`:""}`})()}${badges(p[1])}${have.size&&EQUIP[p[1]]?EQUIP[p[1]][1].map(o=>`<span class="tag also">+ ${esc(o)}</span>`).join(""):""}</div></a><div class="acts"><a class="status ${ready?"ready":"soon"}" href="#${p[1]}" tabindex="-1">${ready?"See Program Details":"Coming soon"}</a>${buyBtn(p[1],"buy-sm")}</div></div>`;
-  }).join(""):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`;
+  }).join(""):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`);
 }
 function renderDetail(id){
   const p=PROGRAMS.find(x=>x[1]===id); if(!p){renderList();return}

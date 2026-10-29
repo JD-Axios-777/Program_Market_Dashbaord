@@ -45,3 +45,7 @@ window.PROGRAM_LINKS = {
   "warpony": "https://axios-remote-fitness-coaching.kit.com/products/warpony",
   "wolfdog-phase-1": "https://axios-remote-fitness-coaching.kit.com/products/wolfdog-phase-1"
 };
+
+/* Free demo program: paste its link between the quotes. The "Not sure? Try a free demo program"
+   row at the top of the program list appears once this is filled in. */
+window.DEMO_LINK = "";
