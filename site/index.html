@@ -235,6 +235,7 @@ em.tm{display:block;font:400 .68rem var(--mono);font-style:normal;color:var(--fa
 .upgrade .go.nolink{opacity:.55;cursor:default}
 .pending{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:22px 18px;color:var(--muted);max-width:60ch}
 .pending a{color:var(--steel)}
+.buy.nolink{background:var(--surface);color:var(--muted);border:1px dashed var(--line);cursor:default}
 @media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.acts{justify-self:start}details.shelf>summary.shelf-head{flex-direction:column;align-items:flex-start;gap:10px}.demo-row .tag{white-space:normal}}
 @media (prefers-reduced-motion:no-preference){.row{transition:background .12s}}
 </style>
@@ -473,8 +474,9 @@ const SHELVES=[
   ["Intermediate","For lifters comfortable with the main barbell lifts and percentage-based loading."],
   ["Advanced","Higher volume, intensity and training frequency for experienced lifters."]];
 const EXTRAS=[
-  {id:"bundles",title:"Program Bundles",desc:"Several programs in one purchase.",items:[
-    {name:"Hypertrophy Program Bundle",tags:["Bundle","$120"],href:"https://axios-remote-fitness-coaching.kit.com/products/hypertrophy-program-bundle",cta:"Buy Bundle"}]},
+  {id:"bundles",title:"Program Bundles",desc:"Curated sets of programs built around one goal, in one purchase.",items:[
+    {name:"Hypertrophy Program Bundle",tags:["Bundle","$120"],href:"https://axios-remote-fitness-coaching.kit.com/products/hypertrophy-program-bundle",cta:"Buy Bundle"},
+    ...(window.BUNDLES||[]).map(b=>({name:b.name,sub:b.short,tags:["Bundle","Coming soon"],page:"bundle-"+b.id}))]},
   {id:"systems",title:"Total Training Systems",desc:"A full multi-phase series in one purchase. Run each phase in order for one continuous progression.",items:[
     ["Darkwater System",["darkwater-phase-1","darkwater-phase-2","darkwater-phase-3"]],
     ["Deimos System",["deimos-phase-1","deimos-phase-2","deimos-phase-3"]],
@@ -484,7 +486,7 @@ const EXTRAS=[
     ["Reaver System",["reaver-phase-1","reaver-phase-2"]],
     ["Ultima System",["ultima-phase-1","ultima-phase-2"]]
   ].map(([name,ids])=>{const ps=ids.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean);return {name,tags:[`${ps.length} phases`,`${ps.reduce((a,p)=>a+p[2],0)} weeks`,"Coming soon"],sub:ps.map(p=>p[0].replace(/^.*?[–-]\s*/,"")).join(" → ")}})}];
-const extraRow=it=>`<div class="row extra-row"><div class="main"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></div>${it.href?`<div class="acts"><a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a></div>`:""}</div>`;
+const extraRow=it=>it.page?`<div class="row extra-row"><a class="main" href="#${it.page}"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></a><div class="acts"><a class="status ready" href="#${it.page}" tabindex="-1">See Bundle Details</a></div></div>`:`<div class="row extra-row"><div class="main"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></div>${it.href?`<div class="acts"><a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a></div>`:""}</div>`;
 const extrasHtml=()=>EXTRAS.map(x=>shelfBox(`lvl-${x.id}`,x.title,x.desc,x.items.length,x.id==="systems"?"system":"bundle",x.items.map(extraRow).join(""))).join("");
 const shelfOf=p=>levelOf(p[1]);
 const slugL=l=>"lvl-"+l.toLowerCase();
@@ -630,7 +632,16 @@ function renderDetail(id){
   if(html.includes("No sets saved"))html+=`<p class="foot">"No sets saved" means that lift has no sets entered yet.</p>`;
   app.innerHTML=html; window.scrollTo(0,0);
 }
-function route(){const id=location.hash.slice(1); id?renderDetail(id):renderList()}
+function renderBundle(b){
+  const paras=b.copy.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("");
+  app.innerHTML=`<a class="back" href="#">← All programs</a>
+  <div class="sheet-head"><span class="brand"><img src="axios-icon.png" alt="" width="24" height="24">Axios Fitness Coaching</span><h1>${esc(b.name)}</h1><div class="meta" style="display:flex;gap:6px"><span class="tag">Program Bundle</span><span class="tag soon-tag">Coming soon</span></div>
+  <div class="about">${paras}</div><p class="builtfor"><b>Who it's for:</b> ${esc(b.who)}</p>
+  <span class="buy nolink" title="Coming soon">Coming soon</span></div>
+  <div class="pending"><b>What's inside:</b> the programs in this bundle are being finalized and will be listed here with the run order and price.${DEMO_HREF?` Want something now? <a href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get a free 2-week custom program</a>.`:""}</div>${upgradeBox()}`;
+  window.scrollTo(0,0);
+}
+function route(){const id=location.hash.slice(1); const b=id.startsWith("bundle-")&&(window.BUNDLES||[]).find(x=>"bundle-"+x.id===id); b?renderBundle(b):id?renderDetail(id):renderList()}
 window.addEventListener("hashchange",route);
 route();
 </script>
