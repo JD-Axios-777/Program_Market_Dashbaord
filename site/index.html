@@ -6,28 +6,29 @@
 <title>Training Program Library | Axios Fitness Coaching</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap">
 <style>
 /* Layout: a gym-board index of programs; each program opens as a full-width sheet of day tables */
 :root{
-  --bg:#f3f4f6; --surface:#ffffff; --line:#d9dce3; --line-soft:#e8eaef;
-  --fg:#16181d; --muted:#5b6170; --faint:#8a90a0;
-  --plate:#c62f2f; --plate-soft:#fbe9e8; --plate-ink:#9e1f1f;
-  --steel:#2f4a6b; --steel-soft:#e7edf5;
-  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
-  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --bg:#DAD7D2; --surface:#E6E3DE; --stone:#CBC6BE; --line:#ADA79C; --line-soft:#CBC6BE;
+  --fg:#151414; --muted:#3B3836; --faint:#55504C;
+  --plate:#F91C1C; --plate-soft:#F2CFCB; --plate-ink:#A31111; --on-plate:#151414;
+  --steel:#151414; --steel-soft:#CBC6BE; --band:#151414; --on-band:#DAD7D2; --band-muted:#ADA79C;
+  --display:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --body:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --mono:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --r:15px; --r-lg:20px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#121418; --surface:#1a1d23; --line:#2d323c; --line-soft:#23272f;
-  --fg:#eceef2; --muted:#a3a9b6; --faint:#767d8c;
-  --plate:#ef5b54; --plate-soft:#3a1d1e; --plate-ink:#ff8a83;
-  --steel:#8fb2dc; --steel-soft:#1d2836; color-scheme:dark}}
+  --bg:#151414; --surface:#1E1D1C; --stone:#2A2827; --line:#4A4643; --line-soft:#2F2D2B;
+  --fg:#F4F2EE; --muted:#CBC6BE; --faint:#ADA79C;
+  --plate:#F91C1C; --plate-soft:#3A1A18; --plate-ink:#FF7A70; --on-plate:#151414;
+  --steel:#DAD7D2; --steel-soft:#2A2827; --band:#DAD7D2; --on-band:#151414; --band-muted:#4A4643; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#121418; --surface:#1a1d23; --line:#2d323c; --line-soft:#23272f;
-  --fg:#eceef2; --muted:#a3a9b6; --faint:#767d8c;
-  --plate:#ef5b54; --plate-soft:#3a1d1e; --plate-ink:#ff8a83;
-  --steel:#8fb2dc; --steel-soft:#1d2836; color-scheme:dark}
+  --bg:#151414; --surface:#1E1D1C; --stone:#2A2827; --line:#4A4643; --line-soft:#2F2D2B;
+  --fg:#F4F2EE; --muted:#CBC6BE; --faint:#ADA79C;
+  --plate:#F91C1C; --plate-soft:#3A1A18; --plate-ink:#FF7A70; --on-plate:#151414;
+  --steel:#DAD7D2; --steel-soft:#2A2827; --band:#DAD7D2; --on-band:#151414; --band-muted:#4A4643; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
 .wrap{max-width:1080px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -238,6 +239,194 @@ em.tm{display:block;font:400 .68rem var(--mono);font-style:normal;color:var(--fa
 .buy.nolink{background:var(--surface);color:var(--muted);border:1px dashed var(--line);cursor:default}
 @media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.acts{justify-self:start}details.shelf>summary.shelf-head{flex-direction:column;align-items:flex-start;gap:10px}.demo-row .tag{white-space:normal}}
 @media (prefers-reduced-motion:no-preference){.row{transition:background .12s}}
+
+/* ===== Concept A (axioscoaching.com look): bone ground, stone cards, ink type, signal-red buttons ===== */
+body{margin:0;font-size:16px;overflow-x:clip}
+.wrap{max-width:1168px;padding-block:0 0}
+h1,h2,h3{font-weight:800;letter-spacing:-.02em;line-height:.95}
+h1{font-size:clamp(2.8rem,7vw,5.5rem)}
+h2{font-size:clamp(1.6rem,3vw,2.4rem)}
+.eyebrow,.brand{font:600 .8rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+a{color:inherit}
+.tag{font:600 .78rem var(--body);letter-spacing:0;padding:4px 10px;border-radius:8px;background:var(--stone);color:var(--fg)}
+.tag.seq{background:var(--fg);color:var(--bg);letter-spacing:.04em}
+.tag.lvl{background:transparent;border:1px solid currentColor}
+.tag.lvl-Beginner{color:#2E6B43;border-color:#2E6B43}.tag.lvl-Intermediate{color:#7A5410;border-color:#7A5410}.tag.lvl-Advanced{color:#9C2F26;border-color:#9C2F26}
+:root[data-theme="dark"] .tag.lvl-Beginner{color:#8FD0A3}:root[data-theme="dark"] .tag.lvl-Intermediate{color:#E7C07A}:root[data-theme="dark"] .tag.lvl-Advanced{color:#F29A90}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag.lvl-Beginner{color:#8FD0A3}:root:not([data-theme="light"]) .tag.lvl-Intermediate{color:#E7C07A}:root:not([data-theme="light"]) .tag.lvl-Advanced{color:#F29A90}}
+.tag.rated{background:var(--plate);color:var(--on-plate)}
+.tag.soon-tag{background:transparent;border:1px dashed var(--line);color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:var(--r);font:700 .95rem var(--body);text-decoration:none;border:0;cursor:pointer;white-space:nowrap}
+.btn.red,.buy,.buy-sm,.upgrade .go{background:var(--plate);color:var(--on-plate);border:0;border-radius:var(--r)}
+.btn.ink{background:var(--fg);color:var(--bg)}
+.btn.ghost{background:transparent;color:var(--fg);border:2px solid var(--fg)}
+.buy{min-height:52px;padding:0 26px;font:700 1rem var(--body);justify-content:center;margin:0}
+.buy-sm{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;font:700 .88rem var(--body)}
+.buy.nolink,.buy-sm.nolink{background:transparent;color:var(--muted);border:1px dashed var(--line)}
+.btn:hover,.buy:hover,.buy-sm:hover{filter:brightness(1.06)}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+
+/* site nav */
+.site-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;padding:22px 0}
+.site-nav .logo{display:inline-flex;align-items:center;gap:10px;font:800 1.25rem var(--body);letter-spacing:.02em;text-decoration:none;color:var(--fg)}
+.site-nav .logo img{width:32px;height:32px;border-radius:7px}
+.site-nav nav{display:flex;flex-wrap:wrap;gap:6px 26px;font:500 .9rem var(--body)}
+.site-nav nav a{text-decoration:none;min-height:32px;display:inline-flex;align-items:center}
+.site-nav nav a:hover{text-decoration:underline;text-underline-offset:4px}
+
+/* library hero */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:56px 0 28px}
+.hero h1{text-transform:uppercase}
+.hero .lede{font-size:1.1rem;color:var(--muted);max-width:56ch;margin:0}
+.hero .search{display:flex;flex-wrap:wrap;gap:10px;width:100%;max-width:640px;margin-top:6px}
+.hero .search input{flex:1 1 300px;min-width:0;min-height:52px;padding:0 18px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);color:var(--fg);font:500 1rem var(--body)}
+.filters{display:flex;flex-direction:column;gap:10px;max-width:880px;margin:0 auto 14px}
+.filters .chips{justify-content:center}
+.chip{font:600 .85rem var(--body);min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg)}
+.chip[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.equip{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);margin:0}
+.equip summary{font:700 .82rem var(--body);letter-spacing:.1em;padding:12px 16px}
+.equip .sel{font:600 .8rem var(--body);color:var(--plate-ink)}
+.equip .clear-link,.equip-actions button{color:var(--fg);text-decoration:underline}
+.understood{justify-content:center;margin:0 0 8px}
+.understood .lbl,.understood .k{font:600 .75rem var(--body)}
+.count{font:500 .85rem var(--body);color:var(--faint);text-align:center;margin:0 0 22px}
+
+/* free banner */
+.free-banner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:22px 26px;border-radius:var(--r-lg);background:var(--stone);margin:0 0 36px}
+.free-banner .t{display:flex;flex-direction:column;gap:6px}
+.free-banner .pill{align-self:flex-start;padding:3px 10px;border-radius:6px;background:var(--plate);color:var(--on-plate);font:600 .8rem var(--body)}
+.free-banner b{font:800 1.35rem var(--body);text-transform:uppercase;letter-spacing:-.01em}
+.free-banner span.s{color:var(--muted)}
+
+/* tiles */
+.sec-title{font:700 .85rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.tile{display:flex;flex-direction:column;gap:10px;min-height:190px;padding:24px;border-radius:var(--r-lg);background:var(--stone);color:var(--fg);border:0;text-align:left;font:inherit;cursor:pointer;text-decoration:none}
+.tile .num{font:600 .8rem var(--body);letter-spacing:.12em;color:var(--faint)}
+.tile .ttl{font:800 2.1rem var(--body);text-transform:uppercase;line-height:1;letter-spacing:-.02em}
+.tile .dsc{font-size:.95rem;line-height:1.45;color:var(--muted)}
+.tile .foot2{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font:600 .9rem var(--body)}
+.tile .pm{font-size:1.5rem;line-height:1}
+.tile[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
+.tile[aria-expanded="true"] .num,.tile[aria-expanded="true"] .dsc{color:var(--line)}
+.tile[aria-expanded="true"] .pm{color:var(--plate)}
+.tile:hover{filter:brightness(.97)}
+.tiles.centered .tile{align-items:center;text-align:center;min-height:0;padding:34px 26px}
+.tiles.centered .tile .pill{padding:3px 10px;border-radius:6px;background:var(--plate);color:var(--on-plate);font:600 .8rem var(--body)}
+.tiles.centered .tile .foot2{margin-top:6px;gap:10px}
+.panel{margin:14px 0 0;border-radius:var(--r-lg);background:var(--surface);overflow:hidden}
+.panel-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:18px 24px;border-bottom:1px solid var(--stone)}
+.panel-head b{font:800 1.25rem var(--body);text-transform:uppercase}
+.panel-head span{font:500 .9rem var(--body);color:var(--muted)}
+.group-head{padding:14px 24px 6px;font:700 .8rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--stone)}
+.lib-sec{margin:0 0 40px;scroll-margin-top:16px}
+.list{background:transparent;border:0;border-radius:0}
+.row{grid-template-columns:minmax(0,1fr) auto;gap:14px;padding:20px 24px;border-top:1px solid var(--stone)}
+.row:hover{background:var(--stone)}
+.row .name{font:800 1.35rem var(--body);letter-spacing:-.01em;text-transform:uppercase}
+.row .sum{margin:4px 0 0;color:var(--muted);font-size:.95rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:70ch}
+.row .meta{gap:6px;margin-top:10px}
+.acts{gap:16px}
+.acts .see{font:600 .9rem var(--body);text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+.extra-row .sub{font:500 .9rem var(--body);color:var(--muted);margin:4px 0 0}
+.empty{padding:28px 24px}
+
+/* full-bleed band */
+.band{margin:56px calc(50% - 50vw) 0;background:var(--band);color:var(--on-band)}
+.band-in{max-width:1168px;margin:0 auto;padding:64px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px}
+.band .l{display:flex;flex-direction:column;gap:12px;flex:1 1 520px}
+.band .eb{font:600 .8rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--band-muted)}
+.band h2{font-size:clamp(2.2rem,5vw,4rem);text-transform:uppercase;color:inherit}
+.band p{margin:0;max-width:54ch;font-size:1.05rem;line-height:1.5;opacity:.85}
+.band .r{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.band .price{font:800 2.6rem var(--body);line-height:1}
+.band .price small{font:600 1.05rem var(--body);color:var(--band-muted)}
+.band .go.nolink{opacity:.55;cursor:default}
+
+/* program page */
+.p-hero{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;padding:20px 0 36px}
+.p-main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.p-main .back{margin:0;color:var(--fg);font:600 .9rem var(--body)}
+.p-main h1{text-transform:uppercase;letter-spacing:-.03em;line-height:.88;font-size:clamp(2.8rem,8vw,6.5rem)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill-d{padding:4px 12px;border-radius:8px;background:var(--fg);color:var(--bg);font:700 .82rem var(--body)}
+.pill-o{padding:4px 12px;border-radius:8px;border:1px solid var(--line);font:600 .82rem var(--body)}
+.about{max-width:60ch;margin:0}
+.about p{font-size:1.15rem;line-height:1.5;margin:0 0 10px}
+.about p:last-child{font-size:1rem;color:var(--muted)}
+.builtfor{max-width:60ch;font-size:1rem;color:var(--muted);margin:0}
+.glines{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.gline{display:grid;grid-template-columns:128px minmax(0,1fr);align-items:baseline;gap:6px 12px;color:var(--muted)}
+.gline .gv{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.buycard .buy{align-self:stretch}
+.gline .lbl{font:600 .75rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.gline .gp{padding:5px 12px;border-radius:999px;background:var(--fg);color:var(--bg);font:600 .9rem var(--body)}
+.buycard{flex:1 1 300px;display:flex;flex-direction:column;gap:16px;padding:26px;border-radius:var(--r-lg);background:var(--stone)}
+.buycard .pill{align-self:flex-start;padding:3px 10px;border-radius:6px;background:var(--plate);color:var(--on-plate);font:600 .8rem var(--body)}
+.buycard .pill.soon{background:transparent;border:1px dashed var(--line);color:var(--muted)}
+.buycard .price{font:800 2.8rem var(--body);line-height:1}
+.buycard .price small{font:600 1rem var(--body);color:var(--faint)}
+.buycard dl{display:flex;flex-direction:column;gap:8px;margin:0}
+.buycard dl div{display:flex;justify-content:space-between;gap:12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.buycard dl div:last-child{border-bottom:0;padding-bottom:0}
+.buycard dt{color:var(--muted)}.buycard dd{margin:0;font-weight:700;text-align:right}
+.buycard .incl{background:transparent;border:0;padding:0;margin:0;max-width:none}
+.buycard .incl h2{font:600 .95rem var(--body);text-transform:none;letter-spacing:0}
+.buycard .incl summary{min-height:44px;margin:0}
+.buycard .incl summary::after{content:"+";font:600 1.4rem var(--body);letter-spacing:0;color:var(--fg)}
+.buycard .incl[open] summary::after{content:"−"}
+.buycard .incl .lead{font-size:.95rem}
+.buycard .incl .items{gap:12px}
+.buycard .incl h3{font:700 .9rem var(--body);text-transform:none;letter-spacing:0}
+.buycard .incl .item p,.buycard .incl .note{font-size:.88rem}
+.sheet-head{display:none}
+.howto{max-width:none;margin:0 0 6px;border:1px solid var(--line);border-radius:var(--r);padding:0 22px}
+.howto summary{min-height:56px;font:700 .88rem var(--body);letter-spacing:.1em;color:var(--fg)}
+.howto summary::before{border:0;font-size:1.3rem;font-weight:600;width:auto;height:auto;margin-right:12px}
+.howto[open]{padding-bottom:18px}
+.notes{font-size:.95rem;color:var(--muted)}
+.wkc{background:var(--stone);border:0;border-radius:12px;padding:10px 12px}
+.wkc .n{font:600 .7rem var(--body);letter-spacing:.1em;color:var(--faint)}
+.wkc b{font:800 .95rem var(--body)}
+.wkc .r{font:600 .75rem var(--body);color:var(--muted)}
+.wkc.b-A{border-top:3px solid var(--fg)}.wkc.b-B{border-top:3px solid var(--plate)}.wkc.b-C{border-top:3px solid var(--faint)}
+.struct-note{font-size:.95rem}
+section.block{margin-top:14px;padding:26px;border-radius:var(--r-lg);background:var(--surface)}
+section.block>h2 small,.wk>summary h2 small{font:600 .9rem var(--body);letter-spacing:0;color:var(--faint);margin-left:12px}
+.wk>summary h2{font-size:2.4rem;text-transform:uppercase}
+.wk>summary{gap:16px}
+.wk .seq{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.wk .seq li{display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:var(--r);background:var(--stone);border:0;font:800 1.1rem var(--body);letter-spacing:0}
+.wk .seq li span{font:600 .72rem var(--body);letter-spacing:.12em;color:var(--faint)}
+.wk .seq li{overflow-wrap:anywhere;min-width:0}
+.wk .seq li.cardio{background:transparent;border:1px dashed var(--line)}
+em.tm{font:500 .82rem var(--body);color:var(--muted);margin-top:0}
+.wk .wk-tog{min-height:44px;display:inline-flex;align-items:center}
+.wk .wk-tog::before{font:700 .8rem var(--body);letter-spacing:.1em;color:var(--fg);text-decoration:underline;text-decoration-color:var(--plate);text-decoration-thickness:2px;text-underline-offset:6px}
+.tbl-wrap{border:0;border-radius:var(--r);background:var(--bg)}
+table{font-size:.92rem}
+th,td{border-top:1px solid var(--stone)}
+thead th{font:700 .72rem var(--body);letter-spacing:.1em;background:var(--stone)}
+tr.day-start td{border-top:2px solid var(--line)}
+td.day{font:800 1rem var(--body)}
+td.day span{font:600 .7rem var(--body);letter-spacing:.1em}
+td.slot,td.rx,td.cond,.prog td:not(:first-child){font-family:var(--body);font-variant-numeric:tabular-nums}
+td.slot{font-weight:700}
+td.cond{color:var(--muted)}
+tr.cardio td{background:var(--surface)}
+.progwrap{margin-top:14px;border:1px solid var(--line);border-radius:var(--r-lg);padding:0 22px}
+.progwrap>summary{font:800 1.3rem var(--body);min-height:64px;justify-content:space-between;list-style:none}
+.progwrap>summary::-webkit-details-marker{display:none}
+.progwrap>summary::after{content:"+";font:600 1.6rem var(--body);color:var(--fg);letter-spacing:0}
+.progwrap[open]>summary::after{content:"−"}
+.progwrap[open]{padding-bottom:22px}
+.progwrap section.block{padding:0;background:transparent}
+.progwrap section.block>h2{font-size:1.1rem;letter-spacing:.04em;margin:10px 0 10px}
+.pending{background:var(--surface);border:1px dashed var(--line);border-radius:var(--r-lg);padding:24px;color:var(--muted);max-width:none;margin-top:8px}
+.pending a{color:var(--fg)}
+.foot{color:var(--faint)}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.acts{justify-self:start}.gline{grid-template-columns:1fr}section.block{padding:18px}.wk .seq{grid-template-columns:repeat(2,minmax(0,1fr))}.wk>summary h2{font-size:2rem}.site-nav nav{gap:4px 18px}.hero{padding-top:32px}.free-banner{padding:20px}.band-in{padding-block:48px}}
 </style>
 </head>
 <body>
@@ -465,10 +654,13 @@ function getDetail(id){if(DETAILS[id])return DETAILS[id];if(!RAWD[id]||!window.b
 const badges=id=>{const i=INFO[id]||{};return (i.level?`<span class="tag lvl lvl-${i.level}">${i.level}</span>`:"")+(i.rated?`<span class="tag rated">★ Highly Rated</span>`:"")};
 const buyBtn=(id,cls,price)=>{const t="Buy Program"+(price?" – "+price:"");return LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">${esc(t)}</a>`:`<span class="${cls} nolink" title="Link coming soon">${esc(t)}</span>`};
 const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<details class="incl"><summary><h2>${esc(c.title)}</h2></summary>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}</details>`};
-const upgradeBox=()=>{const u=window.PROGRAM_UPGRADE,href=(window.UPGRADE_LINK||"").trim();if(!u||!href)return "";return `<details class="upgrade up-col"><summary><span class="eyebrow">${esc(u.eyebrow)}</span><span class="teaser"><span class="t">${esc(u.teaser||u.title)}</span></span></summary><h2>${esc(u.title)}</h2><p class="lead">${esc(u.lead)}</p><div class="pts">${u.points.map(x=>`<div><h3>${esc(x.h)}</h3><p>${esc(x.p)}</p></div>`).join("")}</div><div class="cta"><a class="go" href="${esc(href)}" target="_blank" rel="noopener">${esc(u.button)}</a><span class="price">${esc(u.price)}</span></div></details>`};
+const upgradeBox=()=>{const u=window.PROGRAM_UPGRADE,href=(window.UPGRADE_LINK||"").trim();if(!u||!href)return "";const [amt,per]=(u.price||"").split(/\s*(?=\/)/);return `<section class="band"><div class="band-in"><div class="l"><span class="eb">${esc(u.eyebrow)}</span><h2>${esc(u.title)}</h2><p>${esc(u.lead)}</p></div><div class="r">${amt?`<span class="price">${esc(amt)}<small> ${esc(per||"")}</small></span>`:""}<a class="btn red go" href="${esc(href)}" target="_blank" rel="noopener">${esc(u.button)}</a></div></div></section>`};
 const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<div class="about">${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</div>`:""};
 const DEMO_HREF=(window.DEMO_LINK||"").trim(); /* set in links.js; the demo row only shows once a link is filled in */
-const demoRow=()=>`<div class="row demo-row"><a class="main" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener"><div class="name">Not sure? Get a free 2-week custom program</div><div class="meta"><span class="tag free">Free</span><span class="tag">Answer a short survey, get a program built for you</span></div></a><div class="acts"><a class="demo-btn" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener" tabindex="-1">Get my free program</a></div></div>`;
+const demoRow=()=>`<div class="free-banner"><div class="t"><span class="pill">Free</span><b>Not sure? Get a free 2-week custom program</b><span class="s">Answer a short survey and get a program built for you.</span></div><a class="btn ghost" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get my free program</a></div>`;
+const siteNav=()=>`<header class="site-nav"><a class="logo" href="#"><img src="axios-icon.png" alt="" width="32" height="32">AXIOS</a><nav aria-label="Main"><a href="#go-programs">Programs</a><a href="#go-bundles">Bundles</a><a href="#go-systems">Systems</a><a href="#go-club">Training Club</a></nav>${DEMO_HREF?`<a class="btn red" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get Started</a>`:""}</header>`;
+const sessRange=id=>{const t=(INFO[id]||{}).sessionTimes;if(!t)return "";let lo=1e9,hi=0;Object.values(t).flat().forEach(x=>{const m=/(\d+)\D+(\d+)/.exec(x||"");if(m){lo=Math.min(lo,+m[1]);hi=Math.max(hi,+m[2])}});return hi?`${lo}–${hi}`:""};
+const summaryOf=id=>{const c=((INFO[id]||{}).copy||"").trim();if(!c)return "";const m=/^[^:.]*[:.]/.exec(c);return m?m[0].replace(/:$/,"."):c};
 const SHELVES=[
   ["Beginner","New to structured training or returning after time off. Simpler layouts with fewer moving parts."],
   ["Intermediate","For lifters comfortable with the main barbell lifts and percentage-based loading."],
@@ -486,31 +678,34 @@ const EXTRAS=[
     ["Reaver System",["reaver-phase-1","reaver-phase-2"]],
     ["Ultima System",["ultima-phase-1","ultima-phase-2"]]
   ].map(([name,ids])=>{const ps=ids.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean);return {name,tags:[`${ps.length} phases`,`${ps.reduce((a,p)=>a+p[2],0)} weeks`,"Coming soon"],sub:ps.map(p=>p[0].replace(/^.*?[–-]\s*/,"")).join(" → ")}})}];
-const extraRow=it=>it.page?`<div class="row extra-row"><a class="main" href="#${it.page}"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></a><div class="acts"><a class="status ready" href="#${it.page}" tabindex="-1">See Bundle Details</a></div></div>`:`<div class="row extra-row"><div class="main"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></div>${it.href?`<div class="acts"><a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a></div>`:""}</div>`;
-const extrasHtml=()=>EXTRAS.map(x=>shelfBox(`lvl-${x.id}`,x.title,x.desc,x.items.length,x.id==="systems"?"system":"bundle",x.items.map(extraRow).join(""))).join("");
+const extraRow=it=>it.page?`<div class="row extra-row"><a class="main" href="#${it.page}"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></a><div class="acts"><a class="see" href="#${it.page}" tabindex="-1">See details</a></div></div>`:`<div class="row extra-row"><div class="main"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></div>${it.href?`<div class="acts"><a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a></div>`:""}</div>`;
+let activeLevel=null, activeExtra=null;
+const extrasHtml=()=>`<section class="lib-sec" id="lib-extras"><h2 class="sec-title">Bundles &amp; systems</h2><div class="tiles centered">${EXTRAS.map(x=>{const n=x.items.length,u=x.id==="systems"?"system":"bundle",on=activeExtra===x.id;return `<button type="button" class="tile" data-extra="${x.id}" aria-expanded="${on}" aria-controls="panel-extras"><span class="pill">${n} ${u}${n===1?"":"s"}</span><span class="ttl">${esc(x.title)}</span><span class="dsc">${esc(x.desc)}</span><span class="foot2"><span>${on?"Hide":"Show"} ${u}s</span><span class="pm" aria-hidden="true">${on?"−":"+"}</span></span></button>`}).join("")}</div>${(()=>{const x=EXTRAS.find(e=>e.id===activeExtra);return x?`<div class="panel" id="panel-extras"><div class="panel-head"><b>${esc(x.title)}</b><span>${x.items.length} ${x.id==="systems"?"system":"bundle"}${x.items.length===1?"":"s"}</span></div>${x.items.map(extraRow).join("")}</div>`:""})()}</section>`;
 const shelfOf=p=>levelOf(p[1]);
 const slugL=l=>"lvl-"+l.toLowerCase();
 let openShelves=new Set();
 const shelfBox=(id,title,desc,n,unit,body)=>`<details class="shelf" id="${id}"${openShelves.has(id)?" open":""}><summary class="shelf-head"><div><h2>${esc(title)}</h2><p>${esc(desc)}</p></div><span class="shelf-n"><b>${n}</b> ${unit}${n===1?"":"s"}<i class="tog" aria-hidden="true"></i></span></summary>${body}</details>`;
 const shelfNav=rows=>`<nav class="shelf-nav" aria-label="Jump to level">${SHELVES.map(([l])=>{const n=rows.filter(p=>shelfOf(p)===l).length;return n?`<a href="#${slugL(l)}" data-jump="${slugL(l)}">${l} <span>${n}</span></a>`:""}).join("")}${EXTRAS.map(x=>`<a href="#lvl-${x.id}" data-jump="lvl-${x.id}" class="nav-extra">${esc(x.title)}</a>`).join("")}</nav>`;
 const byLevel=(rows,fn)=>SHELVES.map(([l,d])=>{const g=rows.filter(p=>shelfOf(p)===l);if(!g.length)return "";return shelfBox(slugL(l),l,d,g.length,"program",g.map(fn).join(""))}).join("");
-const clubBox=()=>{const c=window.CLUB_PITCH,href=(window.CLUB_LINK||"").trim();if(!c)return "";const n=PROGRAMS.length;const t=x=>x.replace(/\{count\}/g,n);return `<section class="upgrade club"><span class="eyebrow">${esc(c.eyebrow)}</span><h2>${esc(c.title)}</h2><p class="lead">${esc(t(c.lead))}</p><div class="pts">${c.points.map(x=>`<div><h3>${esc(x.h)}</h3><p>${esc(t(x.p))}</p></div>`).join("")}</div><div class="cta">${href?`<a class="go" href="${esc(href)}" target="_blank" rel="noopener">${esc(c.button)}</a>`:`<span class="go nolink" title="Intake survey link coming soon">${esc(c.button)}</span>`}<span class="price">${esc(c.note)}</span></div></section>`};
+const clubBox=()=>{const c=window.CLUB_PITCH,href=(window.CLUB_LINK||"").trim();if(!c)return "";const n=PROGRAMS.length;const t=x=>x.replace(/\{count\}/g,n);return `<section class="band" id="club"><div class="band-in"><div class="l"><span class="eb">${esc(c.eyebrow)}</span><h2>${esc(c.title)}</h2><p>${esc(t(c.lead))}</p></div><div class="r">${c.price?`<span class="price">${esc(c.price)}<small> ${esc(c.per||"")}</small></span>`:""}${href?`<a class="btn red go" href="${esc(href)}" target="_blank" rel="noopener">${esc(c.button)}</a>`:`<span class="btn red go nolink" title="Intake survey link coming soon">${esc(c.button)}</span>`}<span class="eb">${esc(c.note)}</span></div></div></section>`};
 function renderList(){
   const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
-  app.innerHTML=`
-  <header class="top">
-    <span class="brand"><img src="axios-icon.png" alt="" width="24" height="24">Axios Fitness Coaching</span>
-    <h1>Training Program Library</h1>
+  app.innerHTML=`${siteNav()}
+  <section class="hero">
+    <span class="eyebrow">Axios Fitness Coaching</span>
+    <h1>Axios Program Library</h1>
     <p class="lede">Premium fitness programs designed for the holistic development of strength, size, and work capacity.</p>
-  </header>
-  <div class="controls">
-    <input id="q" type="search" placeholder="What do you want to train?" aria-label="What do you want to train? Describe goals, equipment or days per week" value="${esc(query)}">
+    <form class="search" id="search" role="search">
+      <input id="q" type="search" placeholder="What do you want to train?" aria-label="What do you want to train? Describe goals, equipment or days per week" value="${esc(query)}">
+      <button class="btn ink" type="submit">Find a program</button>
+    </form>
+  </section>
+  <div class="filters">
     <div class="chips" role="group" aria-label="Days per week">
       <button class="chip" data-d="all" aria-pressed="${daysFilter==="all"}">All</button>
       ${dayOpts.map(d=>`<button class="chip" data-d="${d}" aria-pressed="${daysFilter==String(d)}">${d} days</button>`).join("")}
     </div>
-  </div>
-  <div class="understood" id="understood" aria-live="polite"></div>
+    <div class="understood" id="understood" aria-live="polite"></div>
   <details class="equip" id="goal"${goalOpen?" open":""}>
     <summary>Training goal <span class="sel" id="goal-sel"></span><button class="clear-link" id="goal-clear" type="button" hidden>Clear</button></summary>
     <div class="equip-body">
@@ -527,11 +722,13 @@ function renderList(){
       <div class="equip-actions"><button type="button" id="equip-all">Select all</button><button type="button" id="equip-none">Clear</button></div>
     </div>
   </details>
+  </div>
   <div class="count" id="count"></div>
-  <div class="list" id="list"></div>
+  <div id="list"></div>
   ${clubBox()}`;
   const q=document.getElementById("q");
   q.addEventListener("input",e=>{query=e.target.value;parsed=parseQuery(query);fill()});
+  document.getElementById("search").addEventListener("submit",e=>{e.preventDefault();const t=document.getElementById("lib-programs");if(t)t.scrollIntoView({behavior:"smooth",block:"start"})});
   app.querySelectorAll(".chip[data-d]").forEach(b=>b.addEventListener("click",()=>{daysFilter=b.dataset.d;app.querySelectorAll(".chip[data-d]").forEach(x=>x.setAttribute("aria-pressed",x===b));fill()}));
   const gdet=document.getElementById("goal");
   gdet.addEventListener("toggle",()=>{goalOpen=gdet.open;saveGoal()});
@@ -559,14 +756,20 @@ function fill(){
   document.getElementById("goal-def").innerHTML=[...goals].map(x=>`<b>${esc(x)}:</b> ${esc(GOAL_DEFS[x])}`).join("<br>");
   document.getElementById("equip-sel").textContent=have.size?`· ${have.size} selected`:"";
   document.getElementById("equip-clear").hidden=!have.size;
-  document.getElementById("list").innerHTML=(rows.length?shelfNav(rows):"")+(DEMO_HREF?demoRow():"")+(rows.length?byLevel(rows,p=>{
-    const ready=hasDetail(p[1]);
-    return `<div class="row"><a class="main" href="#${p[1]}"><div class="name">${esc(p[0])}</div><div class="meta"><span class="tag">${p[2]} wks</span><span class="tag">${p[3]} days/wk</span>${(()=>{const bi=blockInfo(p);return `<span class="tag" title="${esc(bi.legend)}">${bi.count}</span>${bi.seq?`<span class="tag seq" title="${esc(bi.legend)}">${bi.seq}</span>`:""}`})()}${badges(p[1])}${have.size&&EQUIP[p[1]]?EQUIP[p[1]][1].map(o=>`<span class="tag also">+ ${esc(o)}</span>`).join(""):""}</div></a><div class="acts"><a class="status ${ready?"ready":"soon"}" href="#${p[1]}" tabindex="-1">${ready?"See Program Details":"Coming soon"}</a>${buyBtn(p[1],"buy-sm")}</div></div>`;
-  }):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`)+extrasHtml();
   const filtering=!!(query.trim()||have.size||goals.size||levels.size||daysFilter!=="all");
-  if(filtering)document.querySelectorAll("#list details.shelf").forEach(d=>{if(d.id.startsWith("lvl-")&&!["lvl-bundles","lvl-systems"].includes(d.id))d.open=true});
-  document.querySelectorAll("#list details.shelf").forEach(d=>d.addEventListener("toggle",()=>{if(filtering&&!["lvl-bundles","lvl-systems"].includes(d.id))return;d.open?openShelves.add(d.id):openShelves.delete(d.id)}));
-  document.querySelectorAll("[data-jump]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t){t.open=true;t.scrollIntoView({behavior:"smooth",block:"start"})}}));
+  const row=p=>{const id=p[1],bi=blockInfo(p),rg=sessRange(id),sm=summaryOf(id),i=INFO[id]||{};return `<div class="row"><a class="main" href="#${id}"><div class="name">${esc(p[0])}</div>${sm?`<p class="sum">${esc(sm)}</p>`:""}<div class="meta"><span class="tag">${p[2]} weeks</span><span class="tag">${p[3]} days/wk</span>${rg?`<span class="tag">${rg} min</span>`:""}${bi.seq?`<span class="tag seq" title="${esc(bi.legend)}">${esc(bi.seq)}</span>`:""}${i.rated?`<span class="tag rated">★ Highly Rated</span>`:""}${have.size&&EQUIP[id]?EQUIP[id][1].map(o=>`<span class="tag also">+ ${esc(o)}</span>`).join(""):""}</div></a><div class="acts"><a class="see" href="#${id}" tabindex="-1">See details</a>${buyBtn(id,"buy-sm",window.PROGRAM_PRICE||"$50")}</div></div>`};
+  const cnt=l=>rows.filter(p=>shelfOf(p)===l).length;
+  const tiles=SHELVES.map(([l,d],k)=>{const on=!filtering&&activeLevel===l,n=cnt(l);return `<button type="button" class="tile" data-lvl="${l}" aria-expanded="${on}" aria-controls="panel-programs"><span class="num">0${k+1}</span><span class="ttl">${l}</span><span class="dsc">${esc(d)}</span><span class="foot2"><span>${n} program${n===1?"":"s"}</span><span class="pm" aria-hidden="true">${on?"−":"+"}</span></span></button>`}).join("");
+  let panel="";
+  if(filtering){
+    panel=`<div class="panel" id="panel-programs"><div class="panel-head"><b>Matching programs</b><span>${rows.length} of ${PROGRAMS.length}</span></div>${rows.length?SHELVES.map(([l])=>{const g=rows.filter(p=>shelfOf(p)===l);return g.length?`<div class="group-head" id="grp-${l.toLowerCase()}">${l} · ${g.length}</div>${g.map(row).join("")}`:""}).join(""):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`}</div>`;
+  }else if(activeLevel){
+    const g=rows.filter(p=>shelfOf(p)===activeLevel);
+    panel=`<div class="panel" id="panel-programs"><div class="panel-head"><b>${activeLevel} programs</b><span>${g.length} program${g.length===1?"":"s"}</span></div>${g.map(row).join("")}</div>`;
+  }
+  document.getElementById("list").innerHTML=(DEMO_HREF?demoRow():"")+`<section class="lib-sec" id="lib-programs"><h2 class="sec-title">${filtering?"Results by level":"Choose your level"}</h2><div class="tiles">${tiles}</div>${panel}</section>`+extrasHtml();
+  document.querySelectorAll("#list .tile[data-lvl]").forEach(b=>b.addEventListener("click",()=>{const l=b.dataset.lvl;if(filtering){const t=document.getElementById("grp-"+l.toLowerCase());if(t)t.scrollIntoView({behavior:"smooth",block:"start"});return}activeLevel=activeLevel===l?null:l;fill();const t=activeLevel&&document.getElementById("panel-programs");if(t)t.scrollIntoView({behavior:"smooth",block:"nearest"})}));
+  document.querySelectorAll("#list .tile[data-extra]").forEach(b=>b.addEventListener("click",()=>{const x=b.dataset.extra;activeExtra=activeExtra===x?null:x;fill();const t=activeExtra&&document.getElementById("panel-extras");if(t)t.scrollIntoView({behavior:"smooth",block:"nearest"})}));
 }
 function renderDetail(id){
   const p=PROGRAMS.find(x=>x[1]===id); if(!p){renderList();return}
@@ -577,15 +780,18 @@ function renderDetail(id){
   const info=INFO[id]||{};
   const gl=GOALS[id]||[], prim=(info.primaryGoals||gl.slice(0,3)).filter(x=>gl.includes(x)), sec=gl.filter(x=>!prim.includes(x));
   const gSpan=a=>a.map(x=>`<span title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join(" · ");
-  const spec=`${info.builtFor?`<p class="builtfor"><b>Who it's for:</b> ${esc(info.builtFor)}</p>`:""}<div class="facts">${facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${g&&(g[0].length||g[1].length)?`<div class="gear"><span class="lbl">Equipment</span><span class="plain">${[...g[0],...g[1]].map(esc).join(" · ")}</span></div>`:""}${prim.length?`<div class="gear"><span class="lbl">Primary goals</span><span class="plain prim">${gSpan(prim)}</span></div>`:""}${sec.length?`<div class="gear"><span class="lbl">Secondary goals</span><span class="plain">${gSpan(sec)}</span></div>`:""}`;
-  let html=`<a class="back" href="#">← All programs</a>
-  <div class="sheet-head"><span class="brand"><img src="axios-icon.png" alt="" width="24" height="24">Axios Fitness Coaching</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${copyBox(id)}${spec}${buyBtn(id,"buy",window.PROGRAM_PRICE||"$50")}${inclBox(id)}`;
+  const rg=sessRange(id);
+  const extraFacts=facts.filter(f=>!/^\d+\s*weeks?$/i.test(f.trim())&&!/days\s*\/\s*week/i.test(f));
+  const bi0=blockInfo(p), seq0=(bi0.seq||"").split("/").filter(x=>x&&x!=="U");
+  const patt=d&&d.blocks.length>1&&seq0.length>1&&seq0.every((x,k)=>x===(k%2?"B":"A"))?"A/B weekly undulation":(bi0.seq&&d&&d.blocks.length===1?`${seq0.join("/")} blocks`:"");
+  const lv=info.level;
+  const glines=`<div class="glines">${prim.length?`<div class="gline"><span class="lbl">Primary goals</span><div class="gv">${prim.map(x=>`<span class="gp" title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join("")}</div></div>`:""}${sec.length?`<div class="gline"><span class="lbl">Also builds</span><div class="gv">${gSpan(sec)}</div></div>`:""}${g&&(g[0].length||g[1].length)?`<div class="gline"><span class="lbl">Equipment</span><div class="gv">${[...g[0],...g[1]].map(esc).join(" · ")}</div></div>`:""}</div>`;
+  const card=`<aside class="buycard" aria-label="Buy this program"><span class="pill">Stand-alone program</span><span class="price">${esc(window.PROGRAM_PRICE||"$50")}<small> one-time</small></span><dl><div><dt>Length</dt><dd>${p[2]} weeks</dd></div><div><dt>Schedule</dt><dd>${p[3]} days / week</dd></div>${rg?`<div><dt>Sessions</dt><dd>${rg} min</dd></div>`:""}${extraFacts.map(f=>`<div><dt>Note</dt><dd>${esc(f)}</dd></div>`).join("")}</dl>${buyBtn(id,"buy",window.PROGRAM_PRICE||"$50")}${inclBox(id)}</aside>`;
+  let html=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#">← All programs</a><div class="pills">${lv?`<span class="pill-d">${esc(lv)}</span>`:""}${patt?`<span class="pill-o">${esc(patt)}</span>`:""}${info.rated?`<span class="tag rated">★ Highly Rated</span>`:""}</div><h1>${esc(p[0])}</h1>${copyBox(id)}${info.builtFor?`<p class="builtfor"><b>Who it's for:</b> ${esc(info.builtFor)}</p>`:""}${glines}</div>${card}</div>`;
   if(!d){
-    html+=`</div>
-    <div class="pending">The full write-up for this program isn't on the page yet. It's listed so the club can see what's available; the day-by-day details are being added in batches.</div>`;
+    html+=`<div class="pending">The full write-up for this program isn't on the page yet. The day-by-day details are being added in batches.</div>${upgradeBox()}`;
     app.innerHTML=html; window.scrollTo(0,0); return;
   }
-  html+=`</div>`;
   const pct=JSON.stringify(d.blocks).includes("%");
   const howTo=[...d.notes.filter(n=>pct||!/^All % = % of estimated 1RM\.?$/.test(n.trim())).map(n=>pct?n:n.replace(/^All % = % of estimated 1RM\.\s*/,"")),...(pct?["To estimate your 1RM: take a recent 3–5 rep max and multiply by about 1.1 (3 reps) to 1.15 (5 reps)."]:[])];
   const bi=blockInfo(p), seqW=(bi.seq||"").split("/").filter(x=>x&&x!=="U");
@@ -609,7 +815,7 @@ function renderDetail(id){
     const hasCond=b.days.some(([,c])=>c&&c!=="—");
     const tm=(info.sessionTimes||{})[b.title.trim().replace(/^WEEK/i,"Week")]||[];
     const tmOf=num=>{const t=tm[parseInt(num,10)-1];return t?`<em class="tm">${esc(t)} min</em>`:""};
-    const seq=b.days.map(([label])=>{const [num,...rest]=label.split(" ");return `<li><span>Day ${esc(num)}</span>${esc(rest.join(" "))}${tmOf(num)}</li>`}).join("");
+    const seq=b.days.map(([label,,ex])=>{const [num,...rest]=label.split(" ");return `<li${!ex.length?' class="cardio"':""}><span>Day ${esc(num)}</span>${esc(rest.join(" "))}${tmOf(num)}</li>`}).join("");
     html+=`<section class="block${hasCond?"":" nocond"}"><details class="wk"><summary><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><ol class="seq">${seq}</ol><span class="wk-tog"></span></summary><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th>${hasCond?"<th>Conditioning</th>":""}</tr></thead><tbody>`;
     b.days.forEach(([label,cond,ex])=>{
       const [num,...rest]=label.split(" ");
@@ -634,14 +840,14 @@ function renderDetail(id){
 }
 function renderBundle(b){
   const paras=b.copy.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("");
-  app.innerHTML=`<a class="back" href="#">← All programs</a>
-  <div class="sheet-head"><span class="brand"><img src="axios-icon.png" alt="" width="24" height="24">Axios Fitness Coaching</span><h1>${esc(b.name)}</h1><div class="meta" style="display:flex;gap:6px"><span class="tag">Program Bundle</span><span class="tag soon-tag">Coming soon</span></div>
-  <div class="about">${paras}</div><p class="builtfor"><b>Who it's for:</b> ${esc(b.who)}</p>
-  <span class="buy nolink" title="Coming soon">Coming soon</span></div>
+  app.innerHTML=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#go-bundles">← All bundles</a><div class="pills"><span class="pill-d">Program Bundle</span><span class="pill-o">Coming soon</span></div><h1>${esc(b.name)}</h1><div class="about">${paras}</div><p class="builtfor"><b>Who it's for:</b> ${esc(b.who)}</p></div>
+  <aside class="buycard" aria-label="Bundle status"><span class="pill soon">Coming soon</span><span class="price" style="font-size:2rem">Price to come</span><dl><div><dt>Programs</dt><dd>Being finalized</dd></div><div><dt>Run order</dt><dd>Listed at launch</dd></div></dl><span class="buy nolink" title="Coming soon">Coming soon</span></aside></div>
   <div class="pending"><b>What's inside:</b> the programs in this bundle are being finalized and will be listed here with the run order and price.${DEMO_HREF?` Want something now? <a href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get a free 2-week custom program</a>.`:""}</div>${upgradeBox()}`;
   window.scrollTo(0,0);
 }
-function route(){const id=location.hash.slice(1); const b=id.startsWith("bundle-")&&(window.BUNDLES||[]).find(x=>"bundle-"+x.id===id); b?renderBundle(b):id?renderDetail(id):renderList()}
+function route(){const id=location.hash.slice(1);
+  if(id.startsWith("go-")){const k=id.slice(3);if(k==="bundles"||k==="systems")activeExtra=k;renderList();const t=document.getElementById({programs:"lib-programs",bundles:"lib-extras",systems:"lib-extras",club:"club"}[k]);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:"start"}));return}
+  const b=id.startsWith("bundle-")&&(window.BUNDLES||[]).find(x=>"bundle-"+x.id===id); b?renderBundle(b):id?renderDetail(id):renderList()}
 window.addEventListener("hashchange",route);
 route();
 </script>
