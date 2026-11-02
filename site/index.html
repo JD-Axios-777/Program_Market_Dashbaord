@@ -649,7 +649,7 @@ const DEMO_HREF=(window.DEMO_LINK||"").trim(); /* set in links.js; the demo row 
 const demoRow=()=>`<div class="free-banner"><div class="t"><span class="pill">Free</span><b>Not sure? Get a free 2-week custom program</b><span class="s">Answer a short survey and get a program built for you.</span></div><a class="btn ghost" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get my free program</a></div>`;
 const siteNav=()=>`<header class="site-nav"><a class="logo" href="#"><img src="axios-icon.png" alt="" width="32" height="32">AXIOS</a><nav aria-label="Main"><a href="#go-programs">Programs</a><a href="#go-bundles">Bundles</a><a href="#go-systems">Systems</a><a href="#go-club">Training Club</a></nav>${DEMO_HREF?`<a class="btn red" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get Started</a>`:""}</header>`;
 const sessRange=id=>{const t=(INFO[id]||{}).sessionTimes;if(!t)return "";let lo=1e9,hi=0;Object.values(t).flat().forEach(x=>{const m=/(\d+)\D+(\d+)/.exec(x||"");if(m){lo=Math.min(lo,+m[1]);hi=Math.max(hi,+m[2])}});return hi?`${lo}–${hi}`:""};
-const summaryOf=id=>{const c=((INFO[id]||{}).copy||"").trim();if(!c)return "";const m=/^[^:.]*[:.]/.exec(c);return m?m[0].replace(/:$/,"."):c};
+const summaryOf=id=>{if((INFO[id]||{}).tagline)return INFO[id].tagline;const c=((INFO[id]||{}).copy||"").trim();if(!c)return "";const m=/^[^:.]*[:.]/.exec(c);return m?m[0].replace(/:$/,"."):c};
 const SHELVES=[
   ["Beginner","New to structured training or returning after time off. Simpler layouts with fewer moving parts."],
   ["Intermediate","For lifters comfortable with the main barbell lifts and percentage-based loading."],
@@ -682,7 +682,7 @@ function renderList(){
   app.innerHTML=`${siteNav()}
   <section class="hero">
     <span class="eyebrow">Axios Fitness Coaching</span>
-    <h1>Axios Program Library</h1>
+    <h1>Program Library</h1>
     <p class="lede">Premium fitness programs designed for the holistic development of strength, size, and work capacity.</p>
     <form class="search" id="search" role="search">
       <input id="q" type="search" placeholder="What do you want to train?" aria-label="What do you want to train? Describe goals, equipment or days per week" value="${esc(query)}">

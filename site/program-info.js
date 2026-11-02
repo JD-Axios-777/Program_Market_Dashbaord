@@ -4,6 +4,7 @@
    copy:    the overview shown at the top of the program page (plain text; blank line = new paragraph) */
 window.PROGRAM_INFO = {
   "1kb-vagabond": { level: "Beginner", rated: false,
+    tagline: "One kettlebell, anywhere. Cleans, snatches and swings build strength you can take on the road.",
     builtFor: "Built for newer lifters, or anyone training at home or on the road with a single kettlebell. This program builds strength, muscle and full-body power from a handful of core movements you'll get better at every week.",
     primaryGoals: ["Muscle Gain", "Strength", "Total Body Power"],
     sessionTimes: {"All weeks": ["30–40", "30–40", "30–40", "30–40"]},
@@ -13,6 +14,7 @@ window.PROGRAM_INFO = {
 Six weeks move through hypertrophy, strength capacity and strength blocks, two weeks each, using the same core movements so you can focus on skill and consistency.` },
 
   "2kb-vagabond": { level: "Beginner", rated: false,
+    tagline: "Two bells, more work: descending ladders on double cleans, swings and presses.",
     builtFor: "Built for trainees who are comfortable with basic kettlebell lifts and own a pair of bells. This program builds muscle and full-body power with double-kettlebell work and bodyweight pulling and pressing.",
     primaryGoals: ["Muscle Gain", "Total Body Power"],
     sessionTimes: {"Week A": ["35–45", "35–45", "35–45", "35–45"], "Week B": ["35–45", "35–45", "35–45", "35–45"]},
@@ -22,6 +24,7 @@ Six weeks move through hypertrophy, strength capacity and strength blocks, two w
 Weeks 1–3 build volume with descending-rep ladders on the big double-bell lifts; weeks 4–6 shift to heavier, straighter sets with new exercise variations to keep progress moving.` },
 
   "alpha-bravo-hp1": { level: "Intermediate", rated: false,
+    tagline: "Upper/lower lifting on a cardio base, with higher-rep weeks trading off against heavier ones.",
     builtFor: "Built for lifters who know the barbell basics and want a balanced five-day week. This program builds muscle and strength on the main lifts while steady cardio develops a solid conditioning base.",
     primaryGoals: ["Muscle Gain", "Strength", "Fitness Maintenance"],
     sessionTimes: {"Week A": ["30–40", "40–50", "30–40", "40–50", "30–40"], "Week B": ["30–40", "40–50", "25–35", "45–55", "35–45"]},
@@ -31,6 +34,7 @@ Weeks 1–3 build volume with descending-rep ladders on the big double-bell lift
 Hypertrophy and strength capacity weeks alternate, so you get a higher-rep week followed by a heavier week, every week for six weeks, while the steady aerobic intervals build your conditioning base.` },
 
   "alpha-bravo-sp1": { level: "Intermediate", rated: false,
+    tagline: "The heavier sibling of HP1, with more load on bench, squat, deadlift and pull-ups.",
     builtFor: "Built for lifters who know the barbell basics and want to push heavier on the main lifts. This program prioritizes strength on the bench, squat, deadlift and pull-up, with cardio to support recovery and work capacity.",
     primaryGoals: ["Strength", "Muscle Gain", "Fitness Maintenance"],
     sessionTimes: {"Week A": ["35–45", "40–50", "35–45", "40–50", "30–40"], "Week B": ["40–50", "40–50", "35–45", "45–55", "35–45"]},
@@ -40,6 +44,7 @@ Hypertrophy and strength capacity weeks alternate, so you get a higher-rep week 
 Alternating hypertrophy and strength capacity weeks keep the stimulus varied, while the longer aerobic intervals support recovery and work capacity.` },
 
   "axios-ppl-6-day": { level: "Advanced", rated: false,
+    tagline: "Push, pull, legs, twice a week. High volume for lifters who recover well.",
     builtFor: "Built for experienced lifters who recover well and want high training frequency. This program trains every muscle group twice a week, building size first and then turning it into strength.",
     primaryGoals: ["Muscle Gain", "Strength"],
     sessionTimes: {"Week A": ["40–50", "45–55", "40–50", "30–40", "30–40", "35–45"], "Week B": ["40–50", "40–50", "40–50", "30–40", "30–40", "35–45"]},
@@ -49,6 +54,7 @@ Alternating hypertrophy and strength capacity weeks keep the stimulus varied, wh
 Weeks 1–3 focus on hypertrophy; weeks 4–6 move to strength capacity with heavier top sets, so the program builds size first and then turns it into strength.` },
 
   "bellator-phase-1": { level: "Intermediate", rated: false,
+    tagline: "A classic body-part split with tempo and pause work on every lead lift.",
     builtFor: "Built for lifters with a training base who want a classic bodybuilding-style split. This program builds muscle and strength side by side, with interval cardio to keep conditioning and body composition in check.",
     primaryGoals: ["Muscle Gain", "Strength", "Fat Loss"],
     sessionTimes: {"Week A": ["40–50", "45–55", "35–45", "45–55", "40–50", "40–50"], "Week B": ["45–55", "45–55", "35–45", "45–55", "45–55", "40–50"]},
@@ -58,6 +64,7 @@ Weeks 1–3 focus on hypertrophy; weeks 4–6 move to strength capacity with hea
 Hypertrophy and strength capacity weeks alternate so you train size and strength side by side, while the interval cardio keeps your conditioning in check.` },
 
   "bellator-phase-2": { level: "Intermediate", rated: false,
+    tagline: "New main lifts and heavier loading on the same split. The next step after Phase 1.",
     builtFor: "Built for lifters who have finished Bellator Phase 1 or have a similar split under their belt. This program brings heavier loading and new main lifts to keep size and strength moving forward.",
     primaryGoals: ["Muscle Gain", "Strength", "Fat Loss"],
     sessionTimes: {"Week A": ["40–50", "45–55", "35–45", "50–60", "40–50", "40–50"], "Week B": ["45–55", "45–55", "35–45", "45–55", "45–55", "40–50"]},
@@ -67,6 +74,7 @@ Hypertrophy and strength capacity weeks alternate so you train size and strength
 Alternating hypertrophy and strength capacity weeks continue to push both size and strength, building directly on Phase 1.` },
 
   "bludkrieg": { level: "Intermediate", rated: false,
+    tagline: "Four lifts that matter, trained hard. Watch the numbers climb every two weeks.",
     builtFor: "Built for lifters who are comfortable with the main barbell lifts and can train four days a week. This program builds strength and muscle on a short list of lifts, so you can watch the weights climb week to week.",
     primaryGoals: ["Strength", "Muscle Gain"],
     sessionTimes: {"All weeks": ["30–40", "30–40", "30–40", "30–40"]},
@@ -76,6 +84,7 @@ Alternating hypertrophy and strength capacity weeks continue to push both size a
 Six weeks move through hypertrophy, strength capacity and strength, two weeks each, with the same exercises throughout so you can watch the loads climb.` },
 
   "boneyard": { level: "Beginner", rated: false,
+    tagline: "Three days, a few barbell lifts done well. The simplest way into structured training.",
     builtFor: "Built for newer lifters, or anyone short on time who can train three days a week. This program teaches structured barbell training and builds a foundation of strength and muscle with a few lifts done well.",
     primaryGoals: ["Muscle Gain", "Strength"],
     sessionTimes: {"Week A": ["25–35", "20–30", "25–35"], "Week B": ["20–30", "25–35", "20–30"]},
@@ -85,6 +94,7 @@ Six weeks move through hypertrophy, strength capacity and strength, two weeks ea
 Hypertrophy and strength capacity weeks alternate, making this a great entry point to structured barbell training or a solid option when time is tight.` },
 
   "centurion-phase-2": { level: "Intermediate", rated: false,
+    tagline: "Squat, bench and deadlift pushed toward 85–90%, with intervals to stay conditioned.",
     builtFor: "Built for lifters with solid technique on the squat, bench and deadlift who want to get significantly stronger. This program pushes the main lifts toward heavy top sets while interval cardio keeps you conditioned.",
     primaryGoals: ["Strength", "Aerobic Endurance", "Fat Loss"],
     sessionTimes: {"Week A": ["40–50", "30–40", "35–45", "30–40", "35–45"], "Week B": ["40–50", "30–40", "40–50", "30–40", "50–60"]},
@@ -94,6 +104,7 @@ Hypertrophy and strength capacity weeks alternate, making this a great entry poi
 Strength and max-strength weeks alternate, giving you heavy exposure to the main lifts while the accessory work and cardio keep you balanced and conditioned.` },
 
   "centurion-phase-3": { level: "Intermediate", rated: false,
+    tagline: "High sets, low reps, heavy bars. Locks in the strength built in Phase 2.",
     builtFor: "Built for lifters coming off Centurion Phase 2 or another heavy strength block. This program locks in strength on the main lifts with high-set, low-rep work, supported by interval cardio.",
     primaryGoals: ["Strength", "Fat Loss"],
     sessionTimes: {"Week A": ["45–55", "40–50", "40–50", "40–50", "45–55"], "Week B": ["55–65", "40–50", "45–55", "40–50", "40–50"]},
@@ -103,6 +114,7 @@ Strength and max-strength weeks alternate, giving you heavy exposure to the main
 Strength capacity and strength weeks alternate, including high-set, low-rep work on the main lifts, to lock in the strength built in Phase 2.` },
 
   "darkwater-1kb": { level: "Intermediate", rated: false,
+    tagline: "Minimal gear, full program: one kettlebell plus pull-ups and dips for strength, power and conditioning.",
     builtFor: "Built for trainees with a training base who work out at home or with minimal equipment. This program uses one kettlebell and bodyweight work to build muscle, power, core strength and conditioning.",
     primaryGoals: ["Muscle Gain", "Total Body Power", "Mobility / Core Strength"],
     sessionTimes: {"Week A": ["35–45", "35–45", "35–45", "35–45", "35–45", "40–50"], "Week B": ["35–45", "40–50", "35–45", "35–45", "40–50", "40–50"]},
@@ -112,6 +124,7 @@ Strength capacity and strength weeks alternate, including high-set, low-rep work
 Hypertrophy and strength capacity weeks alternate, making this a strong option for home or minimal-equipment training that still covers strength, power and conditioning.` },
 
   "darkwater-2kb": { level: "Intermediate", rated: false,
+    tagline: "A pair of bells and a pull-up bar. Double swings, front-rack work and presses.",
     builtFor: "Built for trainees with a training base and a pair of kettlebells at home. This program builds muscle, power and work capacity with double-bell lifts, pull-ups, dips and regular cardio.",
     primaryGoals: ["Muscle Gain", "Total Body Power", "Mobility / Core Strength"],
     sessionTimes: {"Week A": ["35–45", "35–45", "35–45", "35–45", "35–45", "40–50"], "Week B": ["35–45", "40–50", "35–45", "35–45", "40–50", "40–50"]},
@@ -121,6 +134,7 @@ Hypertrophy and strength capacity weeks alternate, making this a strong option f
 Alternating hypertrophy and strength capacity weeks build muscle and work capacity with minimal equipment.` },
 
   "darkwater-phase-1": { level: "Intermediate", rated: false,
+    tagline: "Pull-ups, dips, split squats and deadlifts, with core work built into every lower day.",
     builtFor: "Built for lifters with the basics in place who want a well-rounded six-day week. This program develops size and strength while core work and interval cardio build durability and an aerobic base.",
     primaryGoals: ["Muscle Gain", "Strength", "Fitness Maintenance"],
     sessionTimes: {"Week A": ["40–50", "40–50", "35–45", "40–50", "40–50", "40–50"], "Week B": ["35–45", "40–50", "35–45", "35–45", "40–50", "40–50"]},
@@ -130,6 +144,7 @@ Alternating hypertrophy and strength capacity weeks build muscle and work capaci
 Hypertrophy and strength capacity weeks alternate to develop both size and strength, while two interval cardio days build your aerobic base.` },
 
   "darkwater-phase-2": { level: "Intermediate", rated: false,
+    tagline: "Dead-stop pull-ups, box squats and isometric deadlifts for a sturdier middle phase.",
     builtFor: "Built for lifters coming off Darkwater Phase 1 or a similar program. This program introduces new pulling, squatting and deadlift variations to keep building muscle, with plenty of core work throughout.",
     primaryGoals: ["Muscle Gain", "Mobility / Core Strength", "Fitness Maintenance"],
     sessionTimes: {"Week A": ["40–50", "40–50", "35–45", "50–60", "45–55", "40–50"], "Week B": ["40–50", "40–50", "35–45", "35–45", "40–50", "40–50"]},
@@ -139,6 +154,7 @@ Hypertrophy and strength capacity weeks alternate to develop both size and stren
 Alternating hypertrophy and strength capacity weeks continue the progression from Phase 1, with plenty of core work throughout.` },
 
   "darkwater-phase-3": { level: "Intermediate", rated: false,
+    tagline: "L-sit pull-ups, pause squats and sumo pulls close out the Darkwater series.",
     builtFor: "Built for lifters who have completed earlier Darkwater phases or have comparable experience. This program uses more demanding variations of the key movements to build muscle, strength and a strong, stable core.",
     primaryGoals: ["Muscle Gain", "Strength", "Mobility / Core Strength"],
     sessionTimes: {"Week A": ["40–50", "45–55", "35–45", "40–50", "40–50", "40–50"], "Week B": ["40–50", "40–50", "35–45", "40–50", "40–50", "40–50"]},
@@ -148,6 +164,7 @@ Alternating hypertrophy and strength capacity weeks continue the progression fro
 Hypertrophy and strength capacity weeks alternate to round out the Darkwater series with more demanding versions of its key movements.` },
 
   "deimos-phase-1": { level: "Advanced", rated: false,
+    tagline: "Strength, power and size in the same week, backed by aerobic work for recovery.",
     builtFor: "Built for experienced lifters who can handle six training days with heavy barbell work. This program trains strength, power and size in the same week, with aerobic work to support recovery.",
     primaryGoals: ["Strength", "Muscle Gain", "Fitness Maintenance"],
     sessionTimes: {"Week A": ["35–45", "35–45", "25–35", "30–40", "35–45", "20–30"], "Week B": ["35–45", "40–50", "25–35", "30–40", "35–45", "20–30"]},
@@ -157,6 +174,7 @@ Hypertrophy and strength capacity weeks alternate to round out the Darkwater ser
 Hypertrophy and strength capacity weeks alternate, training strength, power and size in a single week while the aerobic work supports recovery.` },
 
   "deimos-phase-2": { level: "Advanced", rated: false,
+    tagline: "Harder intervals and new main lifts, then an unload week to absorb the work.",
     builtFor: "Built for experienced lifters coming off Deimos Phase 1 or a similar program. This program raises the demand with new main lifts and harder intervals, then finishes with an unload week to recover.",
     primaryGoals: ["Strength", "Muscle Gain", "Mobility / Core Strength"],
     sessionTimes: {"Week A": ["35–45", "40–50", "15–25", "30–40", "30–40", "25–35"], "Week B": ["40–50", "45–55", "15–25", "30–40", "35–45", "25–35"]},
@@ -166,6 +184,7 @@ Hypertrophy and strength capacity weeks alternate, training strength, power and 
 Six weeks of alternating hypertrophy and strength capacity training finish with a seventh unload week to recover before the next phase.` },
 
   "deimos-phase-3": { level: "Advanced", rated: false,
+    tagline: "Box squats, pause work and heavier top sets finish the Deimos series.",
     builtFor: "Built for experienced lifters who have run the earlier Deimos phases. This program caps the series with heavier top sets and longer aerobic intervals to push strength and conditioning further.",
     primaryGoals: ["Strength", "Muscle Gain", "Fitness Maintenance"],
     sessionTimes: {"Week A": ["35–45", "35–45", "25–35", "30–40", "35–45", "35–45"], "Week B": ["35–45", "35–45", "25–35", "35–45", "35–45", "35–45"]},
@@ -175,6 +194,7 @@ Six weeks of alternating hypertrophy and strength capacity training finish with 
 Alternating hypertrophy and strength capacity weeks build on Phases 1 and 2, with box squats, pause work and heavier top sets on the main lifts.` },
 
   "drago": { level: "Advanced", rated: false,
+    tagline: "Strong, explosive and well built: heavy barbell days plus kettlebell power work.",
     builtFor: "Built for experienced lifters who want to be strong, explosive and muscular at the same time. This program combines heavy barbell days, kettlebell power work and hypertrophy days with mixed-interval cardio.",
     primaryGoals: ["Strength", "Total Body Power", "Muscle Gain"],
     sessionTimes: {"Week A": ["35–45", "30–40", "35–45", "35–45", "35–45"], "Week B": ["40–50", "40–50", "35–45", "35–45", "35–45", "40–50"]},
@@ -184,6 +204,7 @@ Alternating hypertrophy and strength capacity weeks build on Phases 1 and 2, wit
 Hypertrophy and strength capacity weeks alternate to develop strength, power and muscle together, supported by mixed-interval cardio.` },
 
   "echelon": { level: "Beginner", rated: false,
+    tagline: "The same lifts all six weeks, so technique sticks while the loads rise.",
     builtFor: "Built for newer lifters who want a full week of training with plenty of conditioning. This program keeps the same exercises all six weeks so you can focus on technique as the weights climb, while cardio builds your engine.",
     primaryGoals: ["Muscle Gain", "Strength", "Metabolic Conditioning"],
     sessionTimes: {"All weeks": ["45–55", "50–60", "40–50", "50–60", "50–60", "35–45"]},
@@ -193,6 +214,7 @@ Hypertrophy and strength capacity weeks alternate to develop strength, power and
 The same exercises run all six weeks while the loading moves through hypertrophy, strength capacity and strength blocks, two weeks each, so you can focus on technique as the weights climb. The cardio days mix steady work with harder aerobic intervals.` },
 
   "falcata": { level: "Beginner", rated: false,
+    tagline: "Tempo squats, pause bench and plenty of core work. Move well first, then load it.",
     builtFor: "Built for newer trainees, or anyone who wants to move better before chasing heavy weights. This program teaches control on the squat and bench, with heavy core and mobility work and regular cardio.",
     primaryGoals: ["Mobility / Core Strength", "Fitness Maintenance", "Fat Loss"],
     sessionTimes: {"Week A": ["40–50", "40–50", "35–45", "40–50", "40–50", "40–50"], "Week B": ["40–50", "40–50", "35–45", "45–55", "40–50", "45–55"]},
@@ -202,6 +224,7 @@ The same exercises run all six weeks while the loading moves through hypertrophy
 Hypertrophy and strength capacity weeks alternate, making this a well-rounded program for building good movement habits along with fitness.` },
 
   "fizeek-5-day-template": { level: "Intermediate", rated: false,
+    tagline: "A physique split with steady volume across barbells, cables and machines.",
     builtFor: "Built for lifters with gym experience whose main goal is building muscle. This program delivers steady muscle-building volume across five days, using barbells, dumbbells, cables and machines.",
     primaryGoals: ["Muscle Gain", "Strength"],
     sessionTimes: {"All weeks": ["35–45", "35–45", "35–45", "35–45", "40–50"]},
@@ -211,6 +234,7 @@ Hypertrophy and strength capacity weeks alternate, making this a well-rounded pr
 Designed for steady muscle-building volume across the week.` },
 
   "ground-based-calisthenics-mobility": { level: "Beginner", rated: false,
+    tagline: "No equipment needed. Push-up progressions plus hip, spine and ankle mobility.",
     builtFor: "Built for anyone training at home with no equipment, or recovering between harder blocks. This program builds upper-body strength with push-up progressions and improves hip, spine and ankle mobility.",
     primaryGoals: ["Mobility / Core Strength", "Strength", "Muscle Gain"],
     sessionTimes: {"All weeks": ["35–45", "35–45", "35–45", "35–45"]},
@@ -220,6 +244,7 @@ Designed for steady muscle-building volume across the week.` },
 A great option for training at home, building a movement foundation, or recovering between harder blocks.` },
 
   "gym-based-functional-strength": { level: "Beginner", rated: false,
+    tagline: "A straightforward full-gym plan: build a base, then get stronger on it.",
     builtFor: "Built for newer lifters with access to a full gym who want straightforward, all-round strength. This program builds a muscle base first, then moves into heavier strength work, with core training and cardio throughout.",
     primaryGoals: ["Strength", "Muscle Gain", "Fitness Maintenance"],
     sessionTimes: {"Week A": ["35–45", "30–40", "25–35", "40–50", "35–45", "25–35"], "Week B": ["30–40", "25–35", "25–35", "40–50", "35–45", "25–35"]},
@@ -230,6 +255,7 @@ Weeks 1–3 build a hypertrophy base and weeks 4–6 move into strength capacity
     includesNote: "Built for a full gym: barbell, dumbbells, cables and a squat rack. If yours is missing something, swaps cover it." },
 
   "halcyon-phase-1": { level: "Intermediate", rated: false,
+    tagline: "Four body-part days, each opened by a heavy barbell lift.",
     builtFor: "Built for lifters who prefer a four-day body-part split and know their way around the gym. This program builds size first and then strength, finishing with an unload week to recover.",
     primaryGoals: ["Muscle Gain", "Strength"],
     sessionTimes: {"All weeks": ["35–45", "40–50", "40–50", "40–50"]},
@@ -239,6 +265,7 @@ Weeks 1–3 build a hypertrophy base and weeks 4–6 move into strength capacity
 Weeks 1–3 are hypertrophy, weeks 4–6 move to strength capacity, and week 7 is an unload week to recover before what comes next.` },
 
   "htk-phase-1": { level: "Beginner", rated: false,
+    tagline: "Lifting, metabolic circuits and cardio, rotating through muscle, strength and power weeks.",
     builtFor: "Built for newer trainees who want a hybrid of lifting and hard conditioning. This program rotates muscle, strength and power focus while circuits and cardio build fitness and help with fat loss.",
     primaryGoals: ["Muscle Gain", "Strength", "Metabolic Conditioning"],
     sessionTimes: {"Week A": ["45–55", "45–55", "20–30", "45–55", "55–65", "45–55"], "Week B": ["40–50", "40–50", "30–40", "45–55", "55–65", "60–70"], "Week C": ["35–45", "45–55", "45–55", "40–50", "55–65", "90–100"]},
@@ -248,6 +275,7 @@ Weeks 1–3 are hypertrophy, weeks 4–6 move to strength capacity, and week 7 i
 Weeks run on a three-week rotation of hypertrophy, strength capacity and strength, repeated twice, so each quality gets focused attention.` },
 
   "htk-phase-2": { level: "Intermediate", rated: false,
+    tagline: "More power, more sprints: trap bar work and snatches join the hybrid mix.",
     builtFor: "Built for trainees coming off HTK Phase 1 or with similar hybrid training experience. This program adds more power work and sprint intervals to build strength, explosiveness and conditioning.",
     primaryGoals: ["Strength", "Metabolic Conditioning", "Muscle Gain"],
     sessionTimes: {"Week A": ["40–50", "45–55", "20–30", "45–55", "50–60", "20–30"], "Week B": ["45–55", "45–55", "30–40", "45–55", "50–60", "60–70"], "Week C": ["45–55", "45–55", "45–55", "45–55", "50–60", "90–100"]},
@@ -257,6 +285,7 @@ Weeks run on a three-week rotation of hypertrophy, strength capacity and strengt
 The three-week hypertrophy / strength capacity / strength rotation repeats twice, building on Phase 1.` },
 
   "htk-phase-3": { level: "Advanced", rated: false,
+    tagline: "Heavy barbells, power days and sprint intervals in the series' toughest sessions.",
     builtFor: "Built for experienced hybrid trainees who have completed the earlier HTK phases. This program pairs heavy barbell work with power days and sprint intervals in the most demanding sessions of the series.",
     primaryGoals: ["Strength", "Total Body Power", "Metabolic Conditioning"],
     sessionTimes: {"Week A": ["40–50", "45–55", "20–30", "45–55", "50–60", "20–30"], "Week B": ["40–50", "45–55", "30–40", "45–55", "50–60", "60–70"], "Week C": ["45–55", "50–60", "30–40", "40–50", "50–60", "60–70"]},
@@ -266,6 +295,7 @@ The three-week hypertrophy / strength capacity / strength rotation repeats twice
 The three-week hypertrophy / strength capacity / strength rotation repeats twice to cap off the series with its most demanding sessions.` },
 
   "imperium-phase-1": { level: "Advanced", rated: false,
+    tagline: "Wave-loaded squats, deadlifts and bench for top-end strength and speed.",
     builtFor: "Built for experienced lifters who want to push top-end strength and speed. This program trains the squat, deadlift and bench at high intensity with dedicated power days and cardio for balance.",
     primaryGoals: ["Strength", "Fitness Maintenance", "Fat Loss"],
     sessionTimes: {"Week A": ["40–50", "40–50", "35–45", "40–50", "40–50", "40–50"], "Week B": ["45–55", "40–50", "35–45", "45–55", "45–55", "40–50"]},
@@ -275,6 +305,7 @@ The three-week hypertrophy / strength capacity / strength rotation repeats twice
 Strength capacity and strength weeks alternate to build top-end strength and speed.` },
 
   "jacked-and-athletic": { level: "Intermediate", rated: false,
+    tagline: "Built to look strong and move fast: heavy pulls and presses meet intervals and med-ball power.",
     builtFor: "Built for established trainees who have the basics dialed in. This program increases your capacity to use strength in athletic demands, while improving conditioning and power endurance in dynamic movement patterns.",
     primaryGoals: ["Muscle Gain", "Strength", "Total Body Power"],
     /* Session lengths from Volt, Day 1–6, per rotation (includes warm-up) */
@@ -285,6 +316,7 @@ Strength capacity and strength weeks alternate to build top-end strength and spe
 Weighted pull-ups, pause bench, tempo squats and deadlifts lead the strength work, with kettlebell and medicine ball power work and plenty of conditioning. Hypertrophy and strength capacity weeks alternate throughout.` },
 
   "kerberos": { level: "Beginner", rated: false,
+    tagline: "Conditioning first: circuits and cardio lead, with strength work keeping the muscle on.",
     builtFor: "Built for newer trainees whose priority is conditioning and fat loss while still building muscle. This program mixes metabolic circuits, strength work and cardio across a full six-day week.",
     primaryGoals: ["Fat Loss", "Metabolic Conditioning", "Muscle Gain"],
     sessionTimes: {"Week A": ["45–55", "40–50", "35–45", "45–55", "45–55", "35–45"], "Week B": ["45–55", "45–55", "35–45", "40–50", "45–55", "35–45"], "Week C": ["45–55", "35–45", "35–45", "40–50", "45–55", "35–45"]},
@@ -294,6 +326,7 @@ Weighted pull-ups, pause bench, tempo squats and deadlifts lead the strength wor
 A three-week hypertrophy / strength capacity / strength rotation repeats twice, with a strong focus on conditioning and fat loss.` },
 
   "kilo-bravo": { level: "Beginner", rated: false,
+    tagline: "Three sessions, kettlebells only. Cleans, presses and snatches for total-body power.",
     builtFor: "Built for newer lifters, or anyone with only kettlebells and three days a week to train. This program builds total-body power and strength with a small set of double- and single-bell lifts.",
     primaryGoals: ["Total Body Power"],
     sessionTimes: {"Week A": ["30–40", "30–40", "30–40"], "Week B": ["30–40", "30–40", "30–40"]},
@@ -303,6 +336,7 @@ A three-week hypertrophy / strength capacity / strength rotation repeats twice, 
 Simple, efficient and easy to fit into a busy week, with nothing more than kettlebells.` },
 
   "kreuzer-phase-1": { level: "Advanced", rated: false,
+    tagline: "Serious engine work, from hard intervals to long steady sessions, without giving up muscle.",
     builtFor: "Built for experienced trainees who want serious aerobic capacity without losing muscle. This program pairs hypertrophy and power work with hard intervals and long steady cardio sessions.",
     primaryGoals: ["Aerobic Endurance", "Muscle Gain", "Metabolic Conditioning"],
     sessionTimes: {"Week A": ["40–50", "40–50", "40–50", "40–50", "35–45", "60–70"], "Week B": ["40–50", "40–50", "55–65", "40–50", "35–45", "45–55"]},
@@ -312,6 +346,7 @@ Simple, efficient and easy to fit into a busy week, with nothing more than kettl
 Hypertrophy and strength capacity weeks alternate to build muscle, power and serious aerobic capacity.` },
 
   "opr-8-phase-1": { level: "Advanced", rated: false,
+    tagline: "Throws, jumps, sleds and heavy lifts: performance training for an athletic base.",
     builtFor: "Built for experienced trainees who want athletic performance, not just gym numbers. This program blends heavy lifting, explosive throws and jumps, and aerobic work to build a powerful, well-conditioned base.",
     primaryGoals: ["Total Body Power", "Strength", "Aerobic Endurance"],
     sessionTimes: {"Week A": ["40–50", "40–50", "55–65", "50–60", "50–60", "45–55"], "Week B": ["40–50", "40–50", "55–65", "40–50", "50–60", "45–55"], "Week C": ["40–50", "40–50", "55–65", "40–50", "50–60", "45–55"]},
@@ -321,6 +356,7 @@ Hypertrophy and strength capacity weeks alternate to build muscle, power and ser
 Six weeks move through hypertrophy, strength capacity and strength blocks, two weeks each, building an athletic, well-conditioned base.` },
 
   "reaver-phase-1": { level: "Advanced", rated: false,
+    tagline: "Separate strength and size days for upper and lower body, with aerobic work for recovery.",
     builtFor: "Built for experienced lifters who want separate strength and size days each week. This program drives muscle and strength with an upper/lower split, while aerobic intervals support recovery.",
     primaryGoals: ["Muscle Gain", "Strength", "Aerobic Endurance"],
     sessionTimes: {"Week A": ["35–45", "40–50", "35–45", "40–50", "35–45", "25–35"], "Week B": ["35–45", "40–50", "35–45", "40–50", "45–55", "45–55"], "Week C": ["35–45", "40–50", "35–45", "35–45", "45–55", "45–55"]},
@@ -330,6 +366,7 @@ Six weeks move through hypertrophy, strength capacity and strength blocks, two w
 Hypertrophy and strength capacity weeks alternate to drive both size and strength, with aerobic intervals supporting recovery.` },
 
   "reaver-phase-2": { level: "Advanced", rated: false,
+    tagline: "Standing press, snatch-grip and sumo pulls rotate in to keep Reaver moving.",
     builtFor: "Built for lifters coming off Reaver Phase 1 or a similar upper/lower program. This program rotates in new pressing and deadlift variations to keep building size and strength.",
     primaryGoals: ["Muscle Gain", "Strength", "Fitness Maintenance"],
     sessionTimes: {"Week A": ["35–45", "45–55", "35–45", "45–55", "40–50", "35–45"], "Week B": ["35–45", "45–55", "35–45", "45–55", "40–50", "35–45"]},
@@ -339,6 +376,7 @@ Hypertrophy and strength capacity weeks alternate to drive both size and strengt
 Alternating hypertrophy and strength capacity weeks build on Phase 1.` },
 
   "ultima-phase-1": { level: "Intermediate", rated: false,
+    tagline: "A machine-and-cable body-part split built for a well-equipped gym.",
     builtFor: "Built for lifters who train in a well-equipped gym and want a body-part split. This program builds muscle with machines, cables and dumbbells, with regular cardio for conditioning.",
     primaryGoals: ["Muscle Gain", "Fitness Maintenance", "Aerobic Endurance"],
     sessionTimes: {"Week A": ["50–60", "50–60", "40–50", "55–65", "55–65", "45–55"], "Week B": ["45–55", "45–55", "40–50", "55–65", "50–60", "45–55"]},
@@ -348,6 +386,7 @@ Alternating hypertrophy and strength capacity weeks build on Phase 1.` },
 Weeks 1–3 build hypertrophy and weeks 4–6 move to strength capacity with new exercise choices, making this ideal for a well-equipped gym.` },
 
   "ultima-phase-2": { level: "Intermediate", rated: false,
+    tagline: "Heavier pyramids on the lead lifts as Ultima moves into strength.",
     builtFor: "Built for lifters coming off Ultima Phase 1 or a similar machine-based split. This program adds heavier loading on the lead lifts to keep muscle and strength progressing.",
     primaryGoals: ["Muscle Gain", "Strength", "Fat Loss"],
     sessionTimes: {"Week A": ["45–55", "45–55", "40–50", "40–50", "45–55", "40–50"], "Week B": ["45–55", "45–55", "40–50", "45–55", "50–60", "45–55"]},
@@ -357,6 +396,7 @@ Weeks 1–3 build hypertrophy and weeks 4–6 move to strength capacity with new
 Weeks 1–3 focus on hypertrophy and weeks 4–6 on strength capacity, building on Phase 1.` },
 
   "warhorse": { level: "Advanced", rated: false,
+    tagline: "Heavy squats, deadlifts and weighted pull-ups, plus metabolic intervals and long cardio.",
     builtFor: "Built for experienced lifters who want to train heavy and stay well conditioned. This program pushes the squat, deadlift, bench and weighted pull-up, with metabolic intervals and long steady cardio.",
     primaryGoals: ["Strength", "Muscle Gain", "Metabolic Conditioning"],
     sessionTimes: {"Week A": ["40–50", "40–50", "30–40", "40–50", "40–50", "40–50"], "Week B": ["40–50", "40–50", "40–50", "40–50", "40–50", "40–50"], "Week C": ["45–55", "40–50", "40–50", "45–55", "45–55", "40–50"]},
@@ -366,6 +406,7 @@ Weeks 1–3 focus on hypertrophy and weeks 4–6 on strength capacity, building 
 Six weeks move through hypertrophy, strength capacity and strength, two weeks each, alongside metabolic intervals and long steady cardio.` },
 
   "warpig": { level: "Intermediate", rated: false,
+    tagline: "Single-leg and single-arm work does the heavy lifting, with cardio to build your engine.",
     builtFor: "Built for lifters with a training base who prefer single-leg and single-arm work over heavy barbell lifts. This program builds muscle and strength while interval and steady cardio build your engine.",
     primaryGoals: ["Muscle Gain", "Strength", "Aerobic Endurance"],
     sessionTimes: {"Week A": ["45–55", "45–55", "40–50", "45–55", "50–60", "40–50"], "Week B": ["50–60", "45–55", "40–50", "45–55", "50–60", "40–50"]},
@@ -375,6 +416,7 @@ Six weeks move through hypertrophy, strength capacity and strength, two weeks ea
 Hypertrophy and strength capacity weeks alternate, with aerobic intervals and steady cardio building your engine.` },
 
   "warpony": { level: "Beginner", rated: false,
+    tagline: "An approachable five-day week built on dumbbells, machines and cardio.",
     builtFor: "Built for newer lifters who want an approachable five-day week. This program uses mostly dumbbell, machine and cable work to build muscle, with interval and steady cardio for fitness and fat loss.",
     primaryGoals: ["Muscle Gain", "Fat Loss", "Aerobic Endurance"],
     sessionTimes: {"Week A": ["30–40", "30–40", "30–40", "20–30", "30–40"], "Week B": ["30–40", "30–40", "30–40", "30–40", "30–40"]},
@@ -384,6 +426,7 @@ Hypertrophy and strength capacity weeks alternate, with aerobic intervals and st
 Hypertrophy and strength capacity weeks alternate, with interval and steady cardio for a well-rounded, approachable program.` },
 
   "wolfdog-phase-1": { level: "Advanced", rated: false,
+    tagline: "Squat, bench and deadlift several times a week, with top sets climbing toward 90%.",
     builtFor: "Built for experienced lifters who want to get stronger on the squat, bench and deadlift through high frequency. This program trains the main lifts often, with top sets climbing toward 90% of your max.",
     primaryGoals: ["Strength", "Muscle Gain"],
     sessionTimes: {"All weeks": ["40–50", "40–50", "40–50", "45–55", "45–55", "45–55"]},
