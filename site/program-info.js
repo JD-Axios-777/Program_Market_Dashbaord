@@ -452,3 +452,49 @@ window.CLUB_PITCH = {
   button: "Take the intake survey",
   note: "See if you qualify"
 };
+
+/* Program bundles in progress. Programs, price and Kit link are added later; until then each shows as Coming soon. */
+window.BUNDLES = [
+  { id: "kettlebell", name: "Kettlebell Program Bundle",
+    short: "Train anywhere with one or two kettlebells.",
+    copy: `Programs built around one or two kettlebells, for training at home, on the road, or anywhere space is tight.
+
+Each program uses a small set of kettlebell lifts done well, so you build strength, muscle and power without a full gym.`,
+    who: "Anyone who trains with kettlebells, wants a minimal-equipment setup, or needs programs that travel." },
+  { id: "strength", name: "Strength Program Bundle",
+    short: "Get stronger on the squat, bench press and deadlift.",
+    copy: `Programs focused on getting stronger on the main barbell lifts: the squat, bench press and deadlift.
+
+Loads climb in planned steps across each program, with accessory work to keep you balanced and healthy under heavier weights.`,
+    who: "Lifters comfortable with the main barbell lifts who want strength to be the priority." },
+  { id: "hybrid", name: "Hybrid Program Bundle",
+    short: "Lifting and conditioning in the same week.",
+    copy: `Programs that combine strength training with structured conditioning, so you build muscle, strength and fitness at the same time.
+
+Each week mixes lifting days with interval and steady cardio work, without one getting in the way of the other.`,
+    who: "Trainees who want to look and perform better without choosing between the weight room and cardio." },
+  { id: "athlete-tactical", name: "Athlete / Tactical Performance Bundle",
+    short: "Power, speed, strength and conditioning that carry over.",
+    copy: `Programs that develop power, speed, strength and conditioning for sport, service or physically demanding work.
+
+Explosive lifts, throws and sprint work sit alongside heavy strength training and hard conditioning, so your fitness carries over outside the gym.`,
+    who: "Athletes, military, law enforcement and first responders, or anyone who needs fitness that performs under real-world demands." },
+  { id: "work-capacity", name: "Work Capacity & Stamina Bundle",
+    short: "Build your engine: work hard, recover fast, repeat.",
+    copy: `Programs that build your engine: the ability to work hard, recover quickly and repeat the effort.
+
+Circuits, intervals and steady endurance work are paired with strength training, so you get fitter without losing the muscle you have built.`,
+    who: "Anyone who runs out of gas early, wants better endurance, or wants more conditioning in their training week." },
+  { id: "gym-beginner", name: "Gym Beginner Bundle",
+    short: "A clear, step-by-step start in a full gym.",
+    copy: `Programs that introduce structured gym training step by step, starting with the main lifts and simple weekly layouts.
+
+Each program builds on the last, so you learn the movements, build a base of strength and muscle, and always know what to do next.`,
+    who: "New lifters, or anyone returning after time off, who wants a clear plan to follow in a full gym." },
+  { id: "core-mobility", name: "Core & Mobility Bundle",
+    short: "A stronger trunk and better-moving hips, spine and shoulders.",
+    copy: `Programs that strengthen your core and improve how your hips, spine and shoulders move.
+
+Control, stability and range of motion are trained directly, so everyday movement and your other training feel better.`,
+    who: "Anyone who feels stiff, wants a stronger core, or wants to move better alongside their main training." }
+];
