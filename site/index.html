@@ -388,7 +388,7 @@ section.block>h2 small,.wk>summary h2 small{font:600 .9rem var(--body);letter-sp
 .wk .seq{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
 .wk .seq li{display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:var(--r);background:var(--stone);border:0;font:800 1.1rem var(--body);letter-spacing:0}
 .wk .seq li span{font:600 .72rem var(--body);letter-spacing:.12em;color:var(--faint)}
-.wk .seq li{overflow-wrap:anywhere;min-width:0}
+.wk .seq li{overflow-wrap:break-word;hyphens:auto;min-width:0}
 .wk .seq li.cardio{background:transparent;border:1px dashed var(--line)}
 em.tm{font:500 .82rem var(--body);color:var(--muted);margin-top:0}
 .wk .wk-tog{min-height:44px;display:inline-flex;align-items:center}
@@ -804,7 +804,7 @@ function renderDetail(id){
     const hasCond=b.days.some(([,c])=>c&&c!=="—");
     const tm=(info.sessionTimes||{})[b.title.trim().replace(/^WEEK/i,"Week")]||[];
     const tmOf=num=>{const t=tm[parseInt(num,10)-1];return t?`<em class="tm">${esc(t)} min</em>`:""};
-    const seq=b.days.map(([label,,ex])=>{const [num,...rest]=label.split(" ");return `<li${!ex.length?' class="cardio"':""}><span>Day ${esc(num)}</span>${esc(rest.join(" "))}${tmOf(num)}</li>`}).join("");
+    const seq=b.days.map(([label,,ex])=>{const [num,...rest]=label.split(" ");return `<li${!ex.length?' class="cardio"':""}><span>Day ${esc(num)}</span>${esc(rest.join(" ")).replace(/\//g,"/<wbr>")}${tmOf(num)}</li>`}).join("");
     html+=`<section class="block${hasCond?"":" nocond"}"><details class="wk"><summary><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><ol class="seq">${seq}</ol><span class="wk-tog"></span></summary><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th>${hasCond?"<th>Conditioning</th>":""}</tr></thead><tbody>`;
     b.days.forEach(([label,cond,ex])=>{
       const [num,...rest]=label.split(" ");
