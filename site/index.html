@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Training Program Library | Axios Fitness Coaching</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,16 +20,6 @@
   --mono:"Inter Tight","Helvetica Neue",Arial,sans-serif;
   --r:15px; --r-lg:20px;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#151414; --surface:#1E1D1C; --stone:#2A2827; --line:#4A4643; --line-soft:#2F2D2B;
-  --fg:#F4F2EE; --muted:#CBC6BE; --faint:#ADA79C;
-  --plate:#F91C1C; --plate-soft:#3A1A18; --plate-ink:#FF7A70; --on-plate:#151414;
-  --steel:#DAD7D2; --steel-soft:#2A2827; --band:#DAD7D2; --on-band:#151414; --band-muted:#4A4643; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#151414; --surface:#1E1D1C; --stone:#2A2827; --line:#4A4643; --line-soft:#2F2D2B;
-  --fg:#F4F2EE; --muted:#CBC6BE; --faint:#ADA79C;
-  --plate:#F91C1C; --plate-soft:#3A1A18; --plate-ink:#FF7A70; --on-plate:#151414;
-  --steel:#DAD7D2; --steel-soft:#2A2827; --band:#DAD7D2; --on-band:#151414; --band-muted:#4A4643; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
 .wrap{max-width:1080px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -252,8 +243,6 @@ a{color:inherit}
 .tag.seq{background:var(--fg);color:var(--bg);letter-spacing:.04em}
 .tag.lvl{background:transparent;border:1px solid currentColor}
 .tag.lvl-Beginner{color:#2E6B43;border-color:#2E6B43}.tag.lvl-Intermediate{color:#7A5410;border-color:#7A5410}.tag.lvl-Advanced{color:#9C2F26;border-color:#9C2F26}
-:root[data-theme="dark"] .tag.lvl-Beginner{color:#8FD0A3}:root[data-theme="dark"] .tag.lvl-Intermediate{color:#E7C07A}:root[data-theme="dark"] .tag.lvl-Advanced{color:#F29A90}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag.lvl-Beginner{color:#8FD0A3}:root:not([data-theme="light"]) .tag.lvl-Intermediate{color:#E7C07A}:root:not([data-theme="light"]) .tag.lvl-Advanced{color:#F29A90}}
 .tag.rated{background:var(--plate);color:var(--on-plate)}
 .tag.soon-tag{background:transparent;border:1px dashed var(--line);color:var(--muted)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:var(--r);font:700 .95rem var(--body);text-decoration:none;border:0;cursor:pointer;white-space:nowrap}
