@@ -573,7 +573,20 @@ function renderDetail(id){
   const bi=blockInfo(p), seqW=(bi.seq||"").split("/").filter(x=>x&&x!=="U");
   const rotOf=n=>{const b=d.blocks.find(b=>new RegExp(`(^|[^0-9])${n}([^0-9]|$)`).test(b.sub||""));const m=b&&/^Week\s+([A-Z])$/i.exec(b.title.trim());return m?m[1].toUpperCase():""};
   const struct=seqW.length>1&&d.blocks.length>1?`<div class="struct"><div class="struct-row">${seqW.map((L,i)=>{const nm=L==="U"?"Unload":`Block ${"ABCDEFG".indexOf(L)+1}`;const r=rotOf(i+1);return `<div class="wkc b-${esc(L)}"><span class="n">Week ${i+1}</span><b>${esc(nm)}</b>${r?`<span class="r">Week ${esc(r)}</span>`:""}</div>`}).join("")}</div>${(()=>{const rs=seqW.map((_,i)=>rotOf(i+1));return rs.every((r,i)=>r===(i%2?"B":"A"))?`<p class="struct-note"><b>A/B weekly undulation.</b> The program alternates two different training weeks. Week A and Week B each work at their own intensities and progress over a 2-week cycle, so you get more variety and steady progress while lowering the risk of burnout and overuse.</p>`:""})()}</div>`:"";
-  if(howTo.length||struct)html+=`<details class="howto"><summary>How to read this program</summary>${struct}<ul class="notes">${howTo.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></details>`;
+  let single="", notesShown=howTo;
+  if(d.blocks.length===1&&seqW.length>1){
+    const groups=(bi.seq||"").split("/").filter(g=>g&&g!=="U"), L=groups[0].length, same=groups.every(g=>g.length===L&&new Set(g).size===1);
+    if(same){
+      const nums=["one","two","three","four"], rng=i=>`weeks ${i*L+1}–${i*L+L}`;
+      const list=groups.map((g,i)=>`Block ${i+1} in ${rng(i)}`), lst=list.length>1?list.slice(0,-1).join(", ")+" and "+list[list.length-1]:list[0];
+      const how=L===2?"Each block repeats its loads for two weeks so you can settle in, then the next block raises the intensity.":`Loads build week to week inside each block, and each new block moves to heavier work.`;
+      single=`<p class="struct-note"><b>${esc(groups.join("/"))} block pattern.</b> The program runs ${nums[groups.length-1]||groups.length} ${L}-week blocks: ${lst}. The exercises stay the same throughout. ${how}</p>`;
+      notesShown=howTo.filter(n=>!/^The same exercises run (all six weeks|every week)\.?$/.test(n.trim())&&!/^Weeks 1–2 Hypertrophy/.test(n.trim()));
+      notesShown=notesShown.map(n=>n.replace("the first week of each rotation is shown","Week 1 is shown"));
+    }
+  }
+  if(!d.progressions.length)notesShown=notesShown.map(n=>n.replace(/\s*See progression\.?/,""));
+  if(howTo.length||struct||single)html+=`<details class="howto"><summary>How to read this program</summary>${struct}${single}<ul class="notes">${notesShown.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></details>`;
   d.blocks.forEach(b=>{
     const hasCond=b.days.some(([,c])=>c&&c!=="—");
     const tm=(info.sessionTimes||{})[b.title.trim().replace(/^WEEK/i,"Week")]||[];
