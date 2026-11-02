@@ -416,6 +416,12 @@ tr.cardio td{background:var(--surface)}
 .pending a{color:var(--fg)}
 .foot{color:var(--faint)}
 @media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.acts{justify-self:start}.gline{grid-template-columns:1fr}section.block{padding:18px}.wk .seq{grid-template-columns:repeat(2,minmax(0,1fr))}.wk>summary h2{font-size:2rem}.site-nav nav{gap:4px 18px}.hero{padding-top:32px}.free-banner{padding:20px}.band-in{padding-block:48px}}
+
+/* embedded in another site */
+html.embedded body{overflow:hidden}
+html.embedded .site-nav{display:none}
+html.embedded .hero{padding-top:24px}
+html.embedded .band{margin-left:0;margin-right:0}
 </style>
 </head>
 <body>
@@ -645,6 +651,12 @@ const buyBtn=(id,cls,price)=>{const t="Buy Program"+(price?" – "+price:"");ret
 const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<details class="incl"><summary><h2>${esc(c.title)}</h2></summary>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}</details>`};
 const upgradeBox=()=>{const u=window.PROGRAM_UPGRADE,href=(window.UPGRADE_LINK||"").trim();if(!u||!href)return "";const [amt,per]=(u.price||"").split(/\s*(?=\/)/);return `<section class="band"><div class="band-in"><div class="l"><span class="eb">${esc(u.eyebrow)}</span><h2>${esc(u.title)}</h2><p>${esc(u.lead)}</p></div><div class="r">${amt?`<span class="price">${esc(amt)}<small> ${esc(per||"")}</small></span>`:""}<a class="btn red go" href="${esc(href)}" target="_blank" rel="noopener">${esc(u.button)}</a></div></div></section>`};
 const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<div class="about">${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</div>`:""};
+/* Embed mode: inside an iframe (e.g. axioscoaching.com/training) hide our own nav and report height to the parent page */
+const EMBED=window.top!==window||/[?&]embed=1/.test(location.search);
+if(EMBED)document.documentElement.classList.add("embedded");
+const postUp=m=>{try{if(window.parent!==window)window.parent.postMessage(m,"*")}catch(e){}};
+function toTop(){if(EMBED)postUp({axiosLibTop:1});else window.scrollTo(0,0)}
+if(EMBED){const send=()=>postUp({axiosLibHeight:Math.ceil(document.body.getBoundingClientRect().height)});new ResizeObserver(send).observe(document.body);window.addEventListener("load",send);setInterval(send,1500)}
 const DEMO_HREF=(window.DEMO_LINK||"").trim(); /* set in links.js; the demo row only shows once a link is filled in */
 const demoRow=()=>`<div class="free-banner"><div class="t"><span class="pill">Free</span><b>Not sure? Get a free 2-week custom program</b><span class="s">Answer a short survey and get a program built for you.</span></div><a class="btn ghost" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get my free program</a></div>`;
 const siteNav=()=>`<header class="site-nav"><a class="logo" href="#"><img src="axios-icon.png" alt="" width="32" height="32">AXIOS</a><nav aria-label="Main"><a href="#go-programs">Programs</a><a href="#go-bundles">Bundles</a><a href="#go-systems">Systems</a><a href="#go-club">Training Club</a></nav>${DEMO_HREF?`<a class="btn red" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get Started</a>`:""}</header>`;
@@ -779,7 +791,7 @@ function renderDetail(id){
   let html=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#">← All programs</a><div class="pills">${lv?`<span class="pill-d">${esc(lv)}</span>`:""}${patt?`<span class="pill-o">${esc(patt)}</span>`:""}${info.rated?`<span class="tag rated">★ Highly Rated</span>`:""}</div><h1>${esc(p[0])}</h1>${copyBox(id)}${info.builtFor?`<p class="builtfor"><b>Who it's for:</b> ${esc(info.builtFor)}</p>`:""}${glines}</div>${card}</div>`;
   if(!d){
     html+=`<div class="pending">The full write-up for this program isn't on the page yet. The day-by-day details are being added in batches.</div>${upgradeBox()}`;
-    app.innerHTML=html; window.scrollTo(0,0); return;
+    app.innerHTML=html; toTop(); return;
   }
   const pct=JSON.stringify(d.blocks).includes("%");
   const howTo=[...d.notes.filter(n=>pct||!/^All % = % of estimated 1RM\.?$/.test(n.trim())).map(n=>pct?n:n.replace(/^All % = % of estimated 1RM\.\s*/,"")),...(pct?["To estimate your 1RM: take a recent 3–5 rep max and multiply by about 1.1 (3 reps) to 1.15 (5 reps)."]:[])];
@@ -825,14 +837,14 @@ function renderDetail(id){
   if(d.progressions.length)html+=`</details>`;
   html+=upgradeBox();
   if(html.includes("No sets saved"))html+=`<p class="foot">"No sets saved" means that lift has no sets entered yet.</p>`;
-  app.innerHTML=html; window.scrollTo(0,0);
+  app.innerHTML=html; toTop();
 }
 function renderBundle(b){
   const paras=b.copy.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("");
   app.innerHTML=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#go-bundles">← All bundles</a><div class="pills"><span class="pill-d">Program Bundle</span><span class="pill-o">Coming soon</span></div><h1>${esc(b.name)}</h1><div class="about">${paras}</div><p class="builtfor"><b>Who it's for:</b> ${esc(b.who)}</p></div>
   <aside class="buycard" aria-label="Bundle status"><span class="pill soon">Coming soon</span><span class="price" style="font-size:2rem">Price to come</span><dl><div><dt>Programs</dt><dd>Being finalized</dd></div><div><dt>Run order</dt><dd>Listed at launch</dd></div></dl><span class="buy nolink" title="Coming soon">Coming soon</span></aside></div>
   <div class="pending"><b>What's inside:</b> the programs in this bundle are being finalized and will be listed here with the run order and price.${DEMO_HREF?` Want something now? <a href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get a free 2-week custom program</a>.`:""}</div>${upgradeBox()}`;
-  window.scrollTo(0,0);
+  toTop();
 }
 function route(){const id=location.hash.slice(1);
   if(id.startsWith("go-")){const k=id.slice(3);if(k==="bundles"||k==="systems")activeExtra=k;renderList();const t=document.getElementById({programs:"lib-programs",bundles:"lib-extras",systems:"lib-extras",club:"club"}[k]);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:"start"}));return}
