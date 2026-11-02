@@ -154,7 +154,12 @@ The three-week hypertrophy / strength capacity / strength rotation repeats twice
 
 Strength capacity and strength weeks alternate to build top-end strength and speed.` },
 
-  "jacked-and-athletic": { level: "Intermediate", rated: false, copy:
+  "jacked-and-athletic": { level: "Intermediate", rated: false,
+    builtFor: "Built for established trainees who have the basics dialed in. This program increases your capacity to use strength in athletic demands, while improving conditioning and power endurance in dynamic movement patterns.",
+    primaryGoals: ["Muscle Gain", "Strength", "Total Body Power"],
+    /* Session lengths from Volt, Day 1–6, per rotation (includes warm-up) */
+    sessionTimes: { "Week A": ["50–60", "45–55", "20–30", "45–55", "45–55", "20–30"], "Week B": ["50–60", "45–55", "30–40", "45–55", "40–50", "30–40"] },
+    copy:
 `A six-day program for building muscle and athleticism together: push/pull and lower/core days with built-in max-effort intervals and steady endurance work.
 
 Weighted pull-ups, pause bench, tempo squats and deadlifts lead the strength work, with kettlebell and medicine ball power work and plenty of conditioning. Hypertrophy and strength capacity weeks alternate throughout.` },
@@ -254,6 +259,7 @@ window.PROGRAM_INCLUDES = {
    Custom Program / Accountability service. Its link is UPGRADE_LINK in links.js. */
 window.PROGRAM_UPGRADE = {
   eyebrow: "Want it built around you?",
+  teaser: "Get a custom program",
   title: "Custom Program + Accountability",
   lead: "This program is written for a general lifter with a standard week. A custom program starts from your week instead.",
   points: [
