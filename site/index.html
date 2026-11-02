@@ -53,6 +53,17 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .shelf-head h2{font-family:var(--display);font-weight:700;font-size:1.6rem;text-transform:uppercase;letter-spacing:.02em;margin:0;line-height:1}
 .shelf-head p{margin:4px 0 0;color:var(--muted);font-size:.92em}
 .shelf-n{font-family:var(--mono);font-size:.78rem;color:var(--faint);white-space:nowrap}
+details.shelf{border-top:1px solid var(--line)}
+details.shelf>summary{list-style:none;cursor:pointer;border-top:0}
+details.shelf>summary::-webkit-details-marker{display:none}
+details.shelf>summary:hover h2{text-decoration:underline;text-underline-offset:4px}
+details.shelf>summary:focus-visible{outline:2px solid var(--steel);outline-offset:-2px}
+details.shelf[open]>summary{border-bottom:1px solid var(--line-soft)}
+.shelf-n{display:inline-flex;align-items:center;gap:10px}
+.shelf-n b{color:var(--fg);font-weight:600}
+.shelf-n .tog::before{content:"+";display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--line);border-radius:50%;font:500 1rem var(--body);font-style:normal;color:var(--fg)}
+details.shelf[open] .shelf-n .tog::before{content:"−"}
+details.shelf>summary.shelf-head{align-items:center;padding:18px 16px}
 .shelf-nav a.nav-extra{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .shelf-nav a.nav-extra:hover{opacity:.9}
 .extra-row .sub{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:2px 0 4px}
@@ -172,8 +183,8 @@ tr.cardio td{background:var(--steel-soft)}
 .wk .seq li{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-family:var(--display);font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.02em}
 .wk .seq li span{display:block;font:400 .66rem var(--mono);color:var(--faint);letter-spacing:.06em}
 .wk[open] .seq{display:none}
-.wk .wk-tog::before{content:"+ Show sets & reps";font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
-.wk[open] .wk-tog::before{content:"− Hide sets & reps"}
+.wk .wk-tog::before{content:"+ Show exercises, sets & reps";font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+.wk[open] .wk-tog::before{content:"− Hide exercises, sets & reps"}
 .wk[open]>summary{margin-bottom:10px}
 .wk>summary:focus-visible{outline:2px solid var(--steel);outline-offset:4px;border-radius:4px}
 .howto summary{list-style:none}
@@ -224,7 +235,7 @@ em.tm{display:block;font:400 .68rem var(--mono);font-style:normal;color:var(--fa
 .upgrade .go.nolink{opacity:.55;cursor:default}
 .pending{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:22px 18px;color:var(--muted);max-width:60ch}
 .pending a{color:var(--steel)}
-@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.acts{justify-self:start}}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.acts{justify-self:start}details.shelf>summary.shelf-head{flex-direction:column;align-items:flex-start;gap:10px}.demo-row .tag{white-space:normal}}
 @media (prefers-reduced-motion:no-preference){.row{transition:background .12s}}
 </style>
 </head>
@@ -458,9 +469,9 @@ const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<div class="about">
 const DEMO_HREF=(window.DEMO_LINK||"").trim(); /* set in links.js; the demo row only shows once a link is filled in */
 const demoRow=()=>`<div class="row demo-row"><a class="main" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener"><div class="name">Not sure? Get a free 2-week custom program</div><div class="meta"><span class="tag free">Free</span><span class="tag">Answer a short survey, get a program built for you</span></div></a><div class="acts"><a class="demo-btn" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener" tabindex="-1">Get my free program</a></div></div>`;
 const SHELVES=[
-  ["Beginner","Start here if you're new to structured programs or returning after time off."],
+  ["Beginner","New to structured training or returning after time off. Simpler layouts with fewer moving parts."],
   ["Intermediate","For lifters comfortable with the main barbell lifts and percentage-based loading."],
-  ["Advanced","Higher volume and intensity for experienced lifters."]];
+  ["Advanced","Higher volume, intensity and training frequency for experienced lifters."]];
 const EXTRAS=[
   {id:"bundles",title:"Program Bundles",desc:"Several programs in one purchase.",items:[
     {name:"Hypertrophy Program Bundle",tags:["Bundle","$120"],href:"https://axios-remote-fitness-coaching.kit.com/products/hypertrophy-program-bundle",cta:"Buy Bundle"}]},
@@ -474,11 +485,13 @@ const EXTRAS=[
     ["Ultima System",["ultima-phase-1","ultima-phase-2"]]
   ].map(([name,ids])=>{const ps=ids.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean);return {name,tags:[`${ps.length} phases`,`${ps.reduce((a,p)=>a+p[2],0)} weeks`,"Coming soon"],sub:ps.map(p=>p[0].replace(/^.*?[–-]\s*/,"")).join(" → ")}})}];
 const extraRow=it=>`<div class="row extra-row"><div class="main"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></div>${it.href?`<div class="acts"><a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a></div>`:""}</div>`;
-const extrasHtml=()=>EXTRAS.map(x=>`<div class="shelf-head" id="lvl-${x.id}"><div><h2>${esc(x.title)}</h2><p>${esc(x.desc)}</p></div><span class="shelf-n">${x.items.length} item${x.items.length>1?"s":""}</span></div>`+x.items.map(extraRow).join("")).join("");
+const extrasHtml=()=>EXTRAS.map(x=>shelfBox(`lvl-${x.id}`,x.title,x.desc,x.items.length,x.id==="systems"?"system":"bundle",x.items.map(extraRow).join(""))).join("");
 const shelfOf=p=>levelOf(p[1]);
 const slugL=l=>"lvl-"+l.toLowerCase();
+let openShelves=new Set();
+const shelfBox=(id,title,desc,n,unit,body)=>`<details class="shelf" id="${id}"${openShelves.has(id)?" open":""}><summary class="shelf-head"><div><h2>${esc(title)}</h2><p>${esc(desc)}</p></div><span class="shelf-n"><b>${n}</b> ${unit}${n===1?"":"s"}<i class="tog" aria-hidden="true"></i></span></summary>${body}</details>`;
 const shelfNav=rows=>`<nav class="shelf-nav" aria-label="Jump to level">${SHELVES.map(([l])=>{const n=rows.filter(p=>shelfOf(p)===l).length;return n?`<a href="#${slugL(l)}" data-jump="${slugL(l)}">${l} <span>${n}</span></a>`:""}).join("")}${EXTRAS.map(x=>`<a href="#lvl-${x.id}" data-jump="lvl-${x.id}" class="nav-extra">${esc(x.title)}</a>`).join("")}</nav>`;
-const byLevel=(rows,fn)=>SHELVES.map(([l,d])=>{const g=rows.filter(p=>shelfOf(p)===l);if(!g.length)return "";return `<div class="shelf-head" id="${slugL(l)}"><div><h2>${l}</h2><p>${esc(d)}</p></div><span class="shelf-n">${g.length} program${g.length>1?"s":""}</span></div>`+g.map(fn).join("")}).join("");
+const byLevel=(rows,fn)=>SHELVES.map(([l,d])=>{const g=rows.filter(p=>shelfOf(p)===l);if(!g.length)return "";return shelfBox(slugL(l),l,d,g.length,"program",g.map(fn).join(""))}).join("");
 const clubBox=()=>{const c=window.CLUB_PITCH,href=(window.CLUB_LINK||"").trim();if(!c)return "";const n=PROGRAMS.length;const t=x=>x.replace(/\{count\}/g,n);return `<section class="upgrade club"><span class="eyebrow">${esc(c.eyebrow)}</span><h2>${esc(c.title)}</h2><p class="lead">${esc(t(c.lead))}</p><div class="pts">${c.points.map(x=>`<div><h3>${esc(x.h)}</h3><p>${esc(t(x.p))}</p></div>`).join("")}</div><div class="cta">${href?`<a class="go" href="${esc(href)}" target="_blank" rel="noopener">${esc(c.button)}</a>`:`<span class="go nolink" title="Intake survey link coming soon">${esc(c.button)}</span>`}<span class="price">${esc(c.note)}</span></div></section>`};
 function renderList(){
   const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
@@ -548,7 +561,10 @@ function fill(){
     const ready=hasDetail(p[1]);
     return `<div class="row"><a class="main" href="#${p[1]}"><div class="name">${esc(p[0])}</div><div class="meta"><span class="tag">${p[2]} wks</span><span class="tag">${p[3]} days/wk</span>${(()=>{const bi=blockInfo(p);return `<span class="tag" title="${esc(bi.legend)}">${bi.count}</span>${bi.seq?`<span class="tag seq" title="${esc(bi.legend)}">${bi.seq}</span>`:""}`})()}${badges(p[1])}${have.size&&EQUIP[p[1]]?EQUIP[p[1]][1].map(o=>`<span class="tag also">+ ${esc(o)}</span>`).join(""):""}</div></a><div class="acts"><a class="status ${ready?"ready":"soon"}" href="#${p[1]}" tabindex="-1">${ready?"See Program Details":"Coming soon"}</a>${buyBtn(p[1],"buy-sm")}</div></div>`;
   }):`<div class="empty">No programs match. Try a different search or clear the filters.</div>`)+extrasHtml();
-  document.querySelectorAll("[data-jump]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t)t.scrollIntoView({behavior:"smooth",block:"start"})}));
+  const filtering=!!(query.trim()||have.size||goals.size||levels.size||daysFilter!=="all");
+  if(filtering)document.querySelectorAll("#list details.shelf").forEach(d=>{if(d.id.startsWith("lvl-")&&!["lvl-bundles","lvl-systems"].includes(d.id))d.open=true});
+  document.querySelectorAll("#list details.shelf").forEach(d=>d.addEventListener("toggle",()=>{if(filtering&&!["lvl-bundles","lvl-systems"].includes(d.id))return;d.open?openShelves.add(d.id):openShelves.delete(d.id)}));
+  document.querySelectorAll("[data-jump]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t){t.open=true;t.scrollIntoView({behavior:"smooth",block:"start"})}}));
 }
 function renderDetail(id){
   const p=PROGRAMS.find(x=>x[1]===id); if(!p){renderList();return}
@@ -573,7 +589,20 @@ function renderDetail(id){
   const bi=blockInfo(p), seqW=(bi.seq||"").split("/").filter(x=>x&&x!=="U");
   const rotOf=n=>{const b=d.blocks.find(b=>new RegExp(`(^|[^0-9])${n}([^0-9]|$)`).test(b.sub||""));const m=b&&/^Week\s+([A-Z])$/i.exec(b.title.trim());return m?m[1].toUpperCase():""};
   const struct=seqW.length>1&&d.blocks.length>1?`<div class="struct"><div class="struct-row">${seqW.map((L,i)=>{const nm=L==="U"?"Unload":`Block ${"ABCDEFG".indexOf(L)+1}`;const r=rotOf(i+1);return `<div class="wkc b-${esc(L)}"><span class="n">Week ${i+1}</span><b>${esc(nm)}</b>${r?`<span class="r">Week ${esc(r)}</span>`:""}</div>`}).join("")}</div>${(()=>{const rs=seqW.map((_,i)=>rotOf(i+1));return rs.every((r,i)=>r===(i%2?"B":"A"))?`<p class="struct-note"><b>A/B weekly undulation.</b> The program alternates two different training weeks. Week A and Week B each work at their own intensities and progress over a 2-week cycle, so you get more variety and steady progress while lowering the risk of burnout and overuse.</p>`:""})()}</div>`:"";
-  if(howTo.length||struct)html+=`<details class="howto"><summary>How to read this program</summary>${struct}<ul class="notes">${howTo.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></details>`;
+  let single="", notesShown=howTo;
+  if(d.blocks.length===1&&seqW.length>1){
+    const groups=(bi.seq||"").split("/").filter(g=>g&&g!=="U"), L=groups[0].length, same=groups.every(g=>g.length===L&&new Set(g).size===1);
+    if(same){
+      const nums=["one","two","three","four"], rng=i=>`weeks ${i*L+1}–${i*L+L}`;
+      const list=groups.map((g,i)=>`Block ${i+1} in ${rng(i)}`), lst=list.length>1?list.slice(0,-1).join(", ")+" and "+list[list.length-1]:list[0];
+      const how=L===2?"Each block repeats its loads for two weeks so you can settle in, then the next block raises the intensity.":`Loads build week to week inside each block, and each new block moves to heavier work.`;
+      single=`<p class="struct-note"><b>${esc(groups.join("/"))} block pattern.</b> The program runs ${nums[groups.length-1]||groups.length} ${L}-week blocks: ${lst}. The exercises stay the same throughout. ${how}</p>`;
+      notesShown=howTo.filter(n=>!/^The same exercises run (all six weeks|every week)\.?$/.test(n.trim())&&!/^Weeks 1–2 Hypertrophy/.test(n.trim()));
+      notesShown=notesShown.map(n=>n.replace("the first week of each rotation is shown","Week 1 is shown"));
+    }
+  }
+  if(!d.progressions.length)notesShown=notesShown.map(n=>n.replace(/\s*See progression\.?/,""));
+  if(howTo.length||struct||single)html+=`<details class="howto"><summary>How to read this program</summary>${struct}${single}<ul class="notes">${notesShown.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></details>`;
   d.blocks.forEach(b=>{
     const hasCond=b.days.some(([,c])=>c&&c!=="—");
     const tm=(info.sessionTimes||{})[b.title.trim().replace(/^WEEK/i,"Week")]||[];

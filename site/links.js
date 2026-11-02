@@ -54,4 +54,4 @@ window.DEMO_LINK = "https://axioscoaching.outgrow.us/Axios-Custom-Program";
 window.UPGRADE_LINK = "https://axios-remote-fitness-coaching.kit.com/products/custom-program-accountabil";
 
 /* Training Club intake survey: the button in the "Join the Axios Training Club" section at the bottom of the main page. */
-window.CLUB_LINK = "";
+window.CLUB_LINK = "https://axioscoaching.outgrow.us/axioscoaching-24";
