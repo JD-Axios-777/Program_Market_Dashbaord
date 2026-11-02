@@ -442,8 +442,9 @@ window.PROGRAM_UPGRADE = {
 /* Training Club pitch at the bottom of the main program list. The button links to CLUB_LINK in links.js. */
 window.CLUB_PITCH = {
   eyebrow: "By application",
-  title: "Join the Axios Training Club",
-  lead: "Training Club members get every program in this library, not just one.",
+  title: "Every program. One membership.",
+  lead: "Training Club members get all {count} programs and move from one to the next without buying each one.",
+  price: "$25", per: "/ month",
   points: [
     { h: "Every program, one membership", p: "All {count} programs. Move from one phase or program to the next without buying each one." },
     { h: "Costs less than buying programs one at a time", p: "A single program is $50. Membership starts at $25 per month for the full library." },
