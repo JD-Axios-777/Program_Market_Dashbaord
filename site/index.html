@@ -137,7 +137,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .notes li::before{content:"— ";color:var(--faint)}
 section.block{margin-top:30px}
 section.block>h2{margin-bottom:10px}
-section.block>h2 small{font-family:var(--mono);font-size:.8rem;font-weight:400;letter-spacing:.04em;color:var(--muted);text-transform:none;margin-left:8px}
+section.block>h2 small,.wk>summary h2 small{font-family:var(--mono);font-size:.8rem;font-weight:400;letter-spacing:.04em;color:var(--muted);text-transform:none;margin-left:8px}
 .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
 th,td{text-align:left;vertical-align:top;padding:7px 10px;border-top:1px solid var(--line-soft)}
@@ -156,6 +156,58 @@ tr.cardio td{background:var(--steel-soft)}
 .prog td:not(:first-child){font-family:var(--mono);font-size:.8rem;font-variant-numeric:tabular-nums}
 .buy{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 16px;border-radius:6px;background:var(--plate);color:#fff;font:600 .9rem var(--body);text-decoration:none;border:1px solid var(--plate)}
 .buy:hover{filter:brightness(1.08)}
+.about{max-width:68ch;margin:2px 0 4px}
+.about p{margin:0 0 8px;line-height:1.55;color:var(--fg)}
+.about p:last-child{margin-bottom:0;color:var(--muted)}
+.gear .plain{font-size:.88rem;color:var(--muted)}
+.progwrap{margin-top:30px;border-top:1px solid var(--line);padding-top:6px}
+.progwrap>summary{cursor:pointer;font-family:var(--display);font-weight:700;font-size:1.25rem;text-transform:uppercase;min-height:44px;display:flex;align-items:center;gap:10px}
+.progwrap>summary::after{content:"Show";font:500 .75rem var(--mono);letter-spacing:.1em;color:var(--steel)}
+.progwrap[open]>summary::after{content:"Hide"}
+.progwrap section.block:first-of-type{margin-top:10px}
+.wk>summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:8px}
+.wk>summary::-webkit-details-marker{display:none}
+.wk>summary h2{margin:0}
+.wk .seq{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.wk .seq li{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-family:var(--display);font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.02em}
+.wk .seq li span{display:block;font:400 .66rem var(--mono);color:var(--faint);letter-spacing:.06em}
+.wk[open] .seq{display:none}
+.wk .wk-tog::before{content:"+ Show sets & reps";font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+.wk[open] .wk-tog::before{content:"− Hide sets & reps"}
+.wk[open]>summary{margin-bottom:10px}
+.wk>summary:focus-visible{outline:2px solid var(--steel);outline-offset:4px;border-radius:4px}
+.howto summary{list-style:none}
+.howto summary::-webkit-details-marker{display:none}
+.howto summary::before{content:"+";display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-right:8px;border:1px solid currentColor;border-radius:50%;font-size:.85rem;line-height:1}
+.howto[open] summary::before{content:"−"}
+.brand{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--plate-ink)}
+.brand img{width:24px;height:24px;border-radius:5px;flex:none}
+.builtfor{margin:0 0 4px;max-width:68ch;line-height:1.55;color:var(--muted)}
+.builtfor b{font-weight:600;color:var(--fg)}
+.gear .plain.prim{color:var(--fg);font-weight:600}
+.struct{margin:8px 0 10px}
+.struct-note{margin:10px 0 0;max-width:68ch;font-size:.9rem;line-height:1.55;color:var(--muted)}
+.struct-note b{color:var(--fg);font-weight:600}
+.struct-row{display:flex;flex-wrap:wrap;gap:6px}
+.wkc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 10px;display:flex;flex-direction:column;gap:1px;min-width:92px}
+.wkc .n{font:400 .66rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.wkc b{font-size:.85rem;font-weight:600}
+.wkc .r{font:500 .7rem var(--mono);color:var(--steel)}
+.wkc.b-A{border-top:3px solid var(--steel)}.wkc.b-B{border-top:3px solid var(--plate)}.wkc.b-C{border-top:3px solid var(--fg)}.wkc.b-U{border-top:3px solid var(--line)}
+em.tm{display:block;font:400 .68rem var(--mono);font-style:normal;color:var(--faint);letter-spacing:.04em;text-transform:none;margin-top:2px}
+.up-col>summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:4px;min-height:44px;justify-content:center}
+.up-col>summary::-webkit-details-marker{display:none}
+.up-col .teaser{font-family:var(--display);font-weight:700;font-size:1.35rem;text-transform:uppercase;letter-spacing:.01em;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.up-col .teaser::after{content:"+ Learn more";font:500 .75rem var(--mono);letter-spacing:.1em;opacity:.75;flex:none}
+.up-col[open] .teaser::after{content:"− Hide"}
+.up-col[open]>summary{margin-bottom:4px}
+.up-col[open] .teaser .t{visibility:hidden}
+.up-col[open] .teaser{margin-bottom:-28px}
+.up-col>summary:focus-visible{outline:2px solid var(--bg);outline-offset:4px;border-radius:4px}
+.howto{margin:0 0 6px;max-width:80ch}
+.howto summary{cursor:pointer;font:500 .78rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel);min-height:32px;display:inline-flex;align-items:center}
+.howto .notes{margin-top:6px}
+.nocond table{min-width:520px}
 .foot{margin-top:28px;font-size:.82rem;color:var(--faint);max-width:80ch}
 .upgrade{margin:36px 0 0;padding:22px 22px 24px;background:var(--fg);color:var(--bg);border-radius:10px;max-width:80ch}
 .upgrade .eyebrow{color:inherit;opacity:.7}
@@ -399,10 +451,10 @@ const hasDetail=id=>!!(DETAILS[id]||RAWD[id]);
 function getDetail(id){if(DETAILS[id])return DETAILS[id];if(!RAWD[id]||!window.buildProgram)return null;try{return built[id]||(built[id]=window.buildProgram(RAWD[id]))}catch(e){console.error(e);return null}}
 
 const badges=id=>{const i=INFO[id]||{};return (i.level?`<span class="tag lvl lvl-${i.level}">${i.level}</span>`:"")+(i.rated?`<span class="tag rated">★ Highly Rated</span>`:"")};
-const buyBtn=(id,cls)=>LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Buy Program</a>`:`<span class="${cls} nolink" title="Link coming soon">Buy Program</span>`;
+const buyBtn=(id,cls,price)=>{const t="Buy Program"+(price?" – "+price:"");return LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">${esc(t)}</a>`:`<span class="${cls} nolink" title="Link coming soon">${esc(t)}</span>`};
 const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<details class="incl"><summary><h2>${esc(c.title)}</h2></summary>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}</details>`};
-const upgradeBox=()=>{const u=window.PROGRAM_UPGRADE,href=(window.UPGRADE_LINK||"").trim();if(!u||!href)return "";return `<section class="upgrade"><span class="eyebrow">${esc(u.eyebrow)}</span><h2>${esc(u.title)}</h2><p class="lead">${esc(u.lead)}</p><div class="pts">${u.points.map(x=>`<div><h3>${esc(x.h)}</h3><p>${esc(x.p)}</p></div>`).join("")}</div><div class="cta"><a class="go" href="${esc(href)}" target="_blank" rel="noopener">${esc(u.button)}</a><span class="price">${esc(u.price)}</span></div></section>`};
-const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<section class="copy"><h2>About this program</h2>${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</section>`:""};
+const upgradeBox=()=>{const u=window.PROGRAM_UPGRADE,href=(window.UPGRADE_LINK||"").trim();if(!u||!href)return "";return `<details class="upgrade up-col"><summary><span class="eyebrow">${esc(u.eyebrow)}</span><span class="teaser"><span class="t">${esc(u.teaser||u.title)}</span></span></summary><h2>${esc(u.title)}</h2><p class="lead">${esc(u.lead)}</p><div class="pts">${u.points.map(x=>`<div><h3>${esc(x.h)}</h3><p>${esc(x.p)}</p></div>`).join("")}</div><div class="cta"><a class="go" href="${esc(href)}" target="_blank" rel="noopener">${esc(u.button)}</a><span class="price">${esc(u.price)}</span></div></details>`};
+const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<div class="about">${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</div>`:""};
 const DEMO_HREF=(window.DEMO_LINK||"").trim(); /* set in links.js; the demo row only shows once a link is filled in */
 const demoRow=()=>`<div class="row demo-row"><a class="main" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener"><div class="name">Not sure? Get a free 2-week custom program</div><div class="meta"><span class="tag free">Free</span><span class="tag">Answer a short survey, get a program built for you</span></div></a><div class="acts"><a class="demo-btn" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener" tabindex="-1">Get my free program</a></div></div>`;
 const SHELVES=[
@@ -432,7 +484,7 @@ function renderList(){
   const dayOpts=[...new Set(PROGRAMS.map(p=>p[3]))].sort((a,b)=>a-b);
   app.innerHTML=`
   <header class="top">
-    <span class="eyebrow">Axios Fitness Coaching</span>
+    <span class="brand"><img src="axios-icon.png" alt="" width="24" height="24">Axios Fitness Coaching</span>
     <h1>Training Program Library</h1>
     <p class="lede">Premium fitness programs designed for the holistic development of strength, size, and work capacity.</p>
   </header>
@@ -502,35 +554,51 @@ function renderDetail(id){
   const p=PROGRAMS.find(x=>x[1]===id); if(!p){renderList();return}
   const d=getDetail(id);
   const blocksTag=p[4].split(",").map(b=>BLOCK_NAMES[b]).join(" · ");
+  const g=EQUIP[id];
+  const facts=(d?d.facts:[`${p[2]} weeks`,`${p[3]} days/week`]).filter(f=>!/lifts\s*\/\s*\d+\s*conditioning/i.test(f));
+  const info=INFO[id]||{};
+  const gl=GOALS[id]||[], prim=(info.primaryGoals||gl.slice(0,3)).filter(x=>gl.includes(x)), sec=gl.filter(x=>!prim.includes(x));
+  const gSpan=a=>a.map(x=>`<span title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join(" · ");
+  const spec=`${info.builtFor?`<p class="builtfor"><b>Who it's for:</b> ${esc(info.builtFor)}</p>`:""}<div class="facts">${facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${g&&(g[0].length||g[1].length)?`<div class="gear"><span class="lbl">Equipment</span><span class="plain">${[...g[0],...g[1]].map(esc).join(" · ")}</span></div>`:""}${prim.length?`<div class="gear"><span class="lbl">Primary goals</span><span class="plain prim">${gSpan(prim)}</span></div>`:""}${sec.length?`<div class="gear"><span class="lbl">Secondary goals</span><span class="plain">${gSpan(sec)}</span></div>`:""}`;
   let html=`<a class="back" href="#">← All programs</a>
-  <div class="sheet-head"><span class="eyebrow">${blocksTag}</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${buyBtn(id,"buy")}${inclBox(id)}`;
+  <div class="sheet-head"><span class="brand"><img src="axios-icon.png" alt="" width="24" height="24">Axios Fitness Coaching</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${copyBox(id)}${spec}${buyBtn(id,"buy",window.PROGRAM_PRICE||"$50")}${inclBox(id)}`;
   if(!d){
-    html+=`<div class="facts"><span><b>${p[2]}</b> weeks</span><span><b>${p[3]}</b> days/week</span></div></div>
+    html+=`</div>
     <div class="pending">The full write-up for this program isn't on the page yet. It's listed so the club can see what's available; the day-by-day details are being added in batches.</div>`;
     app.innerHTML=html; window.scrollTo(0,0); return;
   }
-  const g=EQUIP[id];
-  html+=`<div class="facts">${d.facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${(()=>{const bi=blockInfo(p);return `<div class="gear"><span class="lbl">Blocks</span><span class="tag">${bi.count}</span>${bi.seq?`<span class="tag seq">${bi.seq}</span>`:""}<span class="legend">${esc(bi.legend)}</span></div>`})()}${GOALS[id]?`<div class="gear"><span class="lbl">Goals</span>${GOALS[id].map(x=>`<span class="tag" title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join("")}</div>`:""}${g?`<div class="gear"><span class="lbl">Equipment</span>${g[0].map(e=>`<span class="tag">${esc(e)}</span>`).join("")}${g[1].map(e=>`<span class="tag also">+ ${esc(e)}</span>`).join("")}</div>`:""}<ul class="notes">${d.notes.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></div>`;
-  html+=copyBox(id);
+  html+=`</div>`;
+  const pct=JSON.stringify(d.blocks).includes("%");
+  const howTo=[...d.notes.filter(n=>pct||!/^All % = % of estimated 1RM\.?$/.test(n.trim())).map(n=>pct?n:n.replace(/^All % = % of estimated 1RM\.\s*/,"")),...(pct?["To estimate your 1RM: take a recent 3–5 rep max and multiply by about 1.1 (3 reps) to 1.15 (5 reps)."]:[])];
+  const bi=blockInfo(p), seqW=(bi.seq||"").split("/").filter(x=>x&&x!=="U");
+  const rotOf=n=>{const b=d.blocks.find(b=>new RegExp(`(^|[^0-9])${n}([^0-9]|$)`).test(b.sub||""));const m=b&&/^Week\s+([A-Z])$/i.exec(b.title.trim());return m?m[1].toUpperCase():""};
+  const struct=seqW.length>1?`<div class="struct"><div class="struct-row">${seqW.map((L,i)=>{const nm=L==="U"?"Unload":`Block ${"ABCDEFG".indexOf(L)+1}`;const r=rotOf(i+1);return `<div class="wkc b-${esc(L)}"><span class="n">Week ${i+1}</span><b>${esc(nm)}</b>${r?`<span class="r">Week ${esc(r)}</span>`:""}</div>`}).join("")}</div>${(()=>{const rs=seqW.map((_,i)=>rotOf(i+1));return rs.every((r,i)=>r===(i%2?"B":"A"))?`<p class="struct-note"><b>A/B weekly undulation.</b> The program alternates two different training weeks. Week A and Week B each work at their own intensities and progress over a 2-week cycle, so you get more variety and steady progress while lowering the risk of burnout and overuse.</p>`:""})()}</div>`:"";
+  if(howTo.length||struct)html+=`<details class="howto"><summary>How to read this program</summary>${struct}<ul class="notes">${howTo.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></details>`;
   d.blocks.forEach(b=>{
-    html+=`<section class="block"><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th><th>Conditioning</th></tr></thead><tbody>`;
+    const hasCond=b.days.some(([,c])=>c&&c!=="—");
+    const tm=(info.sessionTimes||{})[b.title.trim().replace(/^WEEK/i,"Week")]||[];
+    const tmOf=num=>{const t=tm[parseInt(num,10)-1];return t?`<em class="tm">${esc(t)} min</em>`:""};
+    const seq=b.days.map(([label])=>{const [num,...rest]=label.split(" ");return `<li><span>Day ${esc(num)}</span>${esc(rest.join(" "))}${tmOf(num)}</li>`}).join("");
+    html+=`<section class="block${hasCond?"":" nocond"}"><details class="wk"><summary><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><ol class="seq">${seq}</ol><span class="wk-tog"></span></summary><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th>${hasCond?"<th>Conditioning</th>":""}</tr></thead><tbody>`;
     b.days.forEach(([label,cond,ex])=>{
       const [num,...rest]=label.split(" ");
-      const dayCell=`<td class="day" rowspan="${Math.max(ex.length,1)}"><span>Day ${num}</span>${esc(rest.join(" "))}</td>`;
-      if(!ex.length){html+=`<tr class="day-start cardio">${dayCell}<td class="slot"></td><td>—</td><td class="rx">—</td><td class="cond">${esc(cond)}</td></tr>`;return}
+      const dayCell=`<td class="day" rowspan="${Math.max(ex.length,1)}"><span>Day ${num}</span>${esc(rest.join(" "))}${tmOf(num)}</td>`;
+      if(!ex.length){html+=`<tr class="day-start cardio">${dayCell}<td class="slot"></td><td>—</td><td class="rx">—</td>${hasCond?`<td class="cond">${esc(cond)}</td>`:""}</tr>`;return}
       ex.forEach(([slot,lift,rx],i)=>{
         const letter=slot[0], paired=ex.some(e=>e[0]===letter+"2");
         const cls=[i===0?"day-start":"",paired?(slot.endsWith("1")?"pair-a":"pair-b"):"solo"].join(" ");
-        html+=`<tr class="${cls}">${i===0?dayCell:""}<td class="slot">${esc(slot)}</td><td>${liftName(lift)}</td><td class="rx">${esc(rx)}</td>${i===0?`<td class="cond" rowspan="${ex.length}">${cond?esc(cond):"—"}</td>`:""}</tr>`;
+        html+=`<tr class="${cls}">${i===0?dayCell:""}<td class="slot">${esc(slot)}</td><td>${liftName(lift)}</td><td class="rx">${esc(rx)}</td>${i===0&&hasCond?`<td class="cond" rowspan="${ex.length}">${cond?esc(cond):"—"}</td>`:""}</tr>`;
       });
     });
-    html+=`</tbody></table></div></section>`;
+    html+=`</tbody></table></div></details></section>`;
   });
+  if(d.progressions.length)html+=`<details class="progwrap"><summary>Week-to-week progression</summary>`;
   d.progressions.forEach(pr=>{
     html+=`<section class="block prog"><h2>${esc(pr.title)}</h2><div class="tbl-wrap"><table><thead><tr>${pr.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${pr.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></section>`;
   });
+  if(d.progressions.length)html+=`</details>`;
   html+=upgradeBox();
-  html+=`<p class="foot">To estimate your 1RM: take a recent 3–5 rep max and multiply by about 1.1 (3 reps) to 1.15 (5 reps).${DETAILS[id]?"":" \"No sets saved\" means that lift has no sets entered yet."}</p>`;
+  if(html.includes("No sets saved"))html+=`<p class="foot">"No sets saved" means that lift has no sets entered yet.</p>`;
   app.innerHTML=html; window.scrollTo(0,0);
 }
 function route(){const id=location.hash.slice(1); id?renderDetail(id):renderList()}
