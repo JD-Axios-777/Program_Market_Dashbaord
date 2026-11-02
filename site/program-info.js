@@ -220,11 +220,11 @@ Hypertrophy and strength capacity weeks alternate, with interval and steady card
 Six weeks move through hypertrophy, strength capacity and strength, two weeks each, with top sets climbing toward 90%.` }
 };
 
-/* "What the $50 gets you" section, shown on every program page.
+/* "What Does this Program Come With?" section, shown on every program page.
    {weeks} is replaced with the program's length. The closing note defaults to a line about the
    equipment list; set includesNote on a program above to give it its own line. */
 window.PROGRAM_INCLUDES = {
-  title: "What the $50 gets you",
+  title: "What Does this Program Come With?",
   lead: "This page shows the plan. Buying it puts the plan in a coaching app that adjusts to you.",
   items: [
     { h: "Premium coaching app", lines: [

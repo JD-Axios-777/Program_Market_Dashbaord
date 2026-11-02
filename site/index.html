@@ -137,7 +137,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .notes li::before{content:"— ";color:var(--faint)}
 section.block{margin-top:30px}
 section.block>h2{margin-bottom:10px}
-section.block>h2 small{font-family:var(--mono);font-size:.8rem;font-weight:400;letter-spacing:.04em;color:var(--muted);text-transform:none;margin-left:8px}
+section.block>h2 small,.wk>summary h2 small{font-family:var(--mono);font-size:.8rem;font-weight:400;letter-spacing:.04em;color:var(--muted);text-transform:none;margin-left:8px}
 .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
 th,td{text-align:left;vertical-align:top;padding:7px 10px;border-top:1px solid var(--line-soft)}
@@ -165,6 +165,21 @@ tr.cardio td{background:var(--steel-soft)}
 .progwrap>summary::after{content:"Show";font:500 .75rem var(--mono);letter-spacing:.1em;color:var(--steel)}
 .progwrap[open]>summary::after{content:"Hide"}
 .progwrap section.block:first-of-type{margin-top:10px}
+.wk>summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:8px}
+.wk>summary::-webkit-details-marker{display:none}
+.wk>summary h2{margin:0}
+.wk .seq{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.wk .seq li{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-family:var(--display);font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.02em}
+.wk .seq li span{display:block;font:400 .66rem var(--mono);color:var(--faint);letter-spacing:.06em}
+.wk[open] .seq{display:none}
+.wk .wk-tog::before{content:"+ Show sets & reps";font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+.wk[open] .wk-tog::before{content:"− Hide sets & reps"}
+.wk[open]>summary{margin-bottom:10px}
+.wk>summary:focus-visible{outline:2px solid var(--steel);outline-offset:4px;border-radius:4px}
+.howto summary{list-style:none}
+.howto summary::-webkit-details-marker{display:none}
+.howto summary::before{content:"+";display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-right:8px;border:1px solid currentColor;border-radius:50%;font-size:.85rem;line-height:1}
+.howto[open] summary::before{content:"−"}
 .howto{margin:0 0 6px;max-width:80ch}
 .howto summary{cursor:pointer;font:500 .78rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel);min-height:32px;display:inline-flex;align-items:center}
 .howto .notes{margin-top:6px}
@@ -412,7 +427,7 @@ const hasDetail=id=>!!(DETAILS[id]||RAWD[id]);
 function getDetail(id){if(DETAILS[id])return DETAILS[id];if(!RAWD[id]||!window.buildProgram)return null;try{return built[id]||(built[id]=window.buildProgram(RAWD[id]))}catch(e){console.error(e);return null}}
 
 const badges=id=>{const i=INFO[id]||{};return (i.level?`<span class="tag lvl lvl-${i.level}">${i.level}</span>`:"")+(i.rated?`<span class="tag rated">★ Highly Rated</span>`:"")};
-const buyBtn=(id,cls)=>LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">Buy Program</a>`:`<span class="${cls} nolink" title="Link coming soon">Buy Program</span>`;
+const buyBtn=(id,cls,price)=>{const t="Buy Program"+(price?" – "+price:"");return LINKS[id]?`<a class="${cls}" href="${esc(LINKS[id])}" target="_blank" rel="noopener">${esc(t)}</a>`:`<span class="${cls} nolink" title="Link coming soon">${esc(t)}</span>`};
 const inclBox=id=>{const c=window.PROGRAM_INCLUDES;const p=PROGRAMS.find(x=>x[1]===id);if(!c||!p)return "";const w=s=>s.replace(/\{weeks\}/g,p[2]);const i=INFO[id]||{};const noGear=!(EQUIP[id]&&EQUIP[id][0].length);const note=i.includesNote||(noGear?c.noEquipNote:c.note);return `<details class="incl"><summary><h2>${esc(c.title)}</h2></summary>${c.lead?`<p class="lead">${esc(c.lead)}</p>`:""}<div class="items">${c.items.map(it=>`<div class="item"><h3>${esc(it.h)}</h3>${it.lines.map(l=>`<p>${esc(w(l))}</p>`).join("")}</div>`).join("")}</div>${note?`<p class="note">${esc(note)}</p>`:""}</details>`};
 const upgradeBox=()=>{const u=window.PROGRAM_UPGRADE,href=(window.UPGRADE_LINK||"").trim();if(!u||!href)return "";return `<section class="upgrade"><span class="eyebrow">${esc(u.eyebrow)}</span><h2>${esc(u.title)}</h2><p class="lead">${esc(u.lead)}</p><div class="pts">${u.points.map(x=>`<div><h3>${esc(x.h)}</h3><p>${esc(x.p)}</p></div>`).join("")}</div><div class="cta"><a class="go" href="${esc(href)}" target="_blank" rel="noopener">${esc(u.button)}</a><span class="price">${esc(u.price)}</span></div></section>`};
 const copyBox=id=>{const c=INFO[id]&&INFO[id].copy;return c?`<div class="about">${c.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("")}</div>`:""};
@@ -519,7 +534,7 @@ function renderDetail(id){
   const facts=(d?d.facts:[`${p[2]} weeks`,`${p[3]} days/week`]).filter(f=>!/lifts\s*\/\s*\d+\s*conditioning/i.test(f));
   const spec=`<div class="facts">${facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${g&&(g[0].length||g[1].length)?`<div class="gear"><span class="lbl">Equipment</span><span class="plain">${[...g[0],...g[1]].map(esc).join(" · ")}</span></div>`:""}${GOALS[id]?`<div class="gear"><span class="lbl">Goals</span><span class="plain">${GOALS[id].map(x=>`<span title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join(" · ")}</span></div>`:""}`;
   let html=`<a class="back" href="#">← All programs</a>
-  <div class="sheet-head"><span class="eyebrow">${blocksTag}</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${copyBox(id)}${spec}${buyBtn(id,"buy")}${inclBox(id)}`;
+  <div class="sheet-head"><span class="eyebrow">${blocksTag}</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${copyBox(id)}${spec}${buyBtn(id,"buy",window.PROGRAM_PRICE||"$50")}${inclBox(id)}`;
   if(!d){
     html+=`</div>
     <div class="pending">The full write-up for this program isn't on the page yet. It's listed so the club can see what's available; the day-by-day details are being added in batches.</div>`;
@@ -531,7 +546,8 @@ function renderDetail(id){
   if(howTo.length)html+=`<details class="howto"><summary>How to read this program</summary><ul class="notes">${howTo.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></details>`;
   d.blocks.forEach(b=>{
     const hasCond=b.days.some(([,c])=>c&&c!=="—");
-    html+=`<section class="block${hasCond?"":" nocond"}"><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th>${hasCond?"<th>Conditioning</th>":""}</tr></thead><tbody>`;
+    const seq=b.days.map(([label])=>{const [num,...rest]=label.split(" ");return `<li><span>Day ${esc(num)}</span>${esc(rest.join(" "))}</li>`}).join("");
+    html+=`<section class="block${hasCond?"":" nocond"}"><details class="wk"><summary><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><ol class="seq">${seq}</ol><span class="wk-tog"></span></summary><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th>${hasCond?"<th>Conditioning</th>":""}</tr></thead><tbody>`;
     b.days.forEach(([label,cond,ex])=>{
       const [num,...rest]=label.split(" ");
       const dayCell=`<td class="day" rowspan="${Math.max(ex.length,1)}"><span>Day ${num}</span>${esc(rest.join(" "))}</td>`;
@@ -542,7 +558,7 @@ function renderDetail(id){
         html+=`<tr class="${cls}">${i===0?dayCell:""}<td class="slot">${esc(slot)}</td><td>${liftName(lift)}</td><td class="rx">${esc(rx)}</td>${i===0&&hasCond?`<td class="cond" rowspan="${ex.length}">${cond?esc(cond):"—"}</td>`:""}</tr>`;
       });
     });
-    html+=`</tbody></table></div></section>`;
+    html+=`</tbody></table></div></details></section>`;
   });
   if(d.progressions.length)html+=`<details class="progwrap"><summary>Week-to-week progression</summary>`;
   d.progressions.forEach(pr=>{
