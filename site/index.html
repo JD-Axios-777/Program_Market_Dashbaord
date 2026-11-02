@@ -182,8 +182,8 @@ tr.cardio td{background:var(--steel-soft)}
 .howto[open] summary::before{content:"−"}
 .brand{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--plate-ink)}
 .brand img{width:24px;height:24px;border-radius:5px;flex:none}
-.builtfor{margin:2px 0 2px;max-width:68ch;padding:10px 14px;border-left:3px solid var(--plate);background:var(--surface);border-radius:0 6px 6px 0;line-height:1.55;font-size:.95rem}
-.builtfor b{display:block;font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--plate-ink);margin-bottom:2px}
+.builtfor{margin:0 0 4px;max-width:68ch;line-height:1.55;color:var(--muted)}
+.builtfor b{font-weight:600;color:var(--fg)}
 .gear .plain.prim{color:var(--fg);font-weight:600}
 .struct{margin:8px 0 10px}
 .struct-note{margin:10px 0 0;max-width:68ch;font-size:.9rem;line-height:1.55;color:var(--muted)}
@@ -559,7 +559,7 @@ function renderDetail(id){
   const info=INFO[id]||{};
   const gl=GOALS[id]||[], prim=(info.primaryGoals||gl.slice(0,3)).filter(x=>gl.includes(x)), sec=gl.filter(x=>!prim.includes(x));
   const gSpan=a=>a.map(x=>`<span title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join(" · ");
-  const spec=`${info.builtFor?`<p class="builtfor"><b>Who it's for</b>${esc(info.builtFor)}</p>`:""}<div class="facts">${facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${g&&(g[0].length||g[1].length)?`<div class="gear"><span class="lbl">Equipment</span><span class="plain">${[...g[0],...g[1]].map(esc).join(" · ")}</span></div>`:""}${prim.length?`<div class="gear"><span class="lbl">Primary goals</span><span class="plain prim">${gSpan(prim)}</span></div>`:""}${sec.length?`<div class="gear"><span class="lbl">Secondary goals</span><span class="plain">${gSpan(sec)}</span></div>`:""}`;
+  const spec=`${info.builtFor?`<p class="builtfor"><b>Who it's for:</b> ${esc(info.builtFor)}</p>`:""}<div class="facts">${facts.map(f=>`<span>${esc(f)}</span>`).join("")}</div>${g&&(g[0].length||g[1].length)?`<div class="gear"><span class="lbl">Equipment</span><span class="plain">${[...g[0],...g[1]].map(esc).join(" · ")}</span></div>`:""}${prim.length?`<div class="gear"><span class="lbl">Primary goals</span><span class="plain prim">${gSpan(prim)}</span></div>`:""}${sec.length?`<div class="gear"><span class="lbl">Secondary goals</span><span class="plain">${gSpan(sec)}</span></div>`:""}`;
   let html=`<a class="back" href="#">← All programs</a>
   <div class="sheet-head"><span class="brand"><img src="axios-icon.png" alt="" width="24" height="24">Axios Fitness Coaching</span><h1>${esc(p[0])}</h1>${badges(id)?`<div class="meta" style="display:flex;gap:6px">${badges(id)}</div>`:""}${copyBox(id)}${spec}${buyBtn(id,"buy",window.PROGRAM_PRICE||"$50")}${inclBox(id)}`;
   if(!d){
