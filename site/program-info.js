@@ -93,6 +93,16 @@ Six weeks move through hypertrophy, strength capacity and strength, two weeks ea
 
 Hypertrophy and strength capacity weeks alternate, making this a great entry point to structured barbell training or a solid option when time is tight.` },
 
+  "centurion-phase-1": { level: "Intermediate", rated: false,
+    tagline: "The base of the Centurion System: squat, bench, deadlift and press, plus two cardio days.",
+    builtFor: "Built for lifters who know the main barbell lifts and want a structured start to heavier strength work. This program builds strength on the squat, bench press, deadlift and standing press while two cardio days build your aerobic base.",
+    primaryGoals: ["Strength", "Aerobic Endurance", "Fat Loss"],
+    sessionTimes: {"Week A": ["40–50", "40–50", "40–50", "40–50", "40–50"], "Week B": ["40–50", "50–60", "40–50", "30–40", "40–50"]},
+    copy:
+`A five-day program: three total-body strength days and two cardio days. Each strength day leads with one of the main barbell lifts, works up to top sets at 75–80%, and finishes with a short accessory superset.
+
+Strength capacity and strength weeks alternate, and the cardio days pair intervals with steady aerobic work. This is Phase 1 of the Centurion System and sets you up for the heavier loading in Phase 2.` },
+
   "centurion-phase-2": { level: "Intermediate", rated: false,
     tagline: "Squat, bench and deadlift pushed toward 85–90%, with intervals to stay conditioned.",
     builtFor: "Built for lifters with solid technique on the squat, bench and deadlift who want to get significantly stronger. This program pushes the main lifts toward heavy top sets while interval cardio keeps you conditioned.",

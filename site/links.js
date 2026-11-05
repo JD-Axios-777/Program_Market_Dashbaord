@@ -10,6 +10,7 @@ window.PROGRAM_LINKS = {
   "bellator-phase-2": "https://axios-remote-fitness-coaching.kit.com/products/bellator-phase-2",
   "bludkrieg": "https://axios-remote-fitness-coaching.kit.com/products/bludkrieg",
   "boneyard": "https://axios-remote-fitness-coaching.kit.com/products/boneyard",
+  "centurion-phase-1": "https://axios-remote-fitness-coaching.kit.com/products/centurion-phase-1",
   "centurion-phase-2": "https://axios-remote-fitness-coaching.kit.com/products/centurion-phase-2",
   "centurion-phase-3": "https://axios-remote-fitness-coaching.kit.com/products/centurion-phase-3",
   "darkwater-1kb": "https://axios-remote-fitness-coaching.kit.com/products/darkwater-1kb",
