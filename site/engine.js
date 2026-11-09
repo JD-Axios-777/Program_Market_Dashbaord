@@ -94,6 +94,8 @@ function build(rows,weekLabels){
       return (named?`${titleCase(a)}: `:"")+body;
     }).join(" · ");
   }
+  /* AAA/BBB-style programs (each rotation is a run of consecutive weeks) are labelled Block A / Block B; A/B/A/B programs stay Week A / Week B. */
+  const blockMode=multi&&groups.every(g=>g.weeks.length>1&&g.weeks.every((w,i)=>i===0||w===g.weeks[i-1]+1));
   const blocks=groups.map((grp,gi)=>{
     const inBlock=it=>grp.weeks.some(w=>w in it.wk);
     const its=liftItems.filter(it=>grp.weeks[0] in it.wk);
@@ -129,7 +131,7 @@ function build(rows,weekLabels){
     };
     its.filter(varies).forEach(it=>addRow(it.name,grp.weeks.map(w=>rx(it,w))));
     condProg.forEach(c=>addRow(c.label,c.vals));
-    const title=multi?`Week ${LETTERS[gi]}`:"All weeks";
+    const title=multi?`${blockMode?"Block":"Week"} ${LETTERS[gi]}`:"All weeks";
     return {title,sub:`Week${grp.weeks.length>1?"s":""} ${grp.weeks.join(" / ")}`,days,
       progression:prog.length?{title:`Progression · ${title}`,cols:["Lift",...grp.weeks.map(w=>`Week ${w}${weekLabels&&weekLabels[w-1]?" · "+weekLabels[w-1]:""}`)],rows:prog.map(p=>[p.label,...p.cells])}:null};
   });
@@ -140,8 +142,8 @@ function build(rows,weekLabels){
     facts:[`${nWeeks} weeks`,`${nDays} days/week`,`${liftDays} lifts / ${condCount} conditioning`],
     notes:[
       "All % = % of estimated 1RM.",
-      multi?`The program runs ${blocks.length} rotations: ${blocks.map(b=>`${b.title} in ${b.sub.toLowerCase()}`).join(", ")}.`:"The same exercises run every week.",
-      "Starred lifts change load or reps week to week; the first week of each rotation is shown. See progression."
+      multi?`The program runs ${blocks.length} ${blockMode?"blocks":"rotations"}: ${blocks.map(b=>`${b.title} in ${b.sub.toLowerCase()}`).join(", ")}.`:"The same exercises run every week.",
+      `Starred lifts change load or reps week to week; the first week of each ${blockMode?"block":"rotation"} is shown. See progression.`
     ],
     blocks:blocks.map(b=>({title:b.title,sub:b.sub,days:b.days})),
     progressions:blocks.map(b=>b.progression).filter(Boolean)

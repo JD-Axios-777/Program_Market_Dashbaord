@@ -797,9 +797,10 @@ function renderDetail(id){
   }
   const pct=JSON.stringify(d.blocks).includes("%");
   const howTo=[...d.notes.filter(n=>pct||!/^All % = % of estimated 1RM\.?$/.test(n.trim())).map(n=>pct?n:n.replace(/^All % = % of estimated 1RM\.\s*/,"")),...(pct?["To estimate your 1RM: take a recent 3–5 rep max and multiply by about 1.1 (3 reps) to 1.15 (5 reps)."]:[])];
-  const bi=blockInfo(p), seqW=(bi.seq||"").split("/").filter(x=>x&&x!=="U");
+  const bi=blockInfo(p), seqW=(bi.seq||"").split("/").flatMap(g=>g==="U"?[g]:g.split("")).filter(x=>x&&x!=="U");
+  const blkOf=n=>{const b=d.blocks.find(b=>new RegExp(`(^|[^0-9])${n}([^0-9]|$)`).test(b.sub||""));return b?b.title.trim():""};
   const rotOf=n=>{const b=d.blocks.find(b=>new RegExp(`(^|[^0-9])${n}([^0-9]|$)`).test(b.sub||""));const m=b&&/^Week\s+([A-Z])$/i.exec(b.title.trim());return m?m[1].toUpperCase():""};
-  const struct=seqW.length>1&&d.blocks.length>1?`<div class="struct"><div class="struct-row">${seqW.map((L,i)=>{const nm=L==="U"?"Unload":`Block ${"ABCDEFG".indexOf(L)+1}`;const r=rotOf(i+1);return `<div class="wkc b-${esc(L)}"><span class="n">Week ${i+1}</span><b>${esc(nm)}</b>${r?`<span class="r">Week ${esc(r)}</span>`:""}</div>`}).join("")}</div>${(()=>{const rs=seqW.map((_,i)=>rotOf(i+1));return rs.every((r,i)=>r===(i%2?"B":"A"))?`<p class="struct-note"><b>A/B weekly undulation.</b> The program alternates two different training weeks. Week A and Week B each work at their own intensities and progress over a 2-week cycle, so you get more variety and steady progress while lowering the risk of burnout and overuse.</p>`:""})()}</div>`:"";
+  const struct=seqW.length>1&&d.blocks.length>1?`<div class="struct"><div class="struct-row">${seqW.map((L,i)=>{const bt=blkOf(i+1);let nm=L==="U"?"Unload":`Block ${"ABCDEFG".indexOf(L)+1}`;if(L!=="U"&&/^Block\s+[A-Z]$/i.test(bt))nm=bt;const r=rotOf(i+1);return `<div class="wkc b-${esc(L)}"><span class="n">Week ${i+1}</span><b>${esc(nm)}</b>${r?`<span class="r">Week ${esc(r)}</span>`:""}</div>`}).join("")}</div>${(()=>{const rs=seqW.map((_,i)=>rotOf(i+1));return rs.every((r,i)=>r===(i%2?"B":"A"))?`<p class="struct-note"><b>A/B weekly undulation.</b> The program alternates two different training weeks. Week A and Week B each work at their own intensities and progress over a 2-week cycle, so you get more variety and steady progress while lowering the risk of burnout and overuse.</p>`:""})()}</div>`:"";
   let single="", notesShown=howTo;
   if(d.blocks.length===1&&seqW.length>1){
     const groups=(bi.seq||"").split("/").filter(g=>g&&g!=="U"), L=groups[0].length, same=groups.every(g=>g.length===L&&new Set(g).size===1);
@@ -816,7 +817,7 @@ function renderDetail(id){
   if(howTo.length||struct||single)html+=`<details class="howto"><summary>How to read this program</summary>${struct}${single}<ul class="notes">${notesShown.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></details>`;
   d.blocks.forEach(b=>{
     const hasCond=b.days.some(([,c])=>c&&c!=="—");
-    const tm=(info.sessionTimes||{})[b.title.trim().replace(/^WEEK/i,"Week")]||[];
+    const tm=(info.sessionTimes||{})[b.title.trim().replace(/^(WEEK|BLOCK)/i,"Week")]||[];
     const tmOf=num=>{const t=tm[parseInt(num,10)-1];return t?`<em class="tm">${esc(t)} min</em>`:""};
     const seq=b.days.map(([label,,ex])=>{const [num,...rest]=label.split(" ");return `<li${!ex.length?' class="cardio"':""}><span>Day ${esc(num)}</span>${esc(rest.join(" ")).replace(/\//g,"/<wbr>")}${tmOf(num)}</li>`}).join("");
     html+=`<section class="block${hasCond?"":" nocond"}"><details class="wk"><summary><h2>${esc(b.title)}<small>${esc(b.sub)}</small></h2><ol class="seq">${seq}</ol><span class="wk-tog"></span></summary><div class="tbl-wrap"><table><thead><tr><th>Day</th><th></th><th>Lift</th><th>Prescription</th>${hasCond?"<th>Conditioning</th>":""}</tr></thead><tbody>`;
