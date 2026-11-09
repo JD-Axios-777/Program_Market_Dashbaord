@@ -850,6 +850,7 @@ function renderBundle(b){
   toTop();
 }
 function route(){const id=location.hash.slice(1);
+  postUp({axiosLibRoute:id.startsWith("go-")?"":id}); /* lets the host page put the open program in its own URL for sharing */
   if(id.startsWith("go-")){const k=id.slice(3);if(k==="bundles"||k==="systems")activeExtra=k;renderList();const t=document.getElementById({programs:"lib-programs",bundles:"lib-extras",systems:"lib-extras",club:"club"}[k]);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:"start"}));return}
   const b=id.startsWith("bundle-")&&(window.BUNDLES||[]).find(x=>"bundle-"+x.id===id); b?renderBundle(b):id?renderDetail(id):renderList()}
 window.addEventListener("hashchange",route);
