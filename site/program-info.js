@@ -533,7 +533,10 @@ Loads climb in planned steps across each program, with accessory work to keep yo
     copy: `Programs that combine strength training with structured conditioning, so you build muscle, strength and fitness at the same time.
 
 Each week mixes lifting days with interval and steady cardio work, without one getting in the way of the other.`,
-    who: "Trainees who want to look and perform better without choosing between the weight room and cardio." },
+    who: "Trainees who want to look and perform better without choosing between the weight room and cardio.",
+    programs: ["kerberos", "drago", "jacked-and-athletic", "alpha-bravo-hp1", "alpha-bravo-sp1"],
+    price: "$150",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/hybrid-program-bundle" },
   { id: "athlete-tactical", name: "Athlete / Tactical Performance Bundle",
     short: "Power, speed, strength and conditioning that carry over.",
     copy: `Programs that develop power, speed, strength and conditioning for sport, service or physically demanding work.
