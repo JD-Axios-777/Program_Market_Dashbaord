@@ -560,7 +560,10 @@ Circuits, intervals and steady endurance work are paired with strength training,
     copy: `Programs that introduce structured gym training step by step, starting with the main lifts and simple weekly layouts.
 
 Each program builds on the last, so you learn the movements, build a base of strength and muscle, and always know what to do next.`,
-    who: "New lifters, or anyone returning after time off, who wants a clear plan to follow in a full gym." },
+    who: "New lifters, or anyone returning after time off, who wants a clear plan to follow in a full gym.",
+    programs: ["boneyard", "warpony", "gym-based-functional-strength", "centurion-phase-1", "bellator-phase-1"],
+    price: "$150",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/gym-beginner-bundle" },
   { id: "core-mobility", name: "Core & Mobility Bundle",
     short: "A stronger trunk and better-moving hips, spine and shoulders.",
     copy: `Programs that strengthen your core and improve how your hips, spine and shoulders move.
