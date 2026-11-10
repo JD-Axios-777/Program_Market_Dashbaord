@@ -551,7 +551,10 @@ Explosive lifts, throws and sprint work sit alongside heavy strength training an
     copy: `Programs that build your engine: the ability to work hard, recover quickly and repeat the effort.
 
 Circuits, intervals and steady endurance work are paired with strength training, so you get fitter without losing the muscle you have built.`,
-    who: "Anyone who runs out of gas early, wants better endurance, or wants more conditioning in their training week." },
+    who: "Anyone who runs out of gas early, wants better endurance, or wants more conditioning in their training week.",
+    programs: ["htk-phase-1", "htk-phase-2", "kreuzer-phase-1", "opr-8-phase-1", "kerberos"],
+    price: "$150",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/work-capacity-bundle" },
   { id: "gym-beginner", name: "Gym Beginner Bundle",
     short: "A clear, step-by-step start in a full gym.",
     copy: `Programs that introduce structured gym training step by step, starting with the main lifts and simple weekly layouts.
