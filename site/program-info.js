@@ -507,14 +507,18 @@ window.CLUB_PITCH = {
   note: "See if you qualify"
 };
 
-/* Program bundles in progress. Programs, price and Kit link are added later; until then each shows as Coming soon. */
+/* Program bundles. A bundle goes live once it has programs, price and link (Kit checkout URL); until then it shows as Coming soon.
+   programs: program ids, listed in suggested run order. */
 window.BUNDLES = [
   { id: "kettlebell", name: "Kettlebell Program Bundle",
     short: "Train anywhere with one or two kettlebells.",
     copy: `Programs built around one or two kettlebells, for training at home, on the road, or anywhere space is tight.
 
 Each program uses a small set of kettlebell lifts done well, so you build strength, muscle and power without a full gym.`,
-    who: "Anyone who trains with kettlebells, wants a minimal-equipment setup, or needs programs that travel." },
+    who: "Anyone who trains with kettlebells, wants a minimal-equipment setup, or needs programs that travel.",
+    programs: ["1kb-vagabond", "2kb-vagabond", "kilo-bravo", "darkwater-1kb", "darkwater-2kb"],
+    price: "$150",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/kettlebell-program-bundle" },
   { id: "strength", name: "Strength Program Bundle",
     short: "Get stronger on the squat, bench press and deadlift.",
     copy: `Programs focused on getting stronger on the main barbell lifts: the squat, bench press and deadlift.
