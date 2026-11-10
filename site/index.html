@@ -338,6 +338,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 .p-main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:18px}
 .p-main .back{margin:0;color:var(--fg);font:600 .9rem var(--body)}
 .p-main h1{text-transform:uppercase;letter-spacing:-.03em;line-height:.88;font-size:clamp(2.8rem,8vw,6.5rem)}
+.p-main h1.long{font-size:clamp(2.2rem,5.6vw,4.6rem)}
+.p-main h1{overflow-wrap:break-word}
 .pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill-d{padding:4px 12px;border-radius:8px;background:var(--fg);color:var(--bg);font:700 .82rem var(--body)}
 .pill-o{padding:4px 12px;border-radius:8px;border:1px solid var(--line);font:600 .82rem var(--body)}
@@ -664,6 +666,8 @@ const demoRow=()=>`<div class="free-banner"><div class="t"><span class="pill">Fr
 const siteNav=()=>`<header class="site-nav"><a class="logo" href="#"><img src="axios-icon.png" alt="" width="32" height="32">AXIOS</a><nav aria-label="Main"><a href="#go-programs">Programs</a><a href="#go-bundles">Bundles</a><a href="#go-systems">Systems</a><a href="#go-club">Training Club</a></nav>${DEMO_HREF?`<a class="btn red" href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get Started</a>`:""}</header>`;
 const sessRange=id=>{const t=(INFO[id]||{}).sessionTimes;if(!t)return "";let lo=1e9,hi=0;Object.values(t).flat().forEach(x=>{const m=/(\d+)\D+(\d+)/.exec(x||"");if(m){lo=Math.min(lo,+m[1]);hi=Math.max(hi,+m[2])}});return hi?`${lo}–${hi}`:""};
 const summaryOf=id=>{if((INFO[id]||{}).tagline)return INFO[id].tagline;const c=((INFO[id]||{}).copy||"").trim();if(!c)return "";const m=/^[^:.]*[:.]/.exec(c);return m?m[0].replace(/:$/,"."):c};
+/* Long single words (e.g. PERFORMANCE) overflow the giant title next to the buy card: shrink those titles. */
+const h1Long=t=>Math.max(...String(t).split(/[\s/–-]+/).map(w=>w.length))>=10?' class="long"':"";
 const bundleLive=b=>!!(b.link&&b.price&&(b.programs||[]).length);
 const SHELVES=[
   ["Beginner","New to structured training or returning after time off. Simpler layouts with fewer moving parts."],
@@ -791,7 +795,7 @@ function renderDetail(id){
   const lv=info.level;
   const glines=`<div class="glines">${prim.length?`<div class="gline"><span class="lbl">Primary goals</span><div class="gv">${prim.map(x=>`<span class="gp" title="${esc(GOAL_DEFS[x])}">${esc(x)}</span>`).join("")}</div></div>`:""}${sec.length?`<div class="gline"><span class="lbl">Also builds</span><div class="gv">${gSpan(sec)}</div></div>`:""}${g&&(g[0].length||g[1].length)?`<div class="gline"><span class="lbl">Equipment</span><div class="gv">${[...g[0],...g[1]].map(esc).join(" · ")}</div></div>`:""}</div>`;
   const card=`<aside class="buycard" aria-label="Buy this program"><span class="pill">Stand-alone program</span><span class="price">${esc(window.PROGRAM_PRICE||"$50")}<small> one-time</small></span><dl><div><dt>Length</dt><dd>${p[2]} weeks</dd></div><div><dt>Schedule</dt><dd>${p[3]} days / week</dd></div>${rg?`<div><dt>Sessions</dt><dd>${rg} min</dd></div>`:""}${extraFacts.map(f=>`<div><dt>Note</dt><dd>${esc(f)}</dd></div>`).join("")}</dl>${buyBtn(id,"buy",window.PROGRAM_PRICE||"$50")}${inclBox(id)}</aside>`;
-  let html=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#">← All programs</a><div class="pills">${lv?`<span class="pill-d">${esc(lv)}</span>`:""}${patt?`<span class="pill-o">${esc(patt)}</span>`:""}${info.rated?`<span class="tag rated">★ Highly Rated</span>`:""}</div><h1>${esc(p[0])}</h1>${copyBox(id)}${info.builtFor?`<p class="builtfor"><b>Who it's for:</b> ${esc(info.builtFor)}</p>`:""}${glines}</div>${card}</div>`;
+  let html=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#">← All programs</a><div class="pills">${lv?`<span class="pill-d">${esc(lv)}</span>`:""}${patt?`<span class="pill-o">${esc(patt)}</span>`:""}${info.rated?`<span class="tag rated">★ Highly Rated</span>`:""}</div><h1${h1Long(p[0])}>${esc(p[0])}</h1>${copyBox(id)}${info.builtFor?`<p class="builtfor"><b>Who it's for:</b> ${esc(info.builtFor)}</p>`:""}${glines}</div>${card}</div>`;
   if(!d){
     html+=`<div class="pending">The full write-up for this program isn't on the page yet. The day-by-day details are being added in batches.</div>${upgradeBox()}`;
     app.innerHTML=html; toTop(); return;
@@ -846,7 +850,7 @@ function renderDetail(id){
 function renderBundle(b){
   const paras=b.copy.trim().split(/\n\s*\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("");
   if(!bundleLive(b)){
-  app.innerHTML=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#go-bundles">← All bundles</a><div class="pills"><span class="pill-d">Program Bundle</span><span class="pill-o">Coming soon</span></div><h1>${esc(b.name)}</h1><div class="about">${paras}</div><p class="builtfor"><b>Who it's for:</b> ${esc(b.who)}</p></div>
+  app.innerHTML=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#go-bundles">← All bundles</a><div class="pills"><span class="pill-d">Program Bundle</span><span class="pill-o">Coming soon</span></div><h1${h1Long(b.name)}>${esc(b.name)}</h1><div class="about">${paras}</div><p class="builtfor"><b>Who it's for:</b> ${esc(b.who)}</p></div>
   <aside class="buycard" aria-label="Bundle status"><span class="pill soon">Coming soon</span><span class="price" style="font-size:2rem">Price to come</span><dl><div><dt>Programs</dt><dd>Being finalized</dd></div><div><dt>Run order</dt><dd>Listed at launch</dd></div></dl><span class="buy nolink" title="Coming soon">Coming soon</span></aside></div>
   <div class="pending"><b>What's inside:</b> the programs in this bundle are being finalized and will be listed here with the run order and price.${DEMO_HREF?` Want something now? <a href="${esc(DEMO_HREF)}" target="_blank" rel="noopener">Get a free 2-week custom program</a>.`:""}</div>${upgradeBox()}`;
   toTop(); return;
@@ -856,7 +860,7 @@ function renderBundle(b){
   const save=sep>bp&&bp?`$${Math.round(sep-bp)}`:"";
   const weeks=ps.reduce((a,p)=>a+p[2],0);
   const rows=ps.map((p,k)=>`<div class="row extra-row"><a class="main" href="#${esc(p[1])}"><div class="name">${k+1}. ${esc(p[0])}</div>${summaryOf(p[1])?`<div class="sub">${esc(summaryOf(p[1]))}</div>`:""}<div class="meta"><span class="tag">${p[2]} weeks</span><span class="tag">${p[3]} days/week</span>${levelOf(p[1])?`<span class="tag">${esc(levelOf(p[1]))}</span>`:""}</div></a><div class="acts"><a class="see" href="#${esc(p[1])}">See program</a></div></div>`).join("");
-  app.innerHTML=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#go-bundles">← All bundles</a><div class="pills"><span class="pill-d">Program Bundle</span><span class="pill-o">${ps.length} programs</span></div><h1>${esc(b.name)}</h1><div class="about">${paras}</div><p class="builtfor"><b>Who it's for:</b> ${esc(b.who)}</p></div>
+  app.innerHTML=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#go-bundles">← All bundles</a><div class="pills"><span class="pill-d">Program Bundle</span><span class="pill-o">${ps.length} programs</span></div><h1${h1Long(b.name)}>${esc(b.name)}</h1><div class="about">${paras}</div><p class="builtfor"><b>Who it's for:</b> ${esc(b.who)}</p></div>
   <aside class="buycard" aria-label="Buy this bundle"><span class="pill">Program bundle</span><span class="price">${esc(b.price)}<small> one-time</small></span><dl><div><dt>Programs</dt><dd>${ps.length}</dd></div><div><dt>Total length</dt><dd>${weeks} weeks</dd></div><div><dt>Bought separately</dt><dd>$${sep}</dd></div>${save?`<div><dt>You save</dt><dd>${save}</dd></div>`:""}</dl><a class="buy" href="${esc(b.link)}" target="_blank" rel="noopener">Buy Bundle – ${esc(b.price)}</a></aside></div>
   <section class="panel" aria-label="Programs in this bundle"><div class="panel-head"><b>What's inside</b><span>${ps.length} programs · tap any program for the full breakdown</span></div>${rows}</section>${upgradeBox()}`;
   toTop();
