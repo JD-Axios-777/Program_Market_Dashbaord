@@ -430,8 +430,8 @@ html.embedded .wrap{padding-bottom:clamp(64px,8vw,112px)}
 
 <div class="wrap" id="app"></div>
 
-<script src="links.js"></script>
-<script src="program-info.js"></script>
+<!-- links.js and program-info.js change often: load them with a per-minute stamp so edits show right away instead of after the browser cache expires -->
+<script>(function(){var v=Math.floor(Date.now()/60000);document.write('<script src="links.js?v='+v+'"><\/script><script src="program-info.js?v='+v+'"><\/script>')})();</script>
 <script src="engine.js"></script>
 <script src="data/boneyard.js"></script>
 <script src="data/warpig.js"></script>
