@@ -524,7 +524,10 @@ Each program uses a small set of kettlebell lifts done well, so you build streng
     copy: `Programs focused on getting stronger on the main barbell lifts: the squat, bench press and deadlift.
 
 Loads climb in planned steps across each program, with accessory work to keep you balanced and healthy under heavier weights.`,
-    who: "Lifters comfortable with the main barbell lifts who want strength to be the priority." },
+    who: "Lifters comfortable with the main barbell lifts who want strength to be the priority.",
+    programs: ["centurion-phase-1", "deimos-phase-1", "reaver-phase-1", "warhorse", "imperium-phase-1"],
+    price: "$150",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/strength-program-bundle" },
   { id: "hybrid", name: "Hybrid Program Bundle",
     short: "Lifting and conditioning in the same week.",
     copy: `Programs that combine strength training with structured conditioning, so you build muscle, strength and fitness at the same time.
