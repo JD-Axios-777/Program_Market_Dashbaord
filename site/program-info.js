@@ -542,7 +542,10 @@ Each week mixes lifting days with interval and steady cardio work, without one g
     copy: `Programs that develop power, speed, strength and conditioning for sport, service or physically demanding work.
 
 Explosive lifts, throws and sprint work sit alongside heavy strength training and hard conditioning, so your fitness carries over outside the gym.`,
-    who: "Athletes, military, law enforcement and first responders, or anyone who needs fitness that performs under real-world demands." },
+    who: "Athletes, military, law enforcement and first responders, or anyone who needs fitness that performs under real-world demands.",
+    programs: ["opr-8-phase-1", "htk-phase-1", "jacked-and-athletic", "deimos-phase-1", "bellator-phase-1"],
+    price: "$150",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/athlete-tactical-bundle" },
   { id: "work-capacity", name: "Work Capacity & Stamina Bundle",
     short: "Build your engine: work hard, recover fast, repeat.",
     copy: `Programs that build your engine: the ability to work hard, recover quickly and repeat the effort.
