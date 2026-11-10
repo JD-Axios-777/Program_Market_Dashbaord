@@ -569,5 +569,8 @@ Each program builds on the last, so you learn the movements, build a base of str
     copy: `Programs that strengthen your core and improve how your hips, spine and shoulders move.
 
 Control, stability and range of motion are trained directly, so everyday movement and your other training feel better.`,
-    who: "Anyone who feels stiff, wants a stronger core, or wants to move better alongside their main training." }
+    who: "Anyone who feels stiff, wants a stronger core, or wants to move better alongside their main training.",
+    programs: ["falcata", "ground-based-calisthenics-mobility", "echelon", "gym-based-functional-strength", "darkwater-1kb"],
+    price: "$150",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/core-mobility-bundle" }
 ];
