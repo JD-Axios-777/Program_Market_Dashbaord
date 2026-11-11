@@ -333,6 +333,65 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 .band .price small{font:600 1.05rem var(--body);color:var(--band-muted)}
 .band .go.nolink{opacity:.55;cursor:default}
 
+/* system sales page (#system-<id>) */
+.sys-about p+p{font-size:1rem;color:var(--muted)}
+.sys-sec{margin:14px 0 0;padding:clamp(24px,4vw,44px);border-radius:var(--r-lg);background:var(--surface)}
+.sys-sec>.eb,.sys-band .eb{display:block;font:600 .8rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 12px}
+.sys-sec h2{font-size:clamp(1.8rem,4vw,3rem);text-transform:uppercase;max-width:20ch}
+.sys-sec .txt{max-width:62ch;margin-top:16px}
+.sys-sec .txt p{font-size:1.08rem;line-height:1.55;margin:0 0 12px;color:var(--fg)}
+.sys-sec .txt p:last-child{margin-bottom:0}
+.sys-band{margin:14px 0 0;padding:clamp(28px,5vw,56px);border-radius:var(--r-lg);background:var(--band);color:var(--on-band)}
+.sys-band .eb{color:var(--band-muted)}
+.sys-band h2{font-size:clamp(2rem,5vw,3.6rem);text-transform:uppercase;color:inherit;max-width:16ch}
+.sys-band .txt{max-width:60ch;margin-top:18px}
+.sys-band .txt p{font-size:1.1rem;line-height:1.55;margin:0 0 12px;opacity:.9}
+.sys-week{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:22px}
+.sys-week li{list-style:none;display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:var(--r);background:var(--stone);min-width:0}
+.sys-week li.cond{background:transparent;border:1px dashed var(--line)}
+.sys-week .d{font:600 .72rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sys-week b{font:800 clamp(.82rem,1.15vw,1.05rem) var(--body);text-transform:uppercase;line-height:1.05;letter-spacing:-.01em}
+.sys-week span.w{font-size:.85rem;color:var(--muted);line-height:1.35}
+.sys-week+.note{margin:16px 0 0;max-width:70ch;color:var(--muted)}
+.sys-phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:22px}
+.sys-phase{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:var(--r-lg);background:var(--stone);text-decoration:none;color:var(--fg)}
+.sys-phase .n{font:800 3.4rem var(--body);line-height:.85;letter-spacing:-.04em;color:var(--plate)}
+.sys-phase .lbl{font:600 .78rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sys-phase h3{font:800 1.5rem var(--body);text-transform:uppercase;letter-spacing:-.01em;line-height:1}
+.sys-phase p{margin:0;color:var(--muted);line-height:1.5}
+.sys-phase .lifts{display:flex;flex-wrap:wrap;gap:6px}
+.sys-phase .go{margin-top:auto;font:600 .9rem var(--body);text-decoration:underline;text-underline-offset:4px}
+.sys-phase:hover{filter:brightness(.97)}
+.sys-loop{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:26px}
+.sys-loop .st{padding:12px 18px;border-radius:var(--r);border:2px solid var(--on-band);font:800 1rem var(--body);text-transform:uppercase;white-space:nowrap}
+.sys-loop .st.new{background:var(--plate);border-color:var(--plate);color:var(--on-plate)}
+.sys-loop .ar{font:700 1.4rem var(--body);color:var(--plate)}
+.sys-loop .ret{flex-basis:100%;font:600 .9rem var(--body);color:var(--band-muted)}
+.sys-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+.sys-two>div{padding:24px;border-radius:var(--r-lg);background:var(--stone)}
+.sys-two h3{font:800 1.15rem var(--body);text-transform:uppercase;margin:0 0 12px}
+.sys-two ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.sys-two li{position:relative;padding-left:22px;line-height:1.45}
+.sys-two li::before{content:"";position:absolute;left:0;top:.5em;width:10px;height:10px;border-radius:2px;background:var(--fg)}
+.sys-two .chg li::before{background:var(--plate)}
+.sys-inc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 28px;margin-top:22px}
+.sys-inc div{border-top:2px solid var(--fg);padding-top:12px}
+.sys-inc b{display:block;font:800 1rem var(--body);text-transform:uppercase;margin-bottom:4px}
+.sys-inc p{margin:0;color:var(--muted);line-height:1.45}
+.sys-faq{margin-top:18px;border-top:1px solid var(--line)}
+.sys-faq details{border-bottom:1px solid var(--line)}
+.sys-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:60px;font:700 1.05rem var(--body)}
+.sys-faq summary::-webkit-details-marker{display:none}
+.sys-faq summary::after{content:"+";font:600 1.5rem var(--body);flex:none}
+.sys-faq details[open] summary::after{content:"−"}
+.sys-faq p{margin:0 0 18px;max-width:64ch;color:var(--muted);line-height:1.55}
+.sys-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;margin-top:26px}
+.sys-cta .price{font:800 2.6rem var(--body);line-height:1}
+.sys-cta .price small{font:600 1rem var(--body);color:var(--band-muted)}
+.sys-cta .buy{min-width:240px}
+@media (max-width:860px){.sys-week{grid-template-columns:repeat(3,minmax(0,1fr))}.sys-week b{font-size:1rem}}
+@media (max-width:560px){.sys-week{grid-template-columns:repeat(2,minmax(0,1fr))}.sys-week b{font-size:.82rem}.sys-week li{padding:14px 12px}.sys-loop .st{padding:10px 12px;font-size:.9rem}.sys-cta .buy{min-width:0;width:100%}}
+@media (max-width:420px){.sys-week{grid-template-columns:minmax(0,1fr);gap:6px}.sys-week li{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:2px 10px;padding:12px 14px}.sys-week b{font-size:1rem}.sys-week span.w{flex-basis:100%}}
 /* program page */
 .p-hero{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;padding:20px 0 36px}
 .p-main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:18px}
@@ -668,6 +727,7 @@ const sessRange=id=>{const t=(INFO[id]||{}).sessionTimes;if(!t)return "";let lo=
 const summaryOf=id=>{if((INFO[id]||{}).tagline)return INFO[id].tagline;const c=((INFO[id]||{}).copy||"").trim();if(!c)return "";const m=/^[^:.]*[:.]/.exec(c);return m?m[0].replace(/:$/,"."):c};
 /* Long single words (e.g. PERFORMANCE) overflow the giant title next to the buy card: shrink those titles. */
 const h1Long=t=>Math.max(...String(t).split(/[\s/–-]+/).map(w=>w.length))>=10?' class="long"':"";
+const systemLive=x=>!!(x&&x.link&&x.price&&(x.phases||[]).length);
 const bundleLive=b=>!!(b.link&&b.price&&(b.programs||[]).length);
 const SHELVES=[
   ["Beginner","New to structured training or returning after time off. Simpler layouts with fewer moving parts."],
@@ -685,7 +745,8 @@ const EXTRAS=[
     ["Centurion System",["centurion-phase-1","centurion-phase-2","centurion-phase-3"]],
     ["Reaver System",["reaver-phase-1","reaver-phase-2"]],
     ["Ultima System",["ultima-phase-1","ultima-phase-2"]]
-  ].map(([name,ids])=>{const ps=ids.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean);return {name,tags:[`${ps.length} phases`,`${ps.reduce((a,p)=>a+p[2],0)} weeks`,"Coming soon"],sub:ps.map(p=>p[0].replace(/^.*?[–-]\s*/,"")).join(" → ")}})}];
+  ].map(([name,ids])=>{const ps=ids.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean),wk=`${ps.reduce((a,p)=>a+p[2],0)} weeks`,sy=(window.SYSTEMS||[]).find(x=>systemLive(x)&&x.name.toLowerCase().startsWith(name.toLowerCase().replace(/ system$/,"")));
+    return sy?{name:sy.name,sub:sy.short,tags:[`${sy.phases.length} phases`,wk,"Repeatable",sy.price],page:"system-"+sy.id,href:sy.link,cta:"Buy System"}:{name,tags:[`${ps.length} phases`,wk,"Coming soon"],sub:ps.map(p=>p[0].replace(/^.*?[–-]\s*/,"")).join(" → ")}})}];
 const extraRow=it=>it.page?`<div class="row extra-row"><a class="main" href="#${it.page}"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></a><div class="acts">${it.href?`<a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a>`:`<a class="see" href="#${it.page}" tabindex="-1">See details</a>`}</div></div>`:`<div class="row extra-row"><div class="main"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></div>${it.href?`<div class="acts"><a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a></div>`:""}</div>`;
 let activeLevel=null, activeExtra=null;
 const extrasHtml=()=>`<section class="lib-sec" id="lib-extras"><h2 class="sec-title">Bundles &amp; systems</h2><div class="tiles centered">${EXTRAS.map(x=>{const n=x.items.length,u=x.id==="systems"?"system":"bundle",on=activeExtra===x.id;return `<button type="button" class="tile" data-extra="${x.id}" aria-expanded="${on}" aria-controls="panel-extras"><span class="pill">${n} ${u}${n===1?"":"s"}</span><span class="ttl">${esc(x.title)}</span><span class="dsc">${esc(x.desc)}</span><span class="foot2"><span>${on?"Hide":"Show"} ${u}s</span><span class="pm" aria-hidden="true">${on?"−":"+"}</span></span></button>`}).join("")}</div>${(()=>{const x=EXTRAS.find(e=>e.id===activeExtra);return x?`<div class="panel" id="panel-extras"><div class="panel-head"><b>${esc(x.title)}</b><span>${x.items.length} ${x.id==="systems"?"system":"bundle"}${x.items.length===1?"":"s"}</span></div>${x.items.map(extraRow).join("")}</div>`:""})()}</section>`;
@@ -865,10 +926,36 @@ function renderBundle(b){
   <section class="panel" aria-label="Programs in this bundle"><div class="panel-head"><b>What's inside</b><span>${ps.length} programs · tap any program for the full breakdown</span></div>${rows}</section>${upgradeBox()}`;
   toTop();
 }
+function renderSystem(x){
+  const paras=t=>String(t||"").trim().split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</p>`).join("");
+  const ps=x.phases.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean);
+  const each=parseFloat((window.PROGRAM_PRICE||"$50").replace(/[^0-9.]/g,""))||50, sep=each*ps.length, bp=parseFloat(x.price.replace(/[^0-9.]/g,""))||0;
+  const save=sep>bp&&bp?`$${Math.round(sep-bp)}`:"";
+  const weeks=ps.reduce((a,p)=>a+p[2],0), days=[...new Set(ps.map(p=>p[3]))].join("–");
+  const mins=ps.flatMap(p=>Object.values((INFO[p[1]]||{}).sessionTimes||{}).flat()).flatMap(t=>String(t).split(/[–-]/).map(Number)).filter(n=>n>0);
+  const sess=mins.length?`${Math.min(...mins)}–${Math.max(...mins)} min`:"";
+  const buyBtn=(cls="")=>`<a class="buy${cls}" href="${esc(x.link)}" target="_blank" rel="noopener">Buy the System – ${esc(x.price)}</a>`;
+  const phaseCards=ps.map((p,k)=>{const n=(x.phaseNotes||{})[p[1]]||{};return `<a class="sys-phase" href="#${esc(p[1])}"><span class="n">0${k+1}</span><span class="lbl">Phase ${k+1}${n.label?" · "+esc(n.label):""}</span><h3>${esc(p[0])}</h3><p>${esc(n.body||summaryOf(p[1]))}</p>${(n.lifts||[]).length?`<div class="lifts">${n.lifts.map(l=>`<span class="tag">${esc(l)}</span>`).join("")}</div>`:""}<div class="meta"><span class="tag seq">${p[2]} weeks</span> <span class="tag seq">${p[3]} days/week</span></div><span class="go">See the full Phase ${k+1} program</span></a>`}).join("");
+  const travel=x.travel?(()=>{const tp=(x.travel.programs||[]).map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean);return `<section class="sys-sec" aria-label="${esc(x.travel.title)}"><span class="eb">Training on the road</span><h2>${esc(x.travel.title)}</h2><div class="txt"><p>${esc(x.travel.body)}</p></div><div class="panel" style="margin-top:20px;background:var(--bg)">${tp.map(p=>`<div class="row extra-row"><a class="main" href="#${esc(p[1])}"><div class="name">${esc(p[0])}</div><div class="sub">${esc(summaryOf(p[1]))}</div><div class="meta"><span class="tag">${p[2]} weeks</span><span class="tag">${p[3]} days/week</span><span class="tag">Sold separately</span></div></a><div class="acts"><a class="see" href="#${esc(p[1])}">See program</a></div></div>`).join("")}</div></section>`})():"";
+  app.innerHTML=`${siteNav()}<div class="p-hero"><div class="p-main"><a class="back" href="#go-systems">← All systems</a><div class="pills"><span class="pill-d">Total Training System</span><span class="pill-o">${ps.length} phases</span><span class="pill-o">Repeatable</span></div><h1${h1Long(x.name)}>${esc(x.name)}</h1><div class="about sys-about"><p>${esc(x.headline)}</p>${paras(x.intro)}</div><p class="builtfor"><b>Who it's for:</b> ${esc(x.who)}</p></div>
+  <aside class="buycard" aria-label="Buy this system"><span class="pill">Total training system</span><span class="price">${esc(x.price)}<small> one-time</small></span><dl><div><dt>Phases</dt><dd>${ps.length}, run in order</dd></div><div><dt>One cycle</dt><dd>${weeks} weeks</dd></div><div><dt>Schedule</dt><dd>${days} days / week</dd></div>${sess?`<div><dt>Sessions</dt><dd>${sess}</dd></div>`:""}<div><dt>Phases bought separately</dt><dd>$${sep}</dd></div>${save?`<div><dt>You save</dt><dd>${save}</dd></div>`:""}<div><dt>Repeat the cycle</dt><dd>As often as you like</dd></div></dl>${buyBtn()}</aside></div>
+  ${x.problem?`<section class="sys-band"><span class="eb">Why a system</span><h2>${esc(x.problem.title)}</h2><div class="txt">${paras(x.problem.body)}</div></section>`:""}
+  ${(x.week||[]).length?`<section class="sys-sec" aria-label="The weekly layout"><span class="eb">Every ${esc(x.name.replace(/ (Training )?System$/i,""))} week</span><h2>Six days. Same rhythm every phase.</h2><ul class="sys-week">${x.week.map(([d,b,w])=>`<li class="${/condition|cardio/i.test(b)?"cond":""}"><span class="d">${esc(d)}</span><b>${esc(b)}</b><span class="w">${esc(w)}</span></li>`).join("")}</ul>${x.weekNote?`<p class="note">${esc(x.weekNote)}</p>`:""}</section>`:""}
+  <section class="sys-sec" aria-label="The phases"><span class="eb">${ps.length} phases · ${weeks} weeks per cycle</span><h2>${["One","Two","Three","Four","Five","Six"][ps.length-1]||ps.length} phases. One progression.</h2><div class="sys-phases">${phaseCards}</div></section>
+  ${x.loop?`<section class="sys-band" aria-label="${esc(x.loop.title)}"><span class="eb">Train on it indefinitely</span><h2>${esc(x.loop.title)}</h2><div class="sys-loop" aria-hidden="true">${(x.loop.steps||[]).map((t,i,a)=>`<span class="st${i===a.length-1?" new":""}">${esc(t)}</span>${i<a.length-1?'<span class="ar">→</span>':""}`).join("")}<span class="ret">↻ Then back to Phase 1 for your next cycle</span></div><div class="txt">${paras(x.loop.body)}</div></section>`:""}
+  ${(x.constant||x.changes)?`<section class="sys-sec" aria-label="What stays and what changes"><span class="eb">Built to repeat</span><h2>What stays the same. What moves.</h2><div class="sys-two"><div><h3>Stays the same</h3><ul>${(x.constant||[]).map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div><div class="chg"><h3>Moves forward</h3><ul>${(x.changes||[]).map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div></div></section>`:""}
+  ${travel}
+  ${(x.includes||[]).length?`<section class="sys-sec" aria-label="What you get"><span class="eb">What you get</span><h2>Everything to run it, again and again.</h2><div class="sys-inc">${x.includes.map(([t,d])=>`<div><b>${esc(t)}</b><p>${esc(d)}</p></div>`).join("")}</div></section>`:""}
+  ${(x.faq||[]).length?`<section class="sys-sec" aria-label="Questions"><span class="eb">Questions</span><h2>Before you start.</h2><div class="sys-faq">${x.faq.map(([q,a])=>`<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}</div></section>`:""}
+  <section class="sys-band" aria-label="Buy"><span class="eb">${esc(x.name)}</span><h2>One purchase. A system you keep.</h2><div class="sys-cta"><span class="price">${esc(x.price)}<small> one-time · ${ps.length} phases · repeat as often as you like</small></span>${buyBtn()}</div></section>${upgradeBox()}`;
+  toTop();
+}
 function route(){const id=location.hash.slice(1);
   postUp({axiosLibRoute:id.startsWith("go-")?"":id}); /* lets the host page put the open program in its own URL for sharing */
   if(id.startsWith("go-")){const k=id.slice(3);if(k==="bundles"||k==="systems")activeExtra=k;renderList();const t=document.getElementById({programs:"lib-programs",bundles:"lib-extras",systems:"lib-extras",club:"club"}[k]);if(t)requestAnimationFrame(()=>t.scrollIntoView({block:"start"}));return}
-  const b=id.startsWith("bundle-")&&(window.BUNDLES||[]).find(x=>"bundle-"+x.id===id); b?renderBundle(b):id?renderDetail(id):renderList()}
+  const b=id.startsWith("bundle-")&&(window.BUNDLES||[]).find(x=>"bundle-"+x.id===id);
+  const sy=id.startsWith("system-")&&(window.SYSTEMS||[]).find(x=>"system-"+x.id===id&&systemLive(x));
+  b?renderBundle(b):sy?renderSystem(sy):id?renderDetail(id):renderList()}
 window.addEventListener("hashchange",route);
 route();
 </script>
