@@ -574,3 +574,73 @@ Control, stability and range of motion are trained directly, so everyday movemen
     price: "$150",
     link: "https://axios-remote-fitness-coaching.kit.com/products/core-mobility-bundle" }
 ];
+
+/* Total Training Systems with their own sales page (#system-<id>).
+   A system goes live once it has phases, price and link (Kit checkout URL).
+   Systems not listed here still show in the library as "Coming soon".
+   Copy rules: plain language, concrete claims, short sentences. */
+window.SYSTEMS = [
+  { id: "darkwater", name: "Darkwater Training System",
+    short: "Pull-ups, dips, deadlifts, core and conditioning. Three phases that loop, so you never run out of program.",
+    phases: ["darkwater-phase-1", "darkwater-phase-2", "darkwater-phase-3"],
+    price: "$120",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/darkwater-training-system",
+    headline: "Strong, durable and fit. Week after week, year after year.",
+    intro: `Darkwater is a complete way to train. Six days a week: two upper-body days, two lower-body and core days, and two conditioning days.
+
+The lifts are the ones that carry over to real life: pull-ups, dips, split squats, deadlifts and squats. Core work is built into every lower day. Conditioning builds the engine to back it up.`,
+    who: "Lifters with the basics in place who want one system to follow for the long term, instead of searching for a new program every six weeks.",
+    problem: {
+      title: "Most programs end. Darkwater keeps going.",
+      body: `A typical program runs six weeks, then stops. You have to find the next one, learn a new layout and start over.
+
+Darkwater is three phases built to run in order. When Phase 3 ends, you start Phase 1 again. Your loads are set from your current numbers, so every cycle starts heavier than the last.`
+    },
+    week: [
+      ["Day 1", "Upper", "Pull-ups, rows, presses"],
+      ["Day 2", "Lower / Core", "Split squats, hinges, core"],
+      ["Day 3", "Conditioning", "Intervals"],
+      ["Day 4", "Upper", "Dips, presses, rows"],
+      ["Day 5", "Lower / Core", "Deadlifts, lunges, core"],
+      ["Day 6", "Conditioning", "Longer intervals"]
+    ],
+    weekNote: "Weeks alternate between two types. Muscle weeks use moderate weights for more reps. Strength weeks use heavier weights for fewer reps. Doing both in the same block builds size and strength together.",
+    phaseNotes: {
+      "darkwater-phase-1": { label: "Build the base", lifts: ["Pull-ups", "Dips", "Split squats", "Deadlifts"],
+        body: "Learn the Darkwater week. The main lifts, core work on every lower day, and interval conditioning to build your aerobic base." },
+      "darkwater-phase-2": { label: "Add control", lifts: ["Dead-stop pull-ups", "Box squats", "Isometric deadlifts", "Archer push-ups"],
+        body: "New versions of the same movements. Pauses and dead stops remove momentum, so muscles do more of the work and positions get stronger." },
+      "darkwater-phase-3": { label: "Raise the ceiling", lifts: ["L-sit pull-ups", "Pause squats", "Sumo deadlifts"],
+        body: "The hardest versions of the key lifts, on a push/pull and legs/core split. Heavier top sets close out the cycle." }
+    },
+    loop: {
+      title: "Run it again. Start stronger.",
+      body: `After Phase 3, go back to Phase 1. The exercises are familiar, but the weights are not. Each phase uses percentages of your current best lifts, so the program moves up with you.
+
+Each session also adjusts to the day. If a set feels harder or easier than planned, the app tells you how to change the load. On good days you push. On rough days you still train, without digging a hole.`,
+      steps: ["Phase 1", "Phase 2", "Phase 3", "New numbers"]
+    },
+    constant: ["Six-day week: upper, lower/core, conditioning", "Muscle and strength weeks alternating", "Core work on every lower day", "Two conditioning days every week", "Sessions of about 35 to 60 minutes"],
+    changes: ["Exercise variations get harder each phase", "Top sets get heavier through each phase", "Conditioning intervals get longer", "Your loads rise each cycle as your numbers go up"],
+    travel: {
+      title: "Away from the gym?",
+      body: "Keep the same rhythm with one or two kettlebells, a pull-up bar and dip bars. Run a kettlebell version for a trip or a busy stretch, then step back into the system where you left off.",
+      programs: ["darkwater-1kb", "darkwater-2kb"]
+    },
+    includes: [
+      ["All three phases", "Darkwater Phases 1, 2 and 3: 18 weeks of programming you can repeat as often as you like."],
+      ["Coaching app", "Every session laid out with sets, reps, loads and rest times."],
+      ["Loads that adjust", "Rate how hard each set felt and the app adjusts your next load."],
+      ["Exercise swaps", "Replace a movement when equipment is taken or something does not feel right."],
+      ["Reset and rerun", "Restart any phase at any time to begin your next cycle."],
+      ["Ongoing support", "Help with technique, setup and questions while you train."]
+    ],
+    faq: [
+      ["How long is one cycle?", "18 weeks: three phases of six weeks each. Run it two or three times a year, with a few easy days between cycles if you need them."],
+      ["Do I have to start at Phase 1?", "Yes, for your first cycle. Phase 1 sets your starting numbers and teaches the layout. After that, the order stays the same each time through."],
+      ["Is the second cycle just a repeat?", "The structure repeats on purpose. The weights do not. Loads are based on your current best lifts, so a stronger you gets a heavier program."],
+      ["What equipment do I need?", "A standard gym: barbell, dumbbells, bench, squat rack, pull-up bar and dip bars. A medicine ball, band and landmine are used in some sessions. Any cardio machine works for conditioning."],
+      ["Can I buy one phase first?", "Yes. Each phase is sold on its own for $50. The full system is $120, and it is the better deal if you plan to keep going."]
+    ]
+  }
+];
