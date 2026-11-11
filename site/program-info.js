@@ -648,6 +648,7 @@ Each session also adjusts to the day. If a set feels harder or easier than plann
     weekTitle: "Six days. Strength, power and size every week.",
     short: "Heavy barbell strength, power and size in the same week, with aerobic work for recovery. Three phases that loop.",
     phases: ["deimos-phase-1", "deimos-phase-2", "deimos-phase-3"],
+    phaseWeeks: { "deimos-phase-2": 6 }, /* system page lists each phase as 6 weeks */
     price: "$120",
     link: "https://axios-remote-fitness-coaching.kit.com/products/deimos-training-system",
     headline: "Get stronger, move faster and build muscle. All in the same week.",
@@ -673,8 +674,8 @@ Deimos trains all three in every week. Each day has one job. Strength days go he
     phaseNotes: {
       "deimos-phase-1": { label: "Build the base", lifts: ["Deadlifts", "Bench press", "Standing press", "Box squats"],
         body: "Learn the Deimos week. Heavy top sets on the main barbell lifts, fast power work, and easy aerobic sessions that build your recovery base." },
-      "deimos-phase-2": { label: "Push harder, then recover", lifts: ["Pause bench", "Isometric sumo pulls", "Pause squats", "Dips"],
-        body: "New main lifts, pauses and holds that build strength in the hardest positions, and harder intervals. A seventh, lighter week lets your body absorb the work." },
+      "deimos-phase-2": { label: "Push harder", lifts: ["Pause bench", "Isometric sumo pulls", "Pause squats", "Dips"],
+        body: "New main lifts, pauses and holds that build strength in the hardest positions, and harder aerobic intervals." },
       "deimos-phase-3": { label: "Raise the ceiling", lifts: ["Box squats", "Isometric deadlifts", "Close-grip bench", "Pull-ups"],
         body: "Box squats, pause work and more heavy top sets on the main lifts. Longer aerobic intervals keep your engine growing with your strength." }
     },
@@ -682,13 +683,13 @@ Deimos trains all three in every week. Each day has one job. Strength days go he
       title: "Run it again. Start stronger.",
       body: `After Phase 3, go back to Phase 1. The structure is the same, but your numbers are not. Each phase uses percentages of your current best lifts, so heavier lifts mean a heavier program.
 
-Each session also adjusts to the day. If a set feels harder or easier than planned, the app tells you how to change the load. Phase 2 ends with a lighter week, built in so each cycle includes time to recover.`,
+Each session also adjusts to the day. If a set feels harder or easier than planned, the app tells you how to change the load. On good days you push. On rough days you still train, without digging a hole.`,
       steps: ["Phase 1", "Phase 2", "Phase 3", "New numbers"]
     },
     constant: ["Six-day week: strength, power, muscle and aerobic days", "Muscle and strength weeks alternating", "Barbell deadlift, squat and press lead each lifting day", "Two aerobic days every week", "Sessions of about 15 to 55 minutes"],
     changes: ["Main lifts change each phase", "Pauses and holds are added in Phases 2 and 3", "Aerobic intervals get longer and harder", "Your loads rise each cycle as your numbers go up"],
     includes: [
-      ["All three phases", "Deimos Phases 1, 2 and 3: 19 weeks of programming, including a lighter recovery week, that you can repeat as often as you like."],
+      ["All three phases", "Deimos Phases 1, 2 and 3: 18 weeks of programming you can repeat as often as you like."],
       ["Coaching app", "Every session laid out with sets, reps, loads and rest times."],
       ["Loads that adjust", "Rate how hard each set felt and the app adjusts your next load."],
       ["Exercise swaps", "Replace a movement when equipment is taken or something does not feel right."],
@@ -696,7 +697,7 @@ Each session also adjusts to the day. If a set feels harder or easier than plann
       ["Ongoing support", "Help with technique, setup and questions while you train."]
     ],
     faq: [
-      ["How long is one cycle?", "19 weeks: six weeks each for Phases 1 and 3, and seven weeks for Phase 2, which ends with a lighter recovery week."],
+      ["How long is one cycle?", "18 weeks: three phases of six weeks each. Run it two or three times a year, with a few easy days between cycles if you need them."],
       ["Is Deimos for beginners?", "No. Deimos is rated Advanced. You should be comfortable with the deadlift, squat and bench press and know roughly what you can lift. If you are newer, start with the Centurion or HTK system."],
       ["Is the second cycle just a repeat?", "The structure repeats on purpose. The weights do not. Loads are based on your current best lifts, so a stronger you gets a heavier program."],
       ["What equipment do I need?", "A standard gym: barbell, squat rack, bench, incline bench, dumbbells, pull-up bar and dip bars. A medicine ball and band are used in some sessions. Any cardio machine works for the aerobic days."],

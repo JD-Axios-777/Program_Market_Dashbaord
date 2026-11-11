@@ -746,7 +746,7 @@ const EXTRAS=[
     ["Centurion System",["centurion-phase-1","centurion-phase-2","centurion-phase-3"]],
     ["Reaver System",["reaver-phase-1","reaver-phase-2"]],
     ["Ultima System",["ultima-phase-1","ultima-phase-2"]]
-  ].map(([name,ids])=>{const ps=ids.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean),wk=`${ps.reduce((a,p)=>a+p[2],0)} weeks`,sy=(window.SYSTEMS||[]).find(x=>systemLive(x)&&x.name.toLowerCase().startsWith(name.toLowerCase().replace(/ system$/,"")));
+  ].map(([name,ids])=>{const sy=(window.SYSTEMS||[]).find(x=>systemLive(x)&&x.name.toLowerCase().startsWith(name.toLowerCase().replace(/ system$/,""))),ps=ids.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean),wk=`${ps.reduce((a,p)=>a+(((sy||{}).phaseWeeks||{})[p[1]]||p[2]),0)} weeks`;
     return sy?{name:sy.name,sub:sy.short,tags:[`${sy.phases.length} phases`,wk,"Repeatable",sy.price],page:"system-"+sy.id,href:sy.link,cta:"Buy System"}:{name,tags:[`${ps.length} phases`,wk,"Coming soon"],sub:ps.map(p=>p[0].replace(/^.*?[–-]\s*/,"")).join(" → ")}})}];
 const extraRow=it=>it.page?`<div class="row extra-row"><a class="main" href="#${it.page}"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></a><div class="acts">${it.href?`<a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a>`:`<a class="see" href="#${it.page}" tabindex="-1">See details</a>`}</div></div>`:`<div class="row extra-row"><div class="main"><div class="name">${esc(it.name)}</div>${it.sub?`<div class="sub">${esc(it.sub)}</div>`:""}<div class="meta">${it.tags.map(t=>`<span class="tag${t==="Coming soon"?" soon-tag":""}">${esc(t)}</span>`).join("")}</div></div>${it.href?`<div class="acts"><a class="buy-sm" href="${esc(it.href)}" target="_blank" rel="noopener">${esc(it.cta)}</a></div>`:""}</div>`;
 let activeLevel=null, activeExtra=null;
@@ -929,7 +929,7 @@ function renderBundle(b){
 }
 function renderSystem(x){
   const paras=t=>String(t||"").trim().split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</p>`).join("");
-  const ps=x.phases.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean);
+  const ps=x.phases.map(i=>PROGRAMS.find(p=>p[1]===i)).filter(Boolean).map(p=>{const w=(x.phaseWeeks||{})[p[1]];return w?[p[0],p[1],w,...p.slice(3)]:p});
   const each=parseFloat((window.PROGRAM_PRICE||"$50").replace(/[^0-9.]/g,""))||50, sep=each*ps.length, bp=parseFloat(x.price.replace(/[^0-9.]/g,""))||0;
   const save=sep>bp&&bp?`$${Math.round(sep-bp)}`:"";
   const weeks=ps.reduce((a,p)=>a+p[2],0), days=[...new Set(ps.map(p=>p[3]))].join("–");
