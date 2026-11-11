@@ -581,6 +581,7 @@ Control, stability and range of motion are trained directly, so everyday movemen
    Copy rules: plain language, concrete claims, short sentences. */
 window.SYSTEMS = [
   { id: "darkwater", name: "Darkwater Training System",
+    weekTitle: "Six days. Same rhythm every phase.",
     short: "Pull-ups, dips, deadlifts, core and conditioning. Three phases that loop, so you never run out of program.",
     phases: ["darkwater-phase-1", "darkwater-phase-2", "darkwater-phase-3"],
     price: "$120",
@@ -640,6 +641,182 @@ Each session also adjusts to the day. If a set feels harder or easier than plann
       ["Do I have to start at Phase 1?", "Yes, for your first cycle. Phase 1 sets your starting numbers and teaches the layout. After that, the order stays the same each time through."],
       ["Is the second cycle just a repeat?", "The structure repeats on purpose. The weights do not. Loads are based on your current best lifts, so a stronger you gets a heavier program."],
       ["What equipment do I need?", "A standard gym: barbell, dumbbells, bench, squat rack, pull-up bar and dip bars. A medicine ball, band and landmine are used in some sessions. Any cardio machine works for conditioning."],
+      ["Can I buy one phase first?", "Yes. Each phase is sold on its own for $50. The full system is $120, and it is the better deal if you plan to keep going."]
+    ]
+  },
+  { id: "deimos", name: "Deimos Training System",
+    weekTitle: "Six days. Strength, power and size every week.",
+    short: "Heavy barbell strength, power and size in the same week, with aerobic work for recovery. Three phases that loop.",
+    phases: ["deimos-phase-1", "deimos-phase-2", "deimos-phase-3"],
+    price: "$120",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/deimos-training-system",
+    headline: "Get stronger, move faster and build muscle. All in the same week.",
+    intro: `Deimos is a barbell system for experienced lifters. Each week has a lower-body strength day, an upper-body strength day, a lower-body power day and an upper-body muscle day.
+
+Two aerobic days hold it together. Easy, steady cardio helps you recover between heavy sessions, so you can keep training hard week after week.`,
+    who: "Experienced lifters who are comfortable with the deadlift, squat and bench press and want strength, power and size from one long-term plan.",
+    problem: {
+      title: "Stop choosing between strong, fast and big.",
+      body: `Most programs pick one goal. Train for strength and you lose speed. Train for size and your top-end strength stalls.
+
+Deimos trains all three in every week. Each day has one job. Strength days go heavy. Power days move moderate weights fast. Muscle days use more reps. When Phase 3 ends, you start again from your new numbers.`
+    },
+    week: [
+      ["Day 1", "Lower Strength", "Deadlifts and squats, heavy"],
+      ["Day 2", "Upper Strength", "Bench and presses, heavy"],
+      ["Day 3", "Aerobic", "Easy intervals"],
+      ["Day 4", "Lower Power", "Fast pulls and squats"],
+      ["Day 5", "Upper Muscle", "Incline press, rows"],
+      ["Day 6", "Aerobic", "Steady cardio"]
+    ],
+    weekNote: "Weeks alternate between two types. Muscle weeks use moderate weights for more reps. Strength weeks use heavier weights for fewer reps. Top sets on the main lifts work up to about 80% of your best.",
+    phaseNotes: {
+      "deimos-phase-1": { label: "Build the base", lifts: ["Deadlifts", "Bench press", "Standing press", "Box squats"],
+        body: "Learn the Deimos week. Heavy top sets on the main barbell lifts, fast power work, and easy aerobic sessions that build your recovery base." },
+      "deimos-phase-2": { label: "Push harder, then recover", lifts: ["Pause bench", "Isometric sumo pulls", "Pause squats", "Dips"],
+        body: "New main lifts, pauses and holds that build strength in the hardest positions, and harder intervals. A seventh, lighter week lets your body absorb the work." },
+      "deimos-phase-3": { label: "Raise the ceiling", lifts: ["Box squats", "Isometric deadlifts", "Close-grip bench", "Pull-ups"],
+        body: "Box squats, pause work and more heavy top sets on the main lifts. Longer aerobic intervals keep your engine growing with your strength." }
+    },
+    loop: {
+      title: "Run it again. Start stronger.",
+      body: `After Phase 3, go back to Phase 1. The structure is the same, but your numbers are not. Each phase uses percentages of your current best lifts, so heavier lifts mean a heavier program.
+
+Each session also adjusts to the day. If a set feels harder or easier than planned, the app tells you how to change the load. Phase 2 ends with a lighter week, built in so each cycle includes time to recover.`,
+      steps: ["Phase 1", "Phase 2", "Phase 3", "New numbers"]
+    },
+    constant: ["Six-day week: strength, power, muscle and aerobic days", "Muscle and strength weeks alternating", "Barbell deadlift, squat and press lead each lifting day", "Two aerobic days every week", "Sessions of about 15 to 55 minutes"],
+    changes: ["Main lifts change each phase", "Pauses and holds are added in Phases 2 and 3", "Aerobic intervals get longer and harder", "Your loads rise each cycle as your numbers go up"],
+    includes: [
+      ["All three phases", "Deimos Phases 1, 2 and 3: 19 weeks of programming, including a lighter recovery week, that you can repeat as often as you like."],
+      ["Coaching app", "Every session laid out with sets, reps, loads and rest times."],
+      ["Loads that adjust", "Rate how hard each set felt and the app adjusts your next load."],
+      ["Exercise swaps", "Replace a movement when equipment is taken or something does not feel right."],
+      ["Reset and rerun", "Restart any phase at any time to begin your next cycle."],
+      ["Ongoing support", "Help with technique, setup and questions while you train."]
+    ],
+    faq: [
+      ["How long is one cycle?", "19 weeks: six weeks each for Phases 1 and 3, and seven weeks for Phase 2, which ends with a lighter recovery week."],
+      ["Is Deimos for beginners?", "No. Deimos is rated Advanced. You should be comfortable with the deadlift, squat and bench press and know roughly what you can lift. If you are newer, start with the Centurion or HTK system."],
+      ["Is the second cycle just a repeat?", "The structure repeats on purpose. The weights do not. Loads are based on your current best lifts, so a stronger you gets a heavier program."],
+      ["What equipment do I need?", "A standard gym: barbell, squat rack, bench, incline bench, dumbbells, pull-up bar and dip bars. A medicine ball and band are used in some sessions. Any cardio machine works for the aerobic days."],
+      ["Can I buy one phase first?", "Yes. Each phase is sold on its own for $50. The full system is $120, and it is the better deal if you plan to keep going."]
+    ]
+  },
+  { id: "htk", name: "HTK Training System",
+    weekTitle: "Six days. Lift, circuit, and cardio.",
+    short: "Barbell strength, kettlebell circuits and cardio in one hybrid week. Three phases, beginner to advanced, that loop.",
+    phases: ["htk-phase-1", "htk-phase-2", "htk-phase-3"],
+    price: "$120",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/htk-training-system",
+    headline: "Strong, muscular and fit enough to use it.",
+    intro: `HTK is a hybrid system. Each week mixes barbell strength work, fast-paced circuits with kettlebells and bodyweight moves, and cardio from short sprints to long easy sessions.
+
+It starts at a beginner level and builds to advanced. By Phase 3 you are lifting heavy, moving fast and recovering quickly.`,
+    who: "Anyone who wants to be strong and well-conditioned at the same time, from newer lifters to experienced trainees, and wants one plan to follow for the long term.",
+    problem: {
+      title: "Strength and fitness, without trading one for the other.",
+      body: `Most plans make you choose. Lift heavy and your conditioning drops. Chase fitness and your strength fades.
+
+HTK trains both on purpose. Lifting days build strength and muscle. Circuits and sprints build work capacity. Easy cardio days help you recover. When Phase 3 ends, you start again from your new numbers.`
+    },
+    week: [
+      ["Day 1", "Lift or Circuit", "Bench, squat or deadlift"],
+      ["Day 2", "Lift", "Strength or muscle focus"],
+      ["Day 3", "Easy Cardio", "20–45 min steady"],
+      ["Day 4", "Lift / Power", "Heavy or fast"],
+      ["Day 5", "Metabolic Circuit", "Kettlebells, bodyweight"],
+      ["Day 6", "Long Cardio", "Longest, easiest day"]
+    ],
+    weekNote: "Weeks rotate through three types: a muscle week with more reps, a strength-capacity week with moderate weights, and a strength week with heavier weights and fewer reps. The rotation runs twice in each phase.",
+    phaseNotes: {
+      "htk-phase-1": { label: "Build the base · Beginner", lifts: ["Bench press", "Back squat", "Deadlift", "Kettlebell swings"],
+        body: "Learn the HTK week. The three main barbell lifts lead the strength days, with kettlebell and bodyweight circuits and steady cardio to build your base." },
+      "htk-phase-2": { label: "Add power · Intermediate", lifts: ["Trap bar deadlifts", "Trap bar jumps", "Kettlebell snatches", "Sprints"],
+        body: "More speed and more power. Trap bar work, kettlebell snatches and short sprint intervals join the mix. Top sets reach about 85%." },
+      "htk-phase-3": { label: "Raise the ceiling · Advanced", lifts: ["Heavy barbell work", "Clean and press", "Sprint intervals", "Max-effort conditioning"],
+        body: "The toughest HTK sessions. Heavy barbell days, power days and hard conditioning intervals bring everything together." }
+    },
+    loop: {
+      title: "Run it again. Start stronger.",
+      body: `After Phase 3, go back to Phase 1. You will know the layout, but you will not be the same lifter. Each phase uses percentages of your current best lifts, so the program grows with you.
+
+Each session also adjusts to the day. If a set feels harder or easier than planned, the app tells you how to change the load. Long easy cardio days give you room to recover between hard weeks.`,
+      steps: ["Phase 1", "Phase 2", "Phase 3", "New numbers"]
+    },
+    constant: ["Six-day week: lifting, circuits and cardio", "Three-week rotation of muscle, strength-capacity and strength weeks", "Bench, squat and deadlift at the core", "Easy cardio for recovery every week", "Most sessions 40 to 60 minutes, plus one long, easy cardio day"],
+    changes: ["Difficulty rises from Beginner to Advanced", "Power work and sprints are added in Phase 2", "Top sets get heavier", "Your loads rise each cycle as your numbers go up"],
+    includes: [
+      ["All three phases", "HTK Phases 1, 2 and 3: 18 weeks of programming you can repeat as often as you like."],
+      ["Coaching app", "Every session laid out with sets, reps, loads and rest times."],
+      ["Loads that adjust", "Rate how hard each set felt and the app adjusts your next load."],
+      ["Exercise swaps", "Replace a movement when equipment is taken or something does not feel right."],
+      ["Reset and rerun", "Restart any phase at any time to begin your next cycle."],
+      ["Ongoing support", "Help with technique, setup and questions while you train."]
+    ],
+    faq: [
+      ["How long is one cycle?", "18 weeks: three phases of six weeks each. Run it two or three times a year, with a few easy days between cycles if you need them."],
+      ["I am fairly new to lifting. Can I start HTK?", "Yes. Phase 1 is rated Beginner. It teaches the layout and the main lifts before Phases 2 and 3 add power and harder conditioning."],
+      ["Is the second cycle just a repeat?", "The structure repeats on purpose. The weights do not. Loads are based on your current best lifts, so a stronger you gets a heavier program."],
+      ["What equipment do I need?", "A full gym: barbell, squat rack, bench, dumbbells, kettlebells, cable machine and pull-up bar. A trap bar, landmine, medicine ball and dip bars are used in some phases. Any cardio machine works for cardio and sprints."],
+      ["Can I buy one phase first?", "Yes. Each phase is sold on its own for $50. The full system is $120, and it is the better deal if you plan to keep going."]
+    ]
+  },
+  { id: "centurion", name: "Centurion Training System",
+    weekTitle: "Five days. Three strength, two cardio.",
+    short: "Squat, bench, deadlift and press on five days a week, with cardio to stay fit. Three phases that loop.",
+    phases: ["centurion-phase-1", "centurion-phase-2", "centurion-phase-3"],
+    price: "$120",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/centurion-training-system",
+    headline: "Get strong on the big lifts. Stay fit while you do it.",
+    intro: `Centurion is a strength system built on four barbell lifts: the squat, bench press, deadlift and standing press. Three strength days lead with one of them and finish with a short accessory pairing.
+
+Two cardio days mix hard intervals with steady work, so you build strength without losing your fitness.`,
+    who: "Lifters who know the main barbell lifts and want to get clearly stronger on them, with a five-day week that still leaves room for life.",
+    problem: {
+      title: "A clear path to a stronger squat, bench and deadlift.",
+      body: `Many strength programs are either too vague or too punishing. You either drift without clear progress or burn out on heavy weights.
+
+Centurion sets a clear path. Phase 1 builds the base. Phase 2 pushes your top sets toward 85 to 90% of your best. Phase 3 locks that strength in. Then you start again from your new numbers.`
+    },
+    week: [
+      ["Day 1", "Strength", "Squat or bench leads"],
+      ["Day 2", "Cardio", "Intervals + steady"],
+      ["Day 3", "Strength", "Bench or deadlift leads"],
+      ["Day 4", "Cardio", "Intervals + steady"],
+      ["Day 5", "Strength", "Deadlift or press leads"]
+    ],
+    weekNote: "Weeks alternate between two types. One week uses moderate weights for more sets and reps. The other goes heavier for fewer reps. Two days a week stay free for rest or other activities.",
+    phaseNotes: {
+      "centurion-phase-1": { label: "Build the base", lifts: ["Back squat", "Bench press", "Deadlift", "Standing press"],
+        body: "Three total-body strength days, each led by a main lift with top sets at 75 to 80%. Cardio days pair hard intervals with steady aerobic work." },
+      "centurion-phase-2": { label: "Go heavy", lifts: ["Back squat", "Bench press", "Deadlift", "Bent rows"],
+        body: "The heavy phase. Top sets on the squat, bench and deadlift climb toward 85 to 90% over six weeks, with interval cardio to stay conditioned." },
+      "centurion-phase-3": { label: "Lock it in", lifts: ["Pause squats", "Close-grip bench", "Standing press", "Deadlifts"],
+        body: "High sets of low reps at moderate weights. This makes the strength from Phase 2 stick, so you start the next cycle from a higher base." }
+    },
+    loop: {
+      title: "Run it again. Start stronger.",
+      body: `After Phase 3, go back to Phase 1. The lifts are the same, but the weights are not. Each phase uses percentages of your current best lifts, so a stronger squat, bench and deadlift mean a heavier program.
+
+Each session also adjusts to the day. If a set feels harder or easier than planned, the app tells you how to change the load. Cardio stays in every week, so your fitness keeps pace with your strength.`,
+      steps: ["Phase 1", "Phase 2", "Phase 3", "New numbers"]
+    },
+    constant: ["Five-day week: three strength days, two cardio days", "Squat, bench, deadlift and standing press", "Short accessory work after each main lift", "Two cardio days every week", "Sessions of about 30 to 65 minutes"],
+    changes: ["Top-set loads rise through Phase 2", "Phase 3 switches to many short sets at moderate weights", "Lift variations change, such as pause squats and close-grip bench", "Your loads rise each cycle as your numbers go up"],
+    includes: [
+      ["All three phases", "Centurion Phases 1, 2 and 3: 18 weeks of programming you can repeat as often as you like."],
+      ["Coaching app", "Every session laid out with sets, reps, loads and rest times."],
+      ["Loads that adjust", "Rate how hard each set felt and the app adjusts your next load."],
+      ["Exercise swaps", "Replace a movement when equipment is taken or something does not feel right."],
+      ["Reset and rerun", "Restart any phase at any time to begin your next cycle."],
+      ["Ongoing support", "Help with technique, setup and questions while you train."]
+    ],
+    faq: [
+      ["How long is one cycle?", "18 weeks: three phases of six weeks each. Run it two or three times a year, with a few easy days between cycles if you need them."],
+      ["Do I need to know my max lifts?", "It helps to know roughly what you can lift on the squat, bench and deadlift. Loads are set as percentages of your best, and the app adjusts them as you go."],
+      ["Is the second cycle just a repeat?", "The structure repeats on purpose. The weights do not. Loads are based on your current best lifts, so a stronger you gets a heavier program."],
+      ["What equipment do I need?", "A barbell, squat rack, bench, dumbbells and pull-up bar. An incline bench, medicine ball and dip bars are used in some sessions. Any cardio machine works for the cardio days."],
       ["Can I buy one phase first?", "Yes. Each phase is sold on its own for $50. The full system is $120, and it is the better deal if you plan to keep going."]
     ]
   }
