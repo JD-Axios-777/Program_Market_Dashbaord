@@ -385,6 +385,16 @@ Hypertrophy and strength capacity weeks alternate to drive both size and strengt
 
 Alternating hypertrophy and strength capacity weeks build on Phase 1.` },
 
+  "reaver-phase-3": { level: "Advanced", rated: false,
+    tagline: "The Phase 1 lifts return with heavier top sets to close out the Reaver cycle.",
+    builtFor: "Built for lifters coming off Reaver Phase 2 or a similar upper/lower program. This program brings back the bench, high-incline press, squat and stiff-legged deadlift with heavier top sets, then hands you back to Phase 1.",
+    primaryGoals: ["Muscle Gain", "Strength", "Aerobic Endurance"],
+    sessionTimes: {"Week A": ["30–40", "40–50", "55–65", "40–50", "30–40", "45–55"], "Week B": ["30–40", "45–55", "55–65", "35–45", "30–40", "45–55"]},
+    copy:
+`Phase 3 of Reaver keeps the six-day upper/lower split: an upper strength day, a lower muscle day, an upper muscle day, a lower strength day and two cardio days. The bench press, high-incline press, back squat and stiff-legged deadlift lead every lifting day.
+
+Top sets on the main lifts climb from 75% to 80% of your best over six weeks. Cardio runs on a set pattern: one interval day and one 45-minute easy day.` },
+
   "ultima-phase-1": { level: "Intermediate", rated: false,
     tagline: "A machine-and-cable body-part split built for a well-equipped gym.",
     builtFor: "Built for lifters who train in a well-equipped gym and want a body-part split. This program builds muscle with machines, cables and dumbbells, with regular cardio for conditioning.",
@@ -760,6 +770,65 @@ Each session also adjusts to the day. If a set feels harder or easier than plann
       ["I am fairly new to lifting. Can I start HTK?", "Yes. Phase 1 is rated Beginner. It teaches the layout and the main lifts before Phases 2 and 3 add power and harder conditioning."],
       ["Is the second cycle just a repeat?", "The structure repeats on purpose. The weights do not. Loads are based on your current best lifts, so a stronger you gets a heavier program."],
       ["What equipment do I need?", "A full gym: barbell, squat rack, bench, dumbbells, kettlebells, cable machine and pull-up bar. A trap bar, landmine, medicine ball and dip bars are used in some phases. Any cardio machine works for cardio and sprints."],
+      ["Can I buy one phase first?", "Yes. Each phase is sold on its own for $50. The full system is $120, and it is the better deal if you plan to keep going."]
+    ]
+  },
+  { id: "reaver", name: "Reaver Training System",
+    weekTitle: "Six days. Strength days and size days, upper and lower.",
+    short: "Separate strength and size days for upper and lower body, with two cardio days. Three phases that loop.",
+    phases: ["reaver-phase-1", "reaver-phase-2", "reaver-phase-3"],
+    price: "$120",
+    link: "https://axios-remote-fitness-coaching.kit.com/products/reaver-training-system",
+    headline: "Heavy days and size days. Upper and lower. Every week.",
+    intro: `Reaver is an upper/lower barbell system for experienced lifters. Each week has an upper-body strength day, a lower-body strength day, an upper-body muscle day and a lower-body muscle day.
+
+Two cardio days round out the week. One is intervals. One is long and easy. Both help you recover between heavy sessions.`,
+    who: "Experienced lifters who are comfortable with the bench press, squat and deadlift and want strength and muscle from one long-term plan.",
+    problem: {
+      title: "One job per session.",
+      body: `Many programs put heavy sets and high-rep work in every session. By the second half of the workout, neither gets your full effort.
+
+Reaver splits them. Strength days go heavy on one main lift. Muscle days use moderate weights and more reps. Upper and lower body each get one of each, every week. When Phase 3 ends, you start again from your new numbers.`
+    },
+    week: [
+      ["Day 1", "Upper Strength", "Bench or high-incline press, heavy"],
+      ["Day 2", "Lower Muscle", "Hinges, split squats, core"],
+      ["Day 3", "Cardio", "Intervals"],
+      ["Day 4", "Upper Muscle", "Presses, pull-ups, arms"],
+      ["Day 5", "Lower Strength", "Squats or deadlifts, heavy"],
+      ["Day 6", "Cardio", "Long, easy session"]
+    ],
+    weekNote: "Weeks alternate between two types. Muscle weeks and strength weeks swap the main lift on each day, so every lift gets both heavy and moderate work. Top sets on the main lifts work up to 80 to 87.5% of your best.",
+    phaseNotes: {
+      "reaver-phase-1": { label: "Build the base", lifts: ["Bench press", "High-incline press", "Back squat", "Stiff-legged deadlift"],
+        body: "Learn the Reaver week. Heavy top sets on the main barbell lifts, size work on separate days, and interval cardio to build your aerobic base." },
+      "reaver-phase-2": { label: "Push harder", lifts: ["Standing press", "Sumo deadlift", "Snatch-grip deadlift", "Box squat"],
+        body: "New main lifts and the heaviest loading in the system. Top sets climb to 85 to 87.5% of your best." },
+      "reaver-phase-3": { label: "Raise the ceiling", lifts: ["Bench press", "High-incline press", "Back squat", "Pause squat"],
+        body: "The Phase 1 lifts return with heavier top sets. Pause squats and loaded carries are added. Cardio settles into one interval day and one long, easy day." }
+    },
+    loop: {
+      title: "Run it again. Start stronger.",
+      body: `After Phase 3, go back to Phase 1. The structure is the same, but your numbers are not. Each phase uses percentages of your current best lifts, so heavier lifts mean a heavier program.
+
+Each session also adjusts to the day. If a set feels harder or easier than planned, the app tells you how to change the load. On good days you push. On rough days you still train, without digging a hole.`,
+      steps: ["Phase 1", "Phase 2", "Phase 3", "New numbers"]
+    },
+    constant: ["Six-day week: upper and lower strength days, upper and lower muscle days, two cardio days", "Muscle and strength weeks alternating", "A barbell bench, press, squat or deadlift leads each lifting day", "Two cardio days every week", "Sessions of about 25 to 65 minutes"],
+    changes: ["Main lifts change each phase", "Top sets get heavier through each phase", "Cardio moves to a set interval day and a long, easy day in Phase 3", "Your loads rise each cycle as your numbers go up"],
+    includes: [
+      ["All three phases", "Reaver Phases 1, 2 and 3: 18 weeks of programming you can repeat as often as you like."],
+      ["Coaching app", "Every session laid out with sets, reps, loads and rest times."],
+      ["Loads that adjust", "Rate how hard each set felt and the app adjusts your next load."],
+      ["Exercise swaps", "Replace a movement when equipment is taken or something does not feel right."],
+      ["Reset and rerun", "Restart any phase at any time to begin your next cycle."],
+      ["Ongoing support", "Help with technique, setup and questions while you train."]
+    ],
+    faq: [
+      ["How long is one cycle?", "18 weeks: three phases of six weeks each. Run it two or three times a year, with a few easy days between cycles if you need them."],
+      ["Is Reaver for beginners?", "No. Reaver is rated Advanced. You should be comfortable with the bench press, squat and deadlift and know roughly what you can lift. If you are newer, start with the Centurion or HTK system."],
+      ["Is the second cycle just a repeat?", "The structure repeats on purpose. The weights do not. Loads are based on your current best lifts, so a stronger you gets a heavier program."],
+      ["What equipment do I need?", "A standard gym: barbell, squat rack, bench, incline bench, dumbbells and pull-up bar. A cable station, landmine, kettlebells, medicine ball, band and dip bars are used in some sessions. Any cardio machine works for the cardio days."],
       ["Can I buy one phase first?", "Yes. Each phase is sold on its own for $50. The full system is $120, and it is the better deal if you plan to keep going."]
     ]
   },

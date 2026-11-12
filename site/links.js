@@ -39,6 +39,7 @@ window.PROGRAM_LINKS = {
   "opr-8-phase-1": "https://axios-remote-fitness-coaching.kit.com/products/opr-8-phase-1",
   "reaver-phase-1": "https://axios-remote-fitness-coaching.kit.com/products/reaver-phase-1",
   "reaver-phase-2": "https://axios-remote-fitness-coaching.kit.com/products/reaver-phase-2",
+  "reaver-phase-3": "https://axios-remote-fitness-coaching.kit.com/products/reaver-phase-3",
   "ultima-phase-1": "https://axios-remote-fitness-coaching.kit.com/products/ultima-phase-1",
   "ultima-phase-2": "https://axios-remote-fitness-coaching.kit.com/products/ultima-phase-2",
   "warhorse": "https://axios-remote-fitness-coaching.kit.com/products/warhorse",
