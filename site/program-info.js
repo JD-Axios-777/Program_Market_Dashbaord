@@ -389,9 +389,9 @@ Alternating hypertrophy and strength capacity weeks build on Phase 1.` },
     tagline: "A machine-and-cable body-part split built for a well-equipped gym.",
     builtFor: "Built for lifters who train in a well-equipped gym and want a body-part split. This program builds muscle with machines, cables and dumbbells, with regular cardio for conditioning.",
     primaryGoals: ["Muscle Gain", "Fitness Maintenance", "Aerobic Endurance"],
-    sessionTimes: {"Week A": ["50–60", "50–60", "40–50", "55–65", "55–65", "45–55"], "Week B": ["45–55", "45–55", "40–50", "55–65", "50–60", "45–55"]},
+    sessionTimes: {"Week A": ["45–55", "45–55", "55–65", "45–55", "50–60", "45–55"], "Week B": ["45–55", "45–55", "55–65", "45–55", "45–55", "45–55"]},
     copy:
-`A six-day body-part split (back/lats/biceps, chest/triceps/delts, quads/hams/glutes, arms/shoulders/core) with two cardio days, built heavily around machines, cables and dumbbells.
+`A six-day body-part split (back/lats/biceps, chest/triceps/delts, legs/core, arms/shoulders) with two cardio days, built heavily around machines, cables and dumbbells.
 
 Weeks 1–3 build hypertrophy and weeks 4–6 move to strength capacity with new exercise choices, making this ideal for a well-equipped gym.` },
 
