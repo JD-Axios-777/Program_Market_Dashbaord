@@ -143,7 +143,7 @@ function build(rows,weekLabels){
     notes:[
       "All % = % of estimated 1RM.",
       multi?`The program runs ${blocks.length} ${blockMode?"blocks":"rotations"}: ${blocks.map(b=>`${b.title} in ${b.sub.toLowerCase()}`).join(", ")}.`:"The same exercises run every week.",
-      `Starred lifts change load or reps week to week; the first week of each ${blockMode?"block":"rotation"} is shown. See progression.`
+      blocks.some(b=>b.progression)?`Starred lifts change load or reps week to week; the first week of each ${blockMode?"block":"rotation"} is shown. See progression.`:"Loads and reps repeat each rotation; your RPE scores adjust them from session to session."
     ],
     blocks:blocks.map(b=>({title:b.title,sub:b.sub,days:b.days})),
     progressions:blocks.map(b=>b.progression).filter(Boolean)
